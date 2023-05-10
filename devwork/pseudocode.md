@@ -8,9 +8,9 @@
 - Create enemy's roster of Pokémon from the local file
 
 ## Until either the enemy has been defeated or the player has been defeated
-- The player will attack first
+- The player will choose to either attack, switch pokemon or use items
 
-- The opposing trainer will attack
+- The opposing trainer will either attack, switch pokemon or use items
 
 - The player and the opposing trainer will keep going till a conclusion is made
 ## If the player wins
