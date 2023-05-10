@@ -1,27 +1,22 @@
 # Start of program
-Get player username
+- Get player username
 
-Get a randomized list from the 151 pokemon and the user selects which ones they want
+- Get a randomized list from the 151 Pokémon and the user selects which ones they want
 
-Game selects a random opponent from a list of enemies
+- Game selects a random opponent from a list of trainers
 
-Create enemey's roster of pokemon
+- Create enemey's roster of Pokémon from the local file
 
 ## Until either the enemy has been defeated or the player has been defeated
-Give the player their turn to battle
+- The player will attack first
 
-The pokemon attacks
+- The opposing trainer will attack
 
-THe enemy makes their turn to battle
-
-the pokemon attacks
-
+- The player and the opposing trainer will keep going till a conclusion is made
 ## If the player wins
 
-They progress to the next more difficult enemy
+- The player will face trainers with increasing difficulty, and better Pokémons 
 
 ## If the player is defeated
-They restart the entire program
 
-
-
+- The player will restart from the beginning of the game if they lose
