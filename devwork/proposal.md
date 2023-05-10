@@ -8,6 +8,10 @@ It should include Pokémon from Generation 1 as well as move sets and other thin
 - Moves
 - Effects
 - Player v Machine
+- Critical Hit Chance
+- Type advantages/disadvantages
+- Move stats
+- Miss chance
 ## Nice to have list
 - Graphics
 - Sound Effects
