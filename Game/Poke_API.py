@@ -28,8 +28,17 @@ for i in range(12):
 for data in pokemon_data:
     print(f"Name: {data['name']}")
     print(f"ID: {data['id']}")
-    # print(f"Height: {data['height']}")
-    # print(f"Weight: {data['weight']}")
-    # print("Abilities:")
-    # for ability in data['abilities']:
-    # print(f" - {ability['ability']['name']}")
+    print(f"Height: {data['height']}")
+    print(f"Weight: {data['weight']}")
+    print("Abilities:")
+    for ability in data['abilities']:
+        print(f" - {ability['ability']['name']}")
+
+file = open("data.json", "w")
+
+for data in pokemon_data:
+    # Write the ID and name to the file
+    file.write(f"ID: {data['id']}\n")
+    file.write(f"Name: {data['name']}\n\n")
+
+file.close()
