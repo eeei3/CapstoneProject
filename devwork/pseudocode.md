@@ -13,9 +13,12 @@
 - The opposing trainer will either attack, switch pokemon or use items
 
 - The player and the opposing trainer will keep going till a conclusion is made
+
 ## If the player wins
 
-- The player will face trainers with increasing difficulty, and better Pokémon 
+- The player will face trainers with increasing difficulty, and better Pokémon
+
+- If the player has beaten the last trainer, they win
 
 ## If the player is defeated
 
