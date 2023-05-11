@@ -10,7 +10,7 @@ for i in range(12):
     pokemon = random.randint(1, 1010)
 
     # Construct the URL for the PokeAPI request
-    url = f'https://pokeapi.co/api/v2/pokemon/{pokemon}/'
+    url = f'https://pokeapi.co/api/v2/pokemon/{pokemon}/?limit=20&offset=20"'
 
     # Send a GET request to the PokeAPI URL
     response = requests.get(url)
@@ -28,8 +28,19 @@ for i in range(12):
 for data in pokemon_data:
     print(f"Name: {data['name']}")
     print(f"ID: {data['id']}")
-    # print(f"Height: {data['height']}")
-    # print(f"Weight: {data['weight']}")
-    # print("Abilities:")
-    # for ability in data['abilities']:
-    # print(f" - {ability['ability']['name']}")
+    print("Moves:")
+    for moves in data['moves']:
+        print(f" - {moves['move']['name']}")
+
+file = open("data.json", "w")
+
+for data in pokemon_data:
+    # Write the ID and name to the file
+    file.write(f"ID: {data['id']}\n")
+    file.write(f"Name: {data['name']}\n")
+    file.write("Moves:\n")
+    for move_data in data['moves']:
+        move_name = move_data['move']['name']
+        file.write(f" - {move_name}\n")
+
+file.close()

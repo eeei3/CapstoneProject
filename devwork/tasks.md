@@ -1,8 +1,43 @@
-# Ebaad
+# Member tasks
+## Ebaad
 - Pokemon API
 - Game "Backend"
-# Calvin
+- Game Designer
+## Calvin
 - Player and enemies
-# Josh
+- Player UI
+- Dialogue
+## Josh
 - Pokemon Battle System
+- Player UI
+- PvP system
+- Git
+
+
+## List of objects we plan on using:
+- ### Pokemon object
+- Health
+- Attacks
+- Type
+- Name
+- ID
+- Dialogue
+- ### Player object
+- Pokemon
+- Items
+- Trainer's beat
+- Name
+- Dialogue
+- ### Enemy objects
+- Pokemon
+- Name
+- Items
+- Dialogue
+- ### Item objects
+- Effect
+- ### Game object
+- Battle system
+- Object management
+
+
 
