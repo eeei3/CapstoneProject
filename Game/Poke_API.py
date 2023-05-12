@@ -28,6 +28,7 @@ for i in range(12):
 for data in pokemon_data:
     print(f"Name: {data['name']}")
     print(f"ID: {data['id']}")
+    print(f"Type: {data['type']}")
     print("Moves:")
     for moves in data['moves']:
         print(f" - {moves['move']['name']}")
