@@ -12,6 +12,7 @@ It should include Pokémon from Generation 1 as well as move sets and other thin
 - Type advantages/disadvantages
 - Move stats
 - Miss chance
+- Text-Based (If no graphics)
 ## Nice to have list
 - Graphics
 - Sound Effects
