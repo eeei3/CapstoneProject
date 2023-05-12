@@ -42,7 +42,7 @@ for data in pokemon_data:
     file.write(f"ID: {data['id']}\n")
     file.write(f"Name: {data['name']}\n")
     file.write("Moves:\n")
-    for move_data in data['moves']:
+    for move_data in data['moves'][:10]:
         move_name = move_data['move']['name']
         file.write(f" - {move_name}\n")
 
