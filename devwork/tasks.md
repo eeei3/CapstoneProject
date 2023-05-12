@@ -3,6 +3,7 @@
 - Pokemon API
 - Game "Backend"
 - Game Designer
+- Pokemon Master
 ## Calvin
 - Player and enemies
 - Player UI
