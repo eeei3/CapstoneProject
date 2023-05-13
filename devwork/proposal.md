@@ -1,10 +1,10 @@
 # Project Proposal
 ## Description
-For our major project, we would like to build a Pokémon type turn based fighter game,
+For our major project, we would like to build a Pokémon type turn based fighter game 
 that is run in the terminal.
 It will be text-based with the possibility of graphics. 
 The game should allow for users to have Pokémon battles against the computer (hopefully other people). 
-The game should include all Pokémon from every generation, with their typings andm move sets
+The game should include all Pokémon from every generation, with their typing and move sets
 ## Need to have list
 - List of Pokémon
 - Moves

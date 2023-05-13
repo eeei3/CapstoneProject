@@ -31,18 +31,23 @@ for data in pokemon_data:
     print(f"Types:")
     for types in data['types']:
         print(f" - {types['type']['name']}")
-    #print("Moves:")
-    #for moves in data['moves']:
-        #print(f" - {moves['move']['name']}")
+    print("Moves:")
+    for move_data in data['moves'][:4]:
+        move_name = move_data['move']['name']
+        print(f" - {move_name}")
 
-file = open("Data/data.json", "w")
+file = open("../Data/data.json", "w")
 
 for data in pokemon_data:
     # Write the ID and name to the file
-    file.write(f"ID: {data['id']}\n")
-    file.write(f"Name: {data['name']}\n")
-    file.write("Moves:\n")
-    for move_data in data['moves'][:10]:
+    file.write(f"\042ID\042: {data['id']}\n")
+    file.write(f"\042Name\042: {data['name']}\n")
+    file.write("\042Types\042:\n")
+    for type_data in data['types']:
+        type_name = type_data['type']['name']
+        file.write(f" - {type_name}\n")
+    file.write("\042Moves\042:\n")
+    for move_data in data['moves'][:4]:
         move_name = move_data['move']['name']
         file.write(f" - {move_name}\n")
 
