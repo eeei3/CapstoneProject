@@ -4,7 +4,7 @@ import random
 # Initialize an empty list to store the data
 pokemon_data = []
 
-# Repeat the API call 12 times
+# Repeat the API_ call 12 times
 for i in range(12):
     # Generate a random Pokémon number
     pokemon = random.randint(1, 1010)
@@ -28,6 +28,7 @@ for i in range(12):
 for data in pokemon_data:
     print(f"Name: {data['name']}")
     print(f"ID: {data['id']}")
+    print(f"Stats:")
     print(f"Types:")
     for types in data['types']:
         print(f" - {types['type']['name']}")
@@ -35,6 +36,11 @@ for data in pokemon_data:
     for move_data in data['moves'][:4]:
         move_name = move_data['move']['name']
         print(f" - {move_name}")
+    print(f"Move Power Point:")
+    for power_data in data['moves'][:4]:
+        power_number = power_data['move']['contest_effect']
+        print(f" - {power_number}")
+
 
 file = open("../Data/data.json", "w")
 
