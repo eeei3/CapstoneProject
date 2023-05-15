@@ -11,6 +11,7 @@ class LBattle:
         self.p2 = p2
         return
 
+
 class NBattle(LBattle):
     def __init__(self, p1, p2, stream):
         super().__init__(p1, p2)
