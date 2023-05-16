@@ -2,7 +2,7 @@
 Joshua
 CS 30 Period 1
 May 12, 2023
-This is the battling mechanic of the Pokemon game
+This is the battling mechanic of the Pokémon game
 """
 
 class LBattle:
