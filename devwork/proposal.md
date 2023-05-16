@@ -25,6 +25,6 @@ The game should include all Pokémon from every generation, with their typing an
 ## Do similar projects exist?
 Yes, numerous Pokémon style turn based fighters exist:
 https://github.com/smogon/pokemon-showdown
-Our is written in Python, has PVE, and our personal set of Pokémon's for the enemy.
+Ours is written in Python, has PVE, and our personal set of Pokémon's for the enemy.
 ## Our target users
 Our target users would be gamers and Pokémon enthusiasts. 
