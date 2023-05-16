@@ -43,7 +43,6 @@ class Pokemon:
             move_type = move_response['type']['name']
             self.moves.append({"Name": move_name, "PP": move_pp, "Accuracy": move_accuracy, "Power": move_power, "Type": move_type})
 
-
     def print_info(self):
         print(f"Name: {self.name}")
         print(f"ID: {self.id}")
@@ -56,7 +55,6 @@ class Pokemon:
         print("Moves:")
         for move in self.moves:
             print(f" - {move['Name']} (PP: {move['PP']}, Accuracy: {move['Accuracy']}, Power: {move['Power']}, Type: {move['Type']})")
-
 
     # We use this to return some data in certain forms, used when printing to file
     def to_dict(self):

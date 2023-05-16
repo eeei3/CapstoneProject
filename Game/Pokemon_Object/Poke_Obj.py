@@ -1,11 +1,13 @@
 import json
 
+
 class Pokemon:
     def __init__(self, name, id, types, moves):
         self.name = name
         self.id = id
         self.types = types
         self.moves = moves
+
 
 # Read the data from the JSON file
 with open("../Data/data.json", "r") as f:
