@@ -3,6 +3,7 @@
 - Pokemon API
 - Game "Backend"
 - Game Designer
+- Pokemon Master
 ## Calvin
 - Player and enemies
 - Player UI
@@ -16,11 +17,11 @@
 
 ## List of objects we plan on using:
 - ### Pokemon object
-- Health
-- Attacks
-- Type
-- Name
-- ID
+- ~~Health~~
+- ~~Attacks~~
+- ~~Type~~
+- ~~Name~~
+- ~~ID~~
 - Dialogue
 - ### Player object
 - Pokemon
