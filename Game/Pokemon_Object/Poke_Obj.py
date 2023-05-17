@@ -1,12 +1,27 @@
 import json
 
+
 class Pokemon:
-    def __init__(self, name, id, types, moves):
+    def __init__(self, name, id, types, moves, stats, index):
         self.name = name
         self.id = id
         self.types = types
         self.moves = moves
+        self.stats = stats
+        self.onfield = False
+        self.index = index
+        print(name)
 
+    def attack(self):
+        return
+
+    def take_damage(self, dmg, type):
+        return
+
+    def faint(self):
+        return
+
+"""
 # Read the data from the JSON file
 with open("../Data/data.json", "r") as f:
     data = json.load(f)
@@ -24,4 +39,4 @@ for pokemon_data in data:
 
 # Example usage:
 for pokemon in pokemon_list:
-    print(pokemon.name, pokemon.id, pokemon.types)
+    print(pokemon.name, pokemon.id, pokemon.types)"""

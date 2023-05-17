@@ -1,27 +1,67 @@
 import random
 from API import Poke_API_OOP
+from Pokemon_Object import JSON_Poke
 
-names = ["Ebaad", "Blue", "red", "Trace", "Lance", "Leon", "Cynthia", "Alder", "Iris", "Elio", "Ash"]
+names = ["Ebaad", "Blue", "Red", "Trace", "Lance", "Leon", "Cynthia", "Alder", "Iris", "Elio", "Ash"]
 
 
 class Trainer:
-    def __init__(self):
+    def __init__(self, difficulty):
         self.api = Poke_API_OOP.PokemonAPI()
         self.name = names[random.randint(0, 10)]
         self.pokemon = self.pokeget()
-        # self.items
-        print(self.pokemon)
+        self.difficulty = difficulty
+        self.played_pokemon = None
 
-        return
+
+    def start(self):
+        print(len(self.pokemon))
+        print(type(self.pokemon))
+        print(self.pokemon)
+        self.played_pokemon = self.pokemon[random.randint(0, 11)]
+        print(f"Trainer has chosen {self.played_pokemon.name}")
+        self.played_pokemon.onfield = True
+        
 
     def pokeget(self):
+        pokemon = []
         for i in range(12):
             pokemon_id = random.randint(1, 1010)
             self.api.call_api(pokemon_id)
 
-        pokemon_data = self.api.get_pokemon_data()
+        pokemon_raw = self.api.get_pokemon_data()
 
-        pokemon = [Poke_API_OOP.Pokemon(data).to_dict() for data in pokemon_data]
+        pokemon_data = [Poke_API_OOP.Pokemon(data).to_dict() for data in pokemon_raw]
+        for x in pokemon_data:
+            #print(x)
+            y = JSON_Poke.JSONtoPoke(x)
+            poke = y.return_obj()
+            #print(poke.name)
+            pokemon.append(poke)
         return pokemon
 
+    def turn(self):
+        print("Trainer's turn!")
+        trainer_choice = random.randint(0, 100)
+        pokemon_choice = random.randint(0, 11)
+        if trainer_choice <= 50:
+            # Attack
+            attack_len = len(self.played_pokemon.moves)
+            att_choice = random.randint(0, attack_len)
+            print(f"Trainer {self.name} has used {self.played_pokemon.name}'s {self.played_pokemon.moves[att_choice]['Name']}")
 
+            return
+        elif 50 < trainer_choice <= 80:
+            # Heal
+            return
+        elif 80 < trainer_choice <= 100:
+            # Switch Pokemon
+            self.played_pokemon = self.pokemon[random.randint(0, 11)]
+            print(f"Trainer has chosen {self.played_pokemon.name}")
+            self.played_pokemon.onfield = True
+            return
+
+        return
+
+
+b = Trainer(1)
