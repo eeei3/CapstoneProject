@@ -10,7 +10,6 @@ class Pokemon:
         self.stats = stats
         self.onfield = False
         self.index = index
-        print(name)
 
     def attack(self):
         return
