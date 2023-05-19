@@ -1,9 +1,12 @@
 import random
 from API import Poke_API_OOP
 from Pokemon_Object import JSON_Poke
+import csv
 
 names = ["Ebaad", "Blue", "Red", "Trace", "Lance", "Leon", "Cynthia", "Alder", "Iris", "Elio", "Ash"]
 
+with open("Data/types.csv", newline='') as c:
+    EBAAD = csv.reader(c, delimiter=' ', quotechar='|')
 
 class Trainer:
     def __init__(self, difficulty):
@@ -14,9 +17,6 @@ class Trainer:
         self.played_pokemon = None
 
     def start(self):
-        print(len(self.pokemon))
-        print(type(self.pokemon))
-        print(self.pokemon)
         self.played_pokemon = self.pokemon[random.randint(0, 11)]
         print(f"Trainer has chosen {self.played_pokemon.name}")
         self.played_pokemon.onfield = True
@@ -33,7 +33,7 @@ class Trainer:
         index = 0
         for x in pokemon_data:
             index += 1
-            y = JSON_Poke.JSONtoPoke(x)
+            y = JSON_Poke.JSONtoPoke(x, index, self)
             poke = y.return_obj()
             poke.index = index
             pokemon.append(poke)
@@ -43,28 +43,30 @@ class Trainer:
         print("Trainer's turn!")
         trainer_choice = random.randint(0, 100)
         pokemon_choice = random.randint(0, len(self.pokemon) - 1)
-        if trainer_choice <= 50:
+        if trainer_choice <= 80:
             # Attack
             if random.randint(0, 12) > self.difficulty:
                 for attack in self.played_pokemon.moves:
-                    if epokemon.stats["hp"] <
-            attack_len = len(self.played_pokemon.moves)
-            att_choice = random.randint(0, attack_len)
-            print(f"Trainer {self.name} has used {self.played_pokemon.name}'s {self.played_pokemon.moves[att_choice]['Name']}")
-
-            return
-        elif 50 < trainer_choice <= 80:
-            # Heal
-            return
-        elif 80 < trainer_choice <= 100:
+                    if attack["Power"] == "N/A":
+                        pass
+                    else:
+                        if epokemon.stats["hp"] < attack["Power"]:
+                            self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0)
+                        else:
+                            for row in EBAAD:
+                                for type in epokemon.types:
+                                    if (type in row) and (type in attack["Type"]):
+                                        self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 1)
+                self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0)
+            else:
+                self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0)
+        else:
             # Switch Pokemon
             self.played_pokemon.onfield = False
             self.played_pokemon = self.pokemon[pokemon_choice]
             print(f"Trainer has chosen {self.played_pokemon.name}")
             self.played_pokemon.onfield = True
             return
-
-        return
 
 
 b = Trainer(1)

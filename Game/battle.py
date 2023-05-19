@@ -16,12 +16,6 @@ class LBattle:
         self.p2.turn()
 
 
-    def check_pokemon(self, p):
-        if p.played_pokemon.stats["HP"] <= 0:
-            print("Pokemon fainted!")
-            p.played_pokemon.onfield = False
-
-
 
 class NBattle(LBattle):
     def __init__(self, p1, p2, stream):

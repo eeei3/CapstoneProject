@@ -2,13 +2,15 @@ from Game.Pokemon_Object import Poke_Obj
 
 
 class JSONtoPoke:
-    def __init__(self, rawdata):
+    def __init__(self, rawdata, index, caller):
         self.rawdata = rawdata
         self.name = None
         self.id = None
         self.types = None
         self.moves = None
         self.stats = None
+        self.index = index
+        self.caller = caller
 
 
     def get_moves(self):
@@ -42,5 +44,5 @@ class JSONtoPoke:
         self.types = self.get_type()
         self.moves = self.get_moves()
         self.stats = self.get_stats()
-        pokemon = Poke_Obj.Pokemon(self.name, self.id, self.types, self.moves, self.stats)
+        pokemon = Poke_Obj.Pokemon(self.name, self.id, self.types, self.moves, self.stats, self.index, self.caller)
         return pokemon

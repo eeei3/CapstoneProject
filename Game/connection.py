@@ -17,3 +17,9 @@ class GameConnection:
             print(e)
         else:
             return
+
+    def create_server(self):
+        try:
+            self.socket.bind((self.ip, self.port))
+        except Exception as e:
+            print("There has been a connection error!")

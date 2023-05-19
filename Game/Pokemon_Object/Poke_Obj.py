@@ -1,8 +1,8 @@
-import json
+import random
 
 
 class Pokemon:
-    def __init__(self, name, id, types, moves, stats, index):
+    def __init__(self, name, id, types, moves, stats, index, owner):
         self.name = name
         self.id = id
         self.types = types
@@ -10,11 +10,21 @@ class Pokemon:
         self.stats = stats
         self.onfield = False
         self.index = index
+        self.owner = owner
 
-    def attack(self):
+    def attack(self, attack, condition, opp):
+        print(
+            f" {self.owner} has used {self.name}'s {self.moves[attack]['Name']}")
+        self.moves[attack]["PP"] -= 1
+        if random.randint(0, 100) < self.moves[attack]["Acuracy"]:
+            print("Attack successful!")
+        else:
+            print("Missed!")
+
         return
 
-    def take_damage(self, dmg, type):
+    def take_damage(self, dmg):
+        self.stats["HP"] -= dmg
         return
 
     def faint(self):
