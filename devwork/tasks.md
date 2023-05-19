@@ -17,11 +17,11 @@
 
 ## List of objects we plan on using:
 - ### Pokemon object
-- Health
-- Attacks
-- Type
-- Name
-- ID
+- ~~Health~~
+- ~~Attacks~~
+- ~~Type~~
+- ~~Name~~
+- ~~ID~~
 - Dialogue
 - ### Player object
 - Pokemon

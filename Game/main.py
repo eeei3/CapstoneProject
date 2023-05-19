@@ -3,6 +3,8 @@
 """
 
 from tkinter import *
+from Pokemon_Object import Poke_Obj
+
 
 class GUI:
     def __init__(self):

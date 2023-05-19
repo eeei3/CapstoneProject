@@ -1,5 +1,6 @@
 # Project Proposal
 ## Description
+- Written in Python
 For our major project, we would like to build a Pokémon type turn based fighter game 
 that is run in the terminal.
 It will be text-based with the possibility of graphics. 
