@@ -67,6 +67,3 @@ class Trainer:
             print(f"Trainer has chosen {self.played_pokemon.name}")
             self.played_pokemon.onfield = True
             return
-
-
-b = Trainer(1)
