@@ -26,4 +26,4 @@ for pokemon_data in data:
 
 # Example usage:
 for pokemon in pokemon_list:
-    print(pokemon.name, pokemon.id, pokemon.types)
+    print(pokemon.name, pokemon.id, pokemon.types, pokemon.moves)

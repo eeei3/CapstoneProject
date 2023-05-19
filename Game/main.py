@@ -1,27 +1,24 @@
-"""
-
-"""
-
 from tkinter import *
-from Pokemon_Object import Poke_Obj
+import json
+
+with open('Data/data.json', 'r') as file:
+    data = file.read()
+
+parsed_json = json.loads(data)
+
+for i in parsed_json:
+    print(i['Sprite'])
 
 
 class GUI:
     def __init__(self):
         self.root = Tk()
-
-    def pokewindow(self):
-        return
-
-    def gamewindow(self):
-        return
-
     def main(self):
         self.mainframe = Frame()
 
         self.root.title("ebaad")
-        self.root.maxsize(1000, 900)
-        self.root.minsize(1000, 900)
+        self.root.maxsize(400, 700)
+        self.root.minsize(400, 700)
         self.root.mainloop()
 
 b = GUI()

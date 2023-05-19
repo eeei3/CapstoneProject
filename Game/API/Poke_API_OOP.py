@@ -33,6 +33,7 @@ class Pokemon:
         self.id = data['id']
         self.stats = {stat_data['stat']['name']: stat_data['base_stat'] for stat_data in data['stats']}
         self.types = [types_data['type']['name'] for types_data in data['types']]
+        self.sprites = data['sprites']['front_default']
         self.moves = []
         for move_data in data['moves'][:4]:
             move_name = move_data['move']['name']
@@ -41,11 +42,13 @@ class Pokemon:
             move_accuracy = move_response['accuracy'] or "N/A"
             move_power = move_response['power'] or "N/A"
             move_type = move_response['type']['name']
-            self.moves.append({"Name": move_name, "PP": move_pp, "Accuracy": move_accuracy, "Power": move_power, "Type": move_type})
+            self.moves.append({"Name": move_name, "PP": move_pp, "Accuracy": move_accuracy,
+                               "Power": move_power, "Type": move_type})
 
     def print_info(self):
         print(f"Name: {self.name}")
         print(f"ID: {self.id}")
+        print(f"Sprite: {self.sprites}")
         print("Stats:")
         for stat_name, stat_value in self.stats.items():
             print(f" - {stat_name}: {stat_value}")
@@ -54,13 +57,15 @@ class Pokemon:
             print(f" - {type_name}")
         print("Moves:")
         for move in self.moves:
-            print(f" - {move['Name']} (PP: {move['PP']}, Accuracy: {move['Accuracy']}, Power: {move['Power']}, Type: {move['Type']})")
+            print(f" - {move['Name']} (PP: {move['PP']}, Accuracy: {move['Accuracy']},"
+                  f" Power: {move['Power']}, Type: {move['Type']})")
 
     # We use this to return some data in certain forms, used when printing to file
     def to_dict(self):
         return {
             "ID": self.id,
             "Name": self.name,
+            "Sprite": self.sprites,
             "Types": self.types,
             "Stats": self.stats,
             "Moves": self.moves
