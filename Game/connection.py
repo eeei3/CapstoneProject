@@ -1,5 +1,8 @@
 """
-
+Joshua
+CS 30 Period 1
+May 12, 2023
+This is the module relating to connecting for pvp
 """
 import socket
 
@@ -20,6 +23,14 @@ class GameConnection:
 
     def create_server(self):
         try:
-            self.socket.bind((self.ip, self.port))
+            self.socket.bind(self.connection)
+            self.socket.listen()
+            conn, addr = self.socket.accept()
+            with conn:
+                while True:
+                    data = conn.recv(1024)
+                    if not data:
+                        break
+                    conn.sendall(data)
         except Exception as e:
             print("There has been a connection error!")
