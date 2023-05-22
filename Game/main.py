@@ -1,8 +1,5 @@
 from tkinter import *
 import json
-import connection
-import battle
-from API import Poke_API_OOP
 
 with open('Data/data.json', 'r') as file:
     data = file.read()
@@ -46,11 +43,14 @@ class GUI:
 
 
     def main(self):
-        self.mainframe = Frame()
-        self.root.title("ebaad")
-        self.root.maxsize(400, 700)
-        self.root.minsize(400, 700)
+        self.root.geometry("900x500")
+        self.root.title("Pokémon Battle")
+        self.fight.pack(side=RIGHT)
+        self.team.pack(side=LEFT)
+        self.bag.pack(side=BOTTOM)
+        self.run.pack(side=BOTTOM)
         self.root.mainloop()
 
 b = GUI()
 b.main()
+Poke_API_OOP.PokemonAPI
