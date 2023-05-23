@@ -1,47 +1,47 @@
 [
     {
-        "ID": 621,
-        "Name": "druddigon",
-        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/621.png",
+        "ID": 575,
+        "Name": "gothorita",
+        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/575.png",
         "Types": [
-            "dragon"
+            "psychic"
         ],
         "Stats": {
-            "hp": 77,
-            "attack": 120,
-            "defense": 90,
-            "special-attack": 60,
-            "special-defense": 90,
-            "speed": 48
+            "hp": 60,
+            "attack": 45,
+            "defense": 70,
+            "special-attack": 75,
+            "special-defense": 85,
+            "speed": 55
         },
         "Moves": [
             {
-                "Name": "mega-punch",
-                "PP": 20,
-                "Accuracy": 85,
-                "Power": 80,
-                "Type": "normal"
-            },
-            {
-                "Name": "fire-punch",
-                "PP": 15,
-                "Accuracy": 100,
-                "Power": 75,
-                "Type": "fire"
-            },
-            {
-                "Name": "thunder-punch",
-                "PP": 15,
-                "Accuracy": 100,
-                "Power": 75,
-                "Type": "electric"
-            },
-            {
-                "Name": "scratch",
+                "Name": "pound",
                 "PP": 35,
                 "Accuracy": 100,
                 "Power": 40,
                 "Type": "normal"
+            },
+            {
+                "Name": "double-slap",
+                "PP": 10,
+                "Accuracy": 85,
+                "Power": 15,
+                "Type": "normal"
+            },
+            {
+                "Name": "psybeam",
+                "PP": 20,
+                "Accuracy": 100,
+                "Power": 65,
+                "Type": "psychic"
+            },
+            {
+                "Name": "thunderbolt",
+                "PP": 15,
+                "Accuracy": 100,
+                "Power": 90,
+                "Type": "electric"
             }
         ]
     }
