@@ -1,5 +1,8 @@
 from tkinter import *
 import json
+import connection
+import battle
+from API import Poke_API_OOP
 
 with open('Data/data.json', 'r') as file:
     data = file.read()
@@ -18,6 +21,10 @@ class GUI:
         self.online = False
         self.op = False
         self.game = False
+        self.fight = Button(self.root, text="fight")
+        self.team = Button(self.root, text="team")
+        self.bag = Button(self.root, text="bag")
+        self.run = Button(self.root, text="run")
 
     def connec(self, ip, port):
         self.pipe = connection.GameConnection(ip, port)

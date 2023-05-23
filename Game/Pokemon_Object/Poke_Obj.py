@@ -9,7 +9,7 @@ class Pokemon:
         self.moves = moves
 
 
-
+"""
 # Read the data from the JSON file
 with open("../Data/data.json", "r") as f:
     data = json.load(f)
@@ -28,3 +28,4 @@ for pokemon_data in data:
 # Example usage:
 for pokemon in pokemon_list:
     print(pokemon.name, pokemon.id, pokemon.types, pokemon.moves)
+"""
