@@ -9,6 +9,7 @@ class Pokemon:
         self.moves = moves
 
 
+
 # Read the data from the JSON file
 with open("../Data/data.json", "r") as f:
     data = json.load(f)
