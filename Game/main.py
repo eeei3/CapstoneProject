@@ -51,6 +51,8 @@ class GUI:
         self.run.pack(side=BOTTOM)
         self.root.mainloop()
 
-b = GUI()
-b.main()
-Poke_API_OOP.PokemonAPI
+
+if __name__ == "__main__":
+    b = GUI()
+    b.main()
+    Poke_API_OOP.PokemonAPI()
