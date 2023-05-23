@@ -28,6 +28,8 @@ class GUI:
         self.run.place(x=650, y=450)
         self.root.mainloop()
 
-b = GUI()
-b.main()
-Poke_API_OOP.PokemonAPI
+
+if __name__ == "__main__":
+    b = GUI()
+    b.main()
+    Poke_API_OOP.PokemonAPI()

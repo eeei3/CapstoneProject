@@ -77,7 +77,7 @@ class main:
     api = PokemonAPI()
 
     # Makes 12 API calls with a random number from 1 to 1010
-    for i in range(12):
+    for i in range(1):
         pokemon_id = random.randint(1, 1010)
         api.call_api(pokemon_id)
 
@@ -89,8 +89,9 @@ class main:
 
     # This part is what we use to print the data to our file.
     # We use json.dump so that our file would print into a dictionary
-    with open("../Data/data.json", "w") as f:
+    with open("./Data/data.json", "w+") as f:
         pokemon_list = [Pokemon(data).to_dict() for data in pokemon_data]
         json.dump(pokemon_list, f, indent=4)
+
 
 main()
