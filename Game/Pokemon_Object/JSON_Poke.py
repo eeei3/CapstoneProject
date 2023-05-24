@@ -1,3 +1,15 @@
+# ---------------------------------------------
+# Title: JSON_Poke.py
+# Class: CS 30
+# Date: 17/05/23
+# Version: 1.0
+# ---------------------------------------------
+"""
+Current Assignment: JSON_Poke.py
+
+This file is what we use to make opejects from
+"""
+# Imports module game_logic, needed for functions later used
 from Game.Pokemon_Object import Poke_Obj
 
 

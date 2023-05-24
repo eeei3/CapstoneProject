@@ -8,6 +8,7 @@ names = ["Ebaad", "Blue", "Red", "Trace", "Lance", "Leon", "Cynthia", "Alder", "
 with open("Data/types.csv", newline='') as c:
     EBAAD = csv.reader(c, delimiter=' ', quotechar='|')
 
+
 class Trainer:
     def __init__(self, difficulty):
         self.api = Poke_API_OOP.PokemonAPI()
@@ -61,7 +62,7 @@ class Trainer:
             else:
                 self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0)
         else:
-            # Switch Pokemon
+            # Switch Pokémon
             self.played_pokemon.onfield = False
             self.played_pokemon = self.pokemon[pokemon_choice]
             print(f"Trainer has chosen {self.played_pokemon.name}")

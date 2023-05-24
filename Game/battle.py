@@ -1,7 +1,7 @@
 """
 Joshua
 CS 30 Period 1
-May 12, 2023
+May 12, 2023,
 This is the battling mechanic of the Pokémon game
 """
 import enemies
@@ -17,7 +17,6 @@ class LBattle:
     def start_battle(self):
         self.p1.turn(self.p2.played_pokemon)
         self.p2.turn(self.p1.played_pokemon)
-
 
 
 class NBattle(LBattle):
