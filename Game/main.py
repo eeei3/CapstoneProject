@@ -2,6 +2,7 @@ from tkinter import *
 import json
 import connection
 import battle
+from multiprocessing import Process
 from API import Poke_API_OOP
 
 with open('Data/data.json', 'r') as file:
@@ -17,12 +18,14 @@ class GUI:
     def __init__(self):
         self.mainframe = None
         self.root = Tk()
+        self.main = Tk()
         self.pipe = None
         self.online = False
         self.op = False
         self.game = False
         self.ip = None
         self.port = None
+        self.process = {"Process1": None, "Process2": None, "Process3": None}
         self.fight = Button(self.root, text="fight")
         self.team = Button(self.root, text="team")
         self.bag = Button(self.root, text="bag")
@@ -37,54 +40,68 @@ class GUI:
         self.pipe = connection.GameConnection(ip, port)
         self.pipe.create_server()
 
-    def start(self, ip=None, port=None):
-        if self.online:
-            if self.op:
-                self.pipe.makeserver(ip, port)
-                self.game = battle.NBattle(self.pipe)
-                self.game.start_battle()
-            else:
-                self.pipe.connec(ip, port)
-                self.game = battle.NBattle(self.pipe)
-        else:
-            self.game = battle.LBattle()
-            self.game.start_battle()
+    def offgame(self):
+        self.game = battle.LBattle()
+        self.game.start_battle()
 
+    def joingame(self):
+        ip = self.ip.get()
+        port = self.port.get()
+        try:
+            self.pipe.connec(ip, port)
+        except Exception as e:
+            print("Could not connect!")
+        else:
+            self.gamewin()
+
+        self.game = battle.NBattle(self.pipe)
+
+    def ongame(self):
+        ip = self.ip.get()
+        port = self.port.get()
+        try:
+            self.pipe.makeserver(ip, port)
+        except Exception as e:
+            print("Could not create a new server!")
+        self.game = battle.NBattle(self.pipe)
+        self.game.start_battle()
 
     def temp_name(self):
-        main = Tk()
-        self.ip = StringVar(main)
-        self.port = StringVar(main)
+        self.ip = StringVar(self.main)
+        self.port = StringVar(self.main)
         self.ip.set("Enter IP Address Here")
         self.port.set("Enter Port Number Here")
-        main.geometry("600x900")
-        main.title("Pokémon Battle - Title Screen")
-        maintitle = Label(main, text="Welcome to the Pokemon Battle!", font=("MS Comic Sans", "18"))
+        self.main.geometry("600x900")
+        self.main.title("Pokémon Battle - Title Screen")
+        maintitle = Label(self.main, text="Welcome to the Pokemon Battle!", font=("MS Comic Sans", "18"))
         maintitle.pack(ipadx=20,ipady=10,expand=True)
-        choice1 = Label(main, text="Join a battle server", font=("MS Comic Sans", "14"))
+        choice1 = Label(self.main, text="Join a battle server", font=("MS Comic Sans", "14"))
         choice1.pack(ipadx=20,ipady=20,expand=True)
-        ip1 = Entry(main, textvariable=self.ip)
+        ip1 = Entry(self.main, textvariable=self.ip)
         ip1.pack(ipadx=20)
-        port1 = Entry(main, textvariable=self.port)
+        port1 = Entry(self.main, textvariable=self.port)
         port1.pack(ipadx=20)
-        connect1 = Button(main, text="Connect!")
+        connect1 = Button(self.main, text="Connect!", command=self.joingame)
         connect1.pack()
-        choice2 = Label(main, text="Create a battle server", font=("MS Comic Sans", "14"))
+        choice2 = Label(self.main, text="Create a battle server", font=("MS Comic Sans", "14"))
         choice2.pack(ipadx=20,ipady=20,expand=True)
-        ip2 = Entry(main, textvariable=self.ip)
+        ip2 = Entry(self.main, textvariable=self.ip)
         ip2.pack(ipadx=20)
-        port2 = Entry(main, textvariable=self.port)
+        port2 = Entry(self.main, textvariable=self.port)
         port2.pack(ipadx=20)
-        create = Button(main, text="Create Server!")
+        create = Button(self.main, text="Create Server!", command=self.ongame)
         create.pack()
-        credit = Label(main, text="This program was made by Calvin, Ebaad and Josh", font=("MS Comic Sans", "10"))
+        choice3 = Label(self.main, text="Play an offline bot!", font=("MS Comic Sans", "14"))
+        choice3.pack(ipadx=20, ipady=20, expand=True)
+        start = Button(self.main, text="Play Bot!", command=self.offgame)
+        start.pack()
+        credit = Label(self.main, text="This program was made by Calvin, Ebaad and Josh", font=("MS Comic Sans", "10"))
         credit.pack(ipadx=20,ipady=20,expand=True)
-        main.mainloop()
+        self.main.mainloop()
 
-
-
-    def main(self):
+    def gamewin(self):
         self.root.deiconify()
+        self.main.withdraw()
         self.root.geometry("900x500")
         self.root.title("Pokémon Battle")
         self.fight.pack(side=RIGHT)

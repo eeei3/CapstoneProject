@@ -2,11 +2,14 @@ import json
 
 
 class Pokemon:
-    def __init__(self, name, id, types, moves):
+    def __init__(self, name, id, types, moves, stats, index, caller):
         self.name = name
         self.id = id
         self.types = types
         self.moves = moves
+        self.stats = stats
+        self.index = index
+        self.caller = caller
 
 
 """
