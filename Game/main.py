@@ -3,15 +3,15 @@ import json
 import connection
 import battle
 from multiprocessing import Process
-from API import Poke_API_OOP
+# from API import Poke_API_OOP
 
-with open('Data/data.json', 'r') as file:
+"""with open('Data/data.json', 'r') as file:
     data = file.read()
 
 parsed_json = json.loads(data)
 
 for i in parsed_json:
-    print(i['Sprite'])
+    print(i['Sprite'])"""
 
 
 class GUI:
@@ -25,7 +25,9 @@ class GUI:
         self.game = False
         self.ip = None
         self.port = None
-        self.process = {"Process1": None, "Process2": None, "Process3": None}
+        self.process1 = Process(target=self.gamewin)
+        self.process2 = None
+        self.process3 = None
         self.fight = Button(self.root, text="fight")
         self.team = Button(self.root, text="team")
         self.bag = Button(self.root, text="bag")
@@ -41,8 +43,12 @@ class GUI:
         self.pipe.create_server()
 
     def offgame(self):
-        self.game = battle.LBattle()
-        self.game.start_battle()
+        #self.game = battle.LBattle()
+        self.process1.start()
+        #self.process2 = Process(target=self.game.start_battle)
+        #self.process2.start()
+       # self.process2.join()
+        self.process1.join()
 
     def joingame(self):
         ip = self.ip.get()
@@ -51,20 +57,24 @@ class GUI:
             self.pipe.connec(ip, port)
         except Exception as e:
             print("Could not connect!")
-        else:
-            self.gamewin()
-
-        self.game = battle.NBattle(self.pipe)
+        self.process1.start()
+        #self.game = battle.NBattle(self.pipe)
 
     def ongame(self):
         ip = self.ip.get()
         port = self.port.get()
         try:
-            self.pipe.makeserver(ip, port)
+            self.process3 = Process(target=self.pipe.makeserver, args=(ip, port,))
+            self.process3.start()
         except Exception as e:
+            self.process3.join()
             print("Could not create a new server!")
-        self.game = battle.NBattle(self.pipe)
-        self.game.start_battle()
+        """self.game = battle.NBattle(self.pipe)
+        self.process2 = Process(target=self.game.start_battle)
+        self.process1.start()
+        self.process2.start()
+        self.process1.join()
+        self.process2.join()"""
 
     def temp_name(self):
         self.ip = StringVar(self.main)

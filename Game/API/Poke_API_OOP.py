@@ -73,7 +73,7 @@ class Pokemon:
 
 
 # Main file loop (for testing)
-class main:
+"""class Main:
     api = PokemonAPI()
 
     # Makes 12 API calls with a random number from 1 to 1010
@@ -91,7 +91,7 @@ class main:
     # We use json.dump so that our file would print into a dictionary
     with open("./Data/data.json", "w+") as f:
         pokemon_list = [Pokemon(data).to_dict() for data in pokemon_data]
-        json.dump(pokemon_list, f, indent=4)
+        json.dump(pokemon_list, f, indent=4)"""
 
 
-main()
+# main()
