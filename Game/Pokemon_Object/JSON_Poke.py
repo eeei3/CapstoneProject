@@ -12,7 +12,6 @@ class JSONtoPoke:
         self.index = index
         self.caller = caller
 
-
     def get_moves(self):
         y = 0
         self.moves = []

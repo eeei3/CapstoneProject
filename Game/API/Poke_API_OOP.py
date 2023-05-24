@@ -77,7 +77,7 @@ class main:
     api = PokemonAPI()
 
     # Makes 12 API calls with a random number from 1 to 1010
-    for i in range(1):
+    for i in range(12):
         pokemon_id = random.randint(1, 1010)
         api.call_api(pokemon_id)
 
