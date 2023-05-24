@@ -1,3 +1,17 @@
+# ---------------------------------------------
+# Title: Poke_API.py
+# Class: CS 30
+# Date: 10/05/23
+# Version: 1.0
+# ---------------------------------------------
+"""
+Current Assignment: Poke_API.py
+
+This file makes numerous API calls to pokeapi.co.
+This file is typically used for quick testing and gathering data from the API.
+This file does NOT follow OOP.
+"""
+# Important package imports
 import requests
 import random
 

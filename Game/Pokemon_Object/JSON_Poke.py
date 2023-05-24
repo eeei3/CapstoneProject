@@ -7,7 +7,7 @@
 """
 Current Assignment: JSON_Poke.py
 
-This file is what we use to make opejects from
+This file is what we use to make objects from
 """
 # Imports module game_logic, needed for functions later used
 from Game.Pokemon_Object import Poke_Obj

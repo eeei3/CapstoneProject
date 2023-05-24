@@ -1,3 +1,16 @@
+# ---------------------------------------------
+# Title: Poke_API_OOP.py
+# Class: CS 30
+# Date: 13/05/23
+# Version: 1.0
+# ---------------------------------------------
+"""
+Current Assignment: Poke_API_OOP.py
+
+This file makes api calls to pokeapi.co.
+It then stores the data received in a .json file for later use.
+It also uses classes as per OOP formats.
+"""
 # Important package imports
 import json
 import requests
@@ -72,7 +85,9 @@ class Pokemon:
         }
 
 
-# Main file loop (for testing)
+# This class is where the printing to the file happens,
+# As well as how many calls are made and more.
+# It relies on the other classes in the file
 class main:
     api = PokemonAPI()
 
@@ -94,4 +109,5 @@ class main:
         json.dump(pokemon_list, f, indent=4)
 
 
+# Call the main class, and start the API calls from here
 main()
