@@ -1,6 +1,21 @@
+# ---------------------------------------------
+# Title: Poke_Obj.py
+# Class: CS 30
+# Date: 13/05/23
+# Version: 1.0
+# ---------------------------------------------
+"""
+Current Assignment: Poke_Obj.py
+
+This file is used to make objects from our stored data in our .json file.
+It opens the .json file in read mode, creates a list of objects from the data.
+It prints some data that can be used to verify if the file is working as intended
+"""
+# Import package imports
 import json
 
 
+# Class that is being used to make objects from the data
 class Pokemon:
     def __init__(self, name, id, types, moves, stats, index, caller):
         self.name = name
