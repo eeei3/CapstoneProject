@@ -1,33 +1,80 @@
 [
     {
-        "ID": 374,
-        "Name": "beldum",
-        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/374.png",
+        "ID": 165,
+        "Name": "ledyba",
+        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/165.png",
         "Types": [
-            "steel",
-            "psychic"
+            "bug",
+            "flying"
         ],
         "Stats": {
             "hp": 40,
-            "attack": 55,
-            "defense": 80,
-            "special-attack": 35,
-            "special-defense": 60,
-            "speed": 30
+            "attack": 20,
+            "defense": 30,
+            "special-attack": 40,
+            "special-defense": 80,
+            "speed": 55
         },
         "Moves": [
             {
-                "Name": "headbutt",
+                "Name": "comet-punch",
                 "PP": 15,
-                "Accuracy": 100,
-                "Power": 70,
+                "Accuracy": 85,
+                "Power": 18,
                 "Type": "normal"
             },
             {
-                "Name": "tackle",
-                "PP": 35,
+                "Name": "mega-punch",
+                "PP": 20,
+                "Accuracy": 85,
+                "Power": 80,
+                "Type": "normal"
+            },
+            {
+                "Name": "ice-punch",
+                "PP": 15,
                 "Accuracy": 100,
-                "Power": 40,
+                "Power": 75,
+                "Type": "ice"
+            },
+            {
+                "Name": "thunder-punch",
+                "PP": 15,
+                "Accuracy": 100,
+                "Power": 75,
+                "Type": "electric"
+            }
+        ]
+    },
+    {
+        "ID": 991,
+        "Name": "iron-bundle",
+        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/991.png",
+        "Types": [
+            "ice",
+            "water"
+        ],
+        "Stats": {
+            "hp": 56,
+            "attack": 80,
+            "defense": 114,
+            "special-attack": 124,
+            "special-defense": 60,
+            "speed": 136
+        },
+        "Moves": [
+            {
+                "Name": "ice-punch",
+                "PP": 15,
+                "Accuracy": 100,
+                "Power": 75,
+                "Type": "ice"
+            },
+            {
+                "Name": "body-slam",
+                "PP": 15,
+                "Accuracy": 100,
+                "Power": 85,
                 "Type": "normal"
             },
             {
@@ -38,36 +85,90 @@
                 "Type": "normal"
             },
             {
-                "Name": "iron-defense",
-                "PP": 15,
-                "Accuracy": "N/A",
-                "Power": "N/A",
-                "Type": "steel"
+                "Name": "hydro-pump",
+                "PP": 5,
+                "Accuracy": 80,
+                "Power": 110,
+                "Type": "water"
             }
         ]
     },
     {
-        "ID": 670,
-        "Name": "floette",
-        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/670.png",
+        "ID": 314,
+        "Name": "illumise",
+        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/314.png",
         "Types": [
-            "fairy"
+            "bug"
         ],
         "Stats": {
-            "hp": 54,
-            "attack": 45,
-            "defense": 47,
-            "special-attack": 75,
-            "special-defense": 98,
-            "speed": 52
+            "hp": 65,
+            "attack": 47,
+            "defense": 75,
+            "special-attack": 73,
+            "special-defense": 85,
+            "speed": 85
         },
         "Moves": [
             {
-                "Name": "vine-whip",
-                "PP": 25,
+                "Name": "mega-punch",
+                "PP": 20,
+                "Accuracy": 85,
+                "Power": 80,
+                "Type": "normal"
+            },
+            {
+                "Name": "ice-punch",
+                "PP": 15,
                 "Accuracy": 100,
-                "Power": 45,
-                "Type": "grass"
+                "Power": 75,
+                "Type": "ice"
+            },
+            {
+                "Name": "thunder-punch",
+                "PP": 15,
+                "Accuracy": 100,
+                "Power": 75,
+                "Type": "electric"
+            },
+            {
+                "Name": "mega-kick",
+                "PP": 5,
+                "Accuracy": 75,
+                "Power": 120,
+                "Type": "normal"
+            }
+        ]
+    },
+    {
+        "ID": 882,
+        "Name": "dracovish",
+        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/882.png",
+        "Types": [
+            "water",
+            "dragon"
+        ],
+        "Stats": {
+            "hp": 90,
+            "attack": 90,
+            "defense": 100,
+            "special-attack": 70,
+            "special-defense": 80,
+            "speed": 75
+        },
+        "Moves": [
+            {
+                "Name": "stomp",
+                "PP": 20,
+                "Accuracy": 100,
+                "Power": 65,
+                "Type": "normal"
+            },
+            {
+                "Name": "mega-kick",
+                "PP": 5,
+                "Accuracy": 75,
+                "Power": 120,
+                "Type": "normal"
             },
             {
                 "Name": "tackle",
@@ -77,36 +178,169 @@
                 "Type": "normal"
             },
             {
-                "Name": "razor-leaf",
-                "PP": 25,
-                "Accuracy": 95,
-                "Power": 55,
-                "Type": "grass"
-            },
-            {
-                "Name": "solar-beam",
-                "PP": 10,
+                "Name": "body-slam",
+                "PP": 15,
                 "Accuracy": 100,
-                "Power": 120,
-                "Type": "grass"
+                "Power": 85,
+                "Type": "normal"
             }
         ]
     },
     {
-        "ID": 380,
-        "Name": "latias",
-        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/380.png",
+        "ID": 961,
+        "Name": "wugtrio",
+        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/961.png",
         "Types": [
-            "dragon",
-            "psychic"
+            "water"
         ],
         "Stats": {
-            "hp": 80,
-            "attack": 80,
-            "defense": 90,
-            "special-attack": 110,
-            "special-defense": 130,
-            "speed": 110
+            "hp": 35,
+            "attack": 100,
+            "defense": 50,
+            "special-attack": 50,
+            "special-defense": 70,
+            "speed": 120
+        },
+        "Moves": [
+            {
+                "Name": "slam",
+                "PP": 20,
+                "Accuracy": 75,
+                "Power": 80,
+                "Type": "normal"
+            },
+            {
+                "Name": "sand-attack",
+                "PP": 15,
+                "Accuracy": 100,
+                "Power": "N/A",
+                "Type": "ground"
+            },
+            {
+                "Name": "headbutt",
+                "PP": 15,
+                "Accuracy": 100,
+                "Power": 70,
+                "Type": "normal"
+            },
+            {
+                "Name": "wrap",
+                "PP": 20,
+                "Accuracy": 90,
+                "Power": 15,
+                "Type": "normal"
+            }
+        ]
+    },
+    {
+        "ID": 183,
+        "Name": "marill",
+        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/183.png",
+        "Types": [
+            "water",
+            "fairy"
+        ],
+        "Stats": {
+            "hp": 70,
+            "attack": 20,
+            "defense": 50,
+            "special-attack": 20,
+            "special-defense": 50,
+            "speed": 40
+        },
+        "Moves": [
+            {
+                "Name": "mega-punch",
+                "PP": 20,
+                "Accuracy": 85,
+                "Power": 80,
+                "Type": "normal"
+            },
+            {
+                "Name": "ice-punch",
+                "PP": 15,
+                "Accuracy": 100,
+                "Power": 75,
+                "Type": "ice"
+            },
+            {
+                "Name": "slam",
+                "PP": 20,
+                "Accuracy": 75,
+                "Power": 80,
+                "Type": "normal"
+            },
+            {
+                "Name": "mega-kick",
+                "PP": 5,
+                "Accuracy": 75,
+                "Power": 120,
+                "Type": "normal"
+            }
+        ]
+    },
+    {
+        "ID": 737,
+        "Name": "charjabug",
+        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/737.png",
+        "Types": [
+            "bug",
+            "electric"
+        ],
+        "Stats": {
+            "hp": 57,
+            "attack": 82,
+            "defense": 95,
+            "special-attack": 55,
+            "special-defense": 75,
+            "speed": 36
+        },
+        "Moves": [
+            {
+                "Name": "vice-grip",
+                "PP": 30,
+                "Accuracy": 100,
+                "Power": 55,
+                "Type": "normal"
+            },
+            {
+                "Name": "bite",
+                "PP": 25,
+                "Accuracy": 100,
+                "Power": 60,
+                "Type": "dark"
+            },
+            {
+                "Name": "string-shot",
+                "PP": 40,
+                "Accuracy": 95,
+                "Power": "N/A",
+                "Type": "bug"
+            },
+            {
+                "Name": "thunderbolt",
+                "PP": 15,
+                "Accuracy": 100,
+                "Power": 90,
+                "Type": "electric"
+            }
+        ]
+    },
+    {
+        "ID": 587,
+        "Name": "emolga",
+        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/587.png",
+        "Types": [
+            "electric",
+            "flying"
+        ],
+        "Stats": {
+            "hp": 55,
+            "attack": 75,
+            "defense": 60,
+            "special-attack": 75,
+            "special-defense": 60,
+            "speed": 103
         },
         "Moves": [
             {
@@ -117,51 +351,45 @@
                 "Type": "normal"
             },
             {
-                "Name": "fly",
-                "PP": 15,
-                "Accuracy": 95,
-                "Power": 90,
-                "Type": "flying"
-            },
-            {
-                "Name": "body-slam",
-                "PP": 15,
+                "Name": "tail-whip",
+                "PP": 30,
                 "Accuracy": 100,
-                "Power": 85,
+                "Power": "N/A",
                 "Type": "normal"
             },
             {
-                "Name": "double-edge",
-                "PP": 15,
+                "Name": "solar-beam",
+                "PP": 10,
                 "Accuracy": 100,
                 "Power": 120,
-                "Type": "normal"
+                "Type": "grass"
+            },
+            {
+                "Name": "thunder-shock",
+                "PP": 30,
+                "Accuracy": 100,
+                "Power": 40,
+                "Type": "electric"
             }
         ]
     },
     {
-        "ID": 66,
-        "Name": "machop",
-        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/66.png",
+        "ID": 560,
+        "Name": "scrafty",
+        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/560.png",
         "Types": [
+            "dark",
             "fighting"
         ],
         "Stats": {
-            "hp": 70,
-            "attack": 80,
-            "defense": 50,
-            "special-attack": 35,
-            "special-defense": 35,
-            "speed": 35
+            "hp": 65,
+            "attack": 90,
+            "defense": 115,
+            "special-attack": 45,
+            "special-defense": 115,
+            "speed": 58
         },
         "Moves": [
-            {
-                "Name": "karate-chop",
-                "PP": 25,
-                "Accuracy": 100,
-                "Power": 50,
-                "Type": "fighting"
-            },
             {
                 "Name": "mega-punch",
                 "PP": 20,
@@ -182,86 +410,6 @@
                 "Accuracy": 100,
                 "Power": 75,
                 "Type": "ice"
-            }
-        ]
-    },
-    {
-        "ID": 804,
-        "Name": "naganadel",
-        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/804.png",
-        "Types": [
-            "poison",
-            "dragon"
-        ],
-        "Stats": {
-            "hp": 73,
-            "attack": 73,
-            "defense": 73,
-            "special-attack": 127,
-            "special-defense": 73,
-            "speed": 121
-        },
-        "Moves": [
-            {
-                "Name": "fly",
-                "PP": 15,
-                "Accuracy": 95,
-                "Power": 90,
-                "Type": "flying"
-            },
-            {
-                "Name": "fury-attack",
-                "PP": 20,
-                "Accuracy": 85,
-                "Power": 15,
-                "Type": "normal"
-            },
-            {
-                "Name": "pin-missile",
-                "PP": 20,
-                "Accuracy": 95,
-                "Power": 25,
-                "Type": "bug"
-            },
-            {
-                "Name": "growl",
-                "PP": 40,
-                "Accuracy": 100,
-                "Power": "N/A",
-                "Type": "normal"
-            }
-        ]
-    },
-    {
-        "ID": 476,
-        "Name": "probopass",
-        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/476.png",
-        "Types": [
-            "rock",
-            "steel"
-        ],
-        "Stats": {
-            "hp": 60,
-            "attack": 55,
-            "defense": 145,
-            "special-attack": 75,
-            "special-defense": 150,
-            "speed": 40
-        },
-        "Moves": [
-            {
-                "Name": "fire-punch",
-                "PP": 15,
-                "Accuracy": 100,
-                "Power": 75,
-                "Type": "fire"
-            },
-            {
-                "Name": "ice-punch",
-                "PP": 15,
-                "Accuracy": 100,
-                "Power": 75,
-                "Type": "ice"
             },
             {
                 "Name": "thunder-punch",
@@ -269,39 +417,119 @@
                 "Accuracy": 100,
                 "Power": 75,
                 "Type": "electric"
-            },
-            {
-                "Name": "headbutt",
-                "PP": 15,
-                "Accuracy": 100,
-                "Power": 70,
-                "Type": "normal"
             }
         ]
     },
     {
-        "ID": 294,
-        "Name": "loudred",
-        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/294.png",
+        "ID": 925,
+        "Name": "maushold",
+        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/925.png",
         "Types": [
             "normal"
         ],
         "Stats": {
-            "hp": 84,
-            "attack": 71,
-            "defense": 43,
-            "special-attack": 71,
-            "special-defense": 43,
-            "speed": 48
+            "hp": 74,
+            "attack": 75,
+            "defense": 70,
+            "special-attack": 65,
+            "special-defense": 75,
+            "speed": 111
         },
         "Moves": [
             {
-                "Name": "pound",
+                "Name": "take-down",
+                "PP": 20,
+                "Accuracy": 85,
+                "Power": 90,
+                "Type": "normal"
+            },
+            {
+                "Name": "hyper-beam",
+                "PP": 5,
+                "Accuracy": 90,
+                "Power": 150,
+                "Type": "normal"
+            },
+            {
+                "Name": "low-kick",
+                "PP": 20,
+                "Accuracy": 100,
+                "Power": "N/A",
+                "Type": "fighting"
+            },
+            {
+                "Name": "thunder-wave",
+                "PP": 20,
+                "Accuracy": 90,
+                "Power": "N/A",
+                "Type": "electric"
+            }
+        ]
+    },
+    {
+        "ID": 998,
+        "Name": "baxcalibur",
+        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/998.png",
+        "Types": [
+            "dragon",
+            "ice"
+        ],
+        "Stats": {
+            "hp": 115,
+            "attack": 145,
+            "defense": 92,
+            "special-attack": 75,
+            "special-defense": 86,
+            "speed": 87
+        },
+        "Moves": [
+            {
+                "Name": "swords-dance",
+                "PP": 20,
+                "Accuracy": "N/A",
+                "Power": "N/A",
+                "Type": "normal"
+            },
+            {
+                "Name": "tackle",
                 "PP": 35,
                 "Accuracy": 100,
                 "Power": 40,
                 "Type": "normal"
             },
+            {
+                "Name": "body-slam",
+                "PP": 15,
+                "Accuracy": 100,
+                "Power": 85,
+                "Type": "normal"
+            },
+            {
+                "Name": "take-down",
+                "PP": 20,
+                "Accuracy": 85,
+                "Power": 90,
+                "Type": "normal"
+            }
+        ]
+    },
+    {
+        "ID": 248,
+        "Name": "tyranitar",
+        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png",
+        "Types": [
+            "rock",
+            "dark"
+        ],
+        "Stats": {
+            "hp": 100,
+            "attack": 134,
+            "defense": 110,
+            "special-attack": 95,
+            "special-defense": 100,
+            "speed": 61
+        },
+        "Moves": [
             {
                 "Name": "mega-punch",
                 "PP": 20,
@@ -322,239 +550,13 @@
                 "Accuracy": 100,
                 "Power": 75,
                 "Type": "ice"
-            }
-        ]
-    },
-    {
-        "ID": 18,
-        "Name": "pidgeot",
-        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png",
-        "Types": [
-            "normal",
-            "flying"
-        ],
-        "Stats": {
-            "hp": 83,
-            "attack": 80,
-            "defense": 75,
-            "special-attack": 70,
-            "special-defense": 70,
-            "speed": 101
-        },
-        "Moves": [
-            {
-                "Name": "razor-wind",
-                "PP": 10,
-                "Accuracy": 100,
-                "Power": 80,
-                "Type": "normal"
             },
-            {
-                "Name": "gust",
-                "PP": 35,
-                "Accuracy": 100,
-                "Power": 40,
-                "Type": "flying"
-            },
-            {
-                "Name": "wing-attack",
-                "PP": 35,
-                "Accuracy": 100,
-                "Power": 60,
-                "Type": "flying"
-            },
-            {
-                "Name": "whirlwind",
-                "PP": 20,
-                "Accuracy": "N/A",
-                "Power": "N/A",
-                "Type": "normal"
-            }
-        ]
-    },
-    {
-        "ID": 949,
-        "Name": "toedscruel",
-        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/949.png",
-        "Types": [
-            "ground",
-            "grass"
-        ],
-        "Stats": {
-            "hp": 80,
-            "attack": 70,
-            "defense": 65,
-            "special-attack": 80,
-            "special-defense": 120,
-            "speed": 100
-        },
-        "Moves": [
-            {
-                "Name": "tackle",
-                "PP": 35,
-                "Accuracy": 100,
-                "Power": 40,
-                "Type": "normal"
-            },
-            {
-                "Name": "wrap",
-                "PP": 20,
-                "Accuracy": 90,
-                "Power": 15,
-                "Type": "normal"
-            },
-            {
-                "Name": "supersonic",
-                "PP": 20,
-                "Accuracy": 55,
-                "Power": "N/A",
-                "Type": "normal"
-            },
-            {
-                "Name": "hyper-beam",
-                "PP": 5,
-                "Accuracy": 90,
-                "Power": 150,
-                "Type": "normal"
-            }
-        ]
-    },
-    {
-        "ID": 413,
-        "Name": "wormadam-plant",
-        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/413.png",
-        "Types": [
-            "bug",
-            "grass"
-        ],
-        "Stats": {
-            "hp": 60,
-            "attack": 59,
-            "defense": 85,
-            "special-attack": 79,
-            "special-defense": 105,
-            "speed": 36
-        },
-        "Moves": [
-            {
-                "Name": "tackle",
-                "PP": 35,
-                "Accuracy": 100,
-                "Power": 40,
-                "Type": "normal"
-            },
-            {
-                "Name": "psybeam",
-                "PP": 20,
-                "Accuracy": 100,
-                "Power": 65,
-                "Type": "psychic"
-            },
-            {
-                "Name": "hyper-beam",
-                "PP": 5,
-                "Accuracy": 90,
-                "Power": 150,
-                "Type": "normal"
-            },
-            {
-                "Name": "growth",
-                "PP": 20,
-                "Accuracy": "N/A",
-                "Power": "N/A",
-                "Type": "normal"
-            }
-        ]
-    },
-    {
-        "ID": 875,
-        "Name": "eiscue-ice",
-        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/875.png",
-        "Types": [
-            "ice"
-        ],
-        "Stats": {
-            "hp": 75,
-            "attack": 80,
-            "defense": 110,
-            "special-attack": 65,
-            "special-defense": 90,
-            "speed": 50
-        },
-        "Moves": [
-            {
-                "Name": "ice-punch",
-                "PP": 15,
-                "Accuracy": 100,
-                "Power": 75,
-                "Type": "ice"
-            },
-            {
-                "Name": "headbutt",
-                "PP": 15,
-                "Accuracy": 100,
-                "Power": 70,
-                "Type": "normal"
-            },
-            {
-                "Name": "tackle",
-                "PP": 35,
-                "Accuracy": 100,
-                "Power": 40,
-                "Type": "normal"
-            },
-            {
-                "Name": "body-slam",
-                "PP": 15,
-                "Accuracy": 100,
-                "Power": 85,
-                "Type": "normal"
-            }
-        ]
-    },
-    {
-        "ID": 796,
-        "Name": "xurkitree",
-        "Sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/796.png",
-        "Types": [
-            "electric"
-        ],
-        "Stats": {
-            "hp": 83,
-            "attack": 89,
-            "defense": 71,
-            "special-attack": 173,
-            "special-defense": 71,
-            "speed": 83
-        },
-        "Moves": [
             {
                 "Name": "thunder-punch",
                 "PP": 15,
                 "Accuracy": 100,
                 "Power": 75,
                 "Type": "electric"
-            },
-            {
-                "Name": "bind",
-                "PP": 20,
-                "Accuracy": 85,
-                "Power": 15,
-                "Type": "normal"
-            },
-            {
-                "Name": "wrap",
-                "PP": 20,
-                "Accuracy": 90,
-                "Power": 15,
-                "Type": "normal"
-            },
-            {
-                "Name": "hyper-beam",
-                "PP": 5,
-                "Accuracy": 90,
-                "Power": 150,
-                "Type": "normal"
             }
         ]
     }
