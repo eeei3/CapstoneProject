@@ -9,11 +9,14 @@ Current Assignment: JSON_Poke.py
 
 This file is what we use to make objects from
 """
-# Imports module game_logic, needed for functions later used
+# Import module Poke_Obj, which is used later on
 from Game.Pokemon_Object import Poke_Obj
 
 
-class JSONtoPoke:
+# This class turns the data given from the .json into objects for later usage
+class JSON_to_Obj:
+    # Initializes default values.
+    # Some values assume None, until given data later.
     def __init__(self, rawdata, index, caller):
         self.rawdata = rawdata
         self.name = None
@@ -24,6 +27,7 @@ class JSONtoPoke:
         self.index = index
         self.caller = caller
 
+    # Class reads the moves PP value and returns the value.
     def get_moves(self):
         y = 0
         self.moves = []
@@ -33,22 +37,27 @@ class JSONtoPoke:
             y += 1
         return self.moves
 
+    # Class reads the Pokémons type and returns the value.
     def get_type(self):
         self.types = self.rawdata["Types"]
         return self.types
 
+    # Class reads the Pokémons name and returns the value.
     def get_name(self):
         self.name = self.rawdata["Name"]
         return self.name
 
+    # Class reads the Pokémons' ID and returns the value.
     def get_id(self):
         self.id = self.rawdata["ID"]
         return self.id
 
+    # Class reads the Pokémons stats and returns the value.
     def get_stats(self):
         self.stats = self.rawdata["Stats"]
         return self.stats
 
+    # Class returns the values that it has received and updates the object.
     def return_obj(self):
         self.name = self.get_name()
         self.id = self.get_id()
