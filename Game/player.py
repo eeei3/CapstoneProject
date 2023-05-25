@@ -12,8 +12,11 @@ Current Assignment: player.py
 import random
 from API import Poke_API_OOP
 from Pokemon_Object import JSON_Poke
-import tkinter
 from tkinter import *
+import csv
+
+with open("Data/types.csv", newline='') as c:
+    EBAAD = csv.reader(c, delimiter=' ', quotechar='|')
 
 
 class Player:
@@ -41,6 +44,7 @@ class Player:
             poke.index = index
             pokemon_list.append(poke)
         return pokemon_list
+
 
     def UI(self, pokemon_list):
         root = Tk()
@@ -73,7 +77,36 @@ class Player:
         add.pack()
 
         # This will cause the program to run until we close it with the X\
-        root.mainloop()
+        root.mainloop()"""
+
+    def turn(self, epokemon):
+        print("Trainer's turn!")
+        trainer_choice = random.randint(0, 100)
+        pokemon_choice = random.randint(0, len(self.pokemon) - 1)
+        if trainer_choice <= 80:
+            # Attack
+            if random.randint(0, 12) > self.difficulty:
+                for attack in self.played_pokemon.moves:
+                    if attack["Power"] == "N/A":
+                        pass
+                    else:
+                        if epokemon.stats["hp"] < attack["Power"]:
+                            self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0)
+                        else:
+                            for row in EBAAD:
+                                for type in epokemon.types:
+                                    if (type in row) and (type in attack["Type"]):
+                                        self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 1)
+                self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0)
+            else:
+                self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0)
+        else:
+            # Switch Pokémon
+            self.played_pokemon.onfield = False
+            self.played_pokemon = self.pokemon[pokemon_choice]
+            print(f"Trainer has chosen {self.played_pokemon.name}")
+            self.played_pokemon.onfield = True
+            return
 
 # when it starts, the player throws their first pokémon in the list
 # print a list of options

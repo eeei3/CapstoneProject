@@ -37,6 +37,8 @@ class GUI:
         self.root.withdraw()
 
     def connec(self, ip, port):
+        ip = self.ip.get()
+        port = self.port.get()
         self.pipe = connection.GameConnection(ip, port)
         self.pipe.make_connection()
 
@@ -45,16 +47,17 @@ class GUI:
         self.pipe.create_server()
 
     def offgame(self):
-        #self.game = battle.LBattle()
+        self.game = battle.LBattle()
         self.process1.start()
-        #self.process2 = Process(target=self.game.start_battle)
-        #self.process2.start()
-       # self.process2.join()
+        self.process2 = Process(target=self.game.start_battle)
+        self.process2.start()
+        self.process2.join()
         self.process1.join()
 
     def joingame(self):
         ip = self.ip.get()
         port = self.port.get()
+        self.pipe = connection.GameConnection(ip, port)
         try:
             self.pipe.connec(ip, port)
         except Exception as e:
@@ -71,6 +74,7 @@ class GUI:
         except Exception as e:
             self.process3.join()
             print("Could not create a new server!")
+        self.process3.join()
         """self.game = battle.NBattle(self.pipe)
         self.process2 = Process(target=self.game.start_battle)
         self.process1.start()
