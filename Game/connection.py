@@ -6,6 +6,7 @@ This is the module relating to connecting for pvp
 """
 import socket
 import time
+from multiprocessing import Process
 
 
 """
@@ -27,6 +28,9 @@ class GameConnection:
         self.sdata = None
         self.rdata = None
         self.accept_connection = False
+        self.connec = False
+        self.process1 = Process(target=self.mail)
+        self.process2 = Process(target=self.listen)
 
     def make_connection(self):
         try:
@@ -46,7 +50,10 @@ class GameConnection:
             print("Failed to connect to host")
             print(e)
         else:
-            self.connect()
+            self.connec = True
+            self.process2.start()
+            self.process1.start()
+
 
 
     def create_server(self):
@@ -75,10 +82,11 @@ class GameConnection:
         s.close()
         return ip
 
-    def connect(self):
-        connec = True
-        while connec:
-            self.socket.sendall(self.sdata)
+    def listen(self):
+        while self.connec:
             self.rdata = self.socket.recv(5024)
+
+    def mail(self):
+        while self.connec:
+            self.socket.sendall(self.sdata)
             self.sdata = None
-            time.sleep(1)
