@@ -88,7 +88,7 @@ class Pokemon:
 # This class is where the printing to the file happens,
 # As well as how many calls are made and more.
 # It relies on the other classes in the file
-class main:
+"""class Main:
     api = PokemonAPI()
 
     # Makes 12 API calls with a random number from 1 to 1010
@@ -110,4 +110,4 @@ class main:
 
 
 # Call the main class, and start the API calls from here
-main()
+main()"""

@@ -8,6 +8,18 @@ import socket
 import time
 
 
+"""
+HOW THIS FILE WORKS:
+FOR THE SERVER:
+The server opens up a port on it's IP Address
+The server waits for a connection
+If the connection sends the word "Accept" 
+the server responds with the word "Connect"
+Once this exchange has compeleted, the server
+will send it's data and read the received data from
+the client every second
+"""
+
 class GameConnection:
     def __init__(self, ip, port):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
