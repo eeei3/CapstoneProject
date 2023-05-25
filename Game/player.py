@@ -1,3 +1,14 @@
+# ---------------------------------------------
+# Title: player.py
+# Class: CS 30
+# Date: 19/05/23
+# Version: 1.0
+# ---------------------------------------------
+"""
+Current Assignment: player.py
+
+
+"""
 import random
 from API import Poke_API_OOP
 from Pokemon_Object import JSON_Poke
@@ -6,6 +17,7 @@ import csv
 
 with open("Data/types.csv", newline='') as c:
     EBAAD = csv.reader(c, delimiter=' ', quotechar='|')
+
 
 class Player:
 
@@ -34,7 +46,7 @@ class Player:
         return pokemon_list
 
 
-"""    def UI(self, pokemon_list):
+    def UI(self, pokemon_list):
         root = Tk()
         root.geometry("500x400")
         root.title("Player Setup")
@@ -52,7 +64,6 @@ class Player:
         pokemon_dropdown.pack()
         count = 0
 
-
         # this button will add the pokemon to the team
         def add_pokemon():
             global count
@@ -61,7 +72,6 @@ class Player:
             pokemon_dropdown['menu'].delete(index)
             team[count] = pick
             count = 1 + count
-
 
         add = Button(root, text="Add Pokemon", command=add_pokemon)
         add.pack()
@@ -98,13 +108,8 @@ class Player:
             self.played_pokemon.onfield = True
             return
 
-
-
-# when it starts, the player throws their first pokemon in the list
+# when it starts, the player throws their first pokémon in the list
 # print a list of options
 # if the player chooses to attack, open a menu of different moves
-# if the player chooses to swtich, open a list of pokemon
-# if the player chooses bag, open a list of items the player can use
-
-
-
+# if the player chooses to switch, open a list of pokémon
+# if the player chooses the bag, open a list of items the player can use

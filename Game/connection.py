@@ -1,8 +1,13 @@
+# ---------------------------------------------
+# Title: connection.py
+# Class: CS 30
+# Date: 11/05/23
+# Version: 1.0
+# ---------------------------------------------
 """
-Joshua
-CS 30 Period 1
-May 12, 2023
-This is the module relating to connecting for pvp
+Current Assignment: connection.py
+
+
 """
 import socket
 import time
@@ -20,6 +25,7 @@ Once this exchange has compeleted, the server
 will send it's data and read the received data from
 the client every second
 """
+
 
 class GameConnection:
     def __init__(self, ip, port):
@@ -53,8 +59,6 @@ class GameConnection:
             self.connec = True
             self.process2.start()
             self.process1.start()
-
-
 
     def create_server(self):
         try:
