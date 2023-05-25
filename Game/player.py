@@ -2,6 +2,7 @@ import random
 from API import Poke_API_OOP
 from Pokemon_Object import JSON_Poke
 from tkinter import *
+import csv
 
 with open("Data/types.csv", newline='') as c:
     EBAAD = csv.reader(c, delimiter=' ', quotechar='|')
@@ -33,7 +34,7 @@ class Player:
         return pokemon_list
 
 
-    def UI(self, pokemon_list):
+"""    def UI(self, pokemon_list):
         root = Tk()
         root.geometry("500x400")
         root.title("Player Setup")
@@ -66,7 +67,7 @@ class Player:
         add.pack()
 
         # This will cause the program to run until we close it with the X\
-        root.mainloop()
+        root.mainloop()"""
 
     def turn(self, epokemon):
         print("Trainer's turn!")
