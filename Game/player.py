@@ -1,7 +1,8 @@
 import random
 from API import Poke_API_OOP
 from Pokemon_Object import JSON_Poke
-import csv
+import tkinter
+from tkinter import *
 
 class Player:
 
@@ -12,10 +13,10 @@ class Player:
         self.played_pokemon = None
 
     def pokeget(self):
-        pokemon = []
+        pokemon_list = []  # Empty list
         for i in range(12):
-            pokemon_id = random.randint(1, 1010)
-            self.api.call_api(pokemon_id)
+            pokemon_id = random.randint(1, 1010)  # random selection between ID 1 and ID 1010
+            self.api.call_api(pokemon_id)  # call the pokemon based on the ID randomly selected
 
         pokemon_raw = self.api.get_pokemon_data()
 
@@ -26,7 +27,52 @@ class Player:
             y = JSON_Poke.JSONtoPoke(x, index, self)
             poke = y.return_obj()
             poke.index = index
-            pokemon.append(poke)
-        return pokemon
+            pokemon_list.append(poke)
+        return pokemon_list
 
-    def turn(self, epokemon):
+
+    def UI(self, pokemon_list):
+        root = Tk()
+        root.geometry("500x400")
+        root.title("Player Setup")
+
+        # List of pokemon after pulling from API
+        # pokemon_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"]
+        team = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+
+        # setup the pick variables
+        pick = tkinter.StringVar(root)
+        pick.set("Pick your first pokemon.")
+        # Add dropdown menu to the GUI
+
+        pokemon_dropdown = tkinter.OptionMenu(root, pick, *pokemon_list['Name'])
+        pokemon_dropdown.pack()
+        count = 0
+
+
+        # this button will add the pokemon to the team
+        def add_pokemon():
+            global count
+            dropdown = pick.get()
+            index = pokemon_list['Name'].index(dropdown)
+            pokemon_dropdown['menu'].delete(index)
+            team[count] = pick
+            count = 1 + count
+
+
+        add = Button(root, text="Add Pokemon", command=add_pokemon)
+        add.pack()
+
+        # This will cause the program to run until we close it with the X\
+        root.mainloop()
+
+
+
+# when it starts, the player throws their first pokemon in the list
+# print a list of options
+# if the player chooses to attack, open a menu of different moves
+# if the player chooses to swtich, open a list of pokemon
+# if the player chooses bag, open a list of items the player can use
+
+
+
