@@ -1,3 +1,14 @@
+# ---------------------------------------------
+# Title: enemies.py
+# Class: CS 30
+# Date: 15/05/23
+# Version: 1.0
+# ---------------------------------------------
+"""
+Current Assignment: enemies.py
+
+
+"""
 import random
 from API import Poke_API_OOP
 from Pokemon_Object import JSON_Poke

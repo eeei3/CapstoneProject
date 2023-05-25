@@ -1,9 +1,15 @@
+# ---------------------------------------------
+# Title: battle.py
+# Class: CS 30
+# Date: 19/05/23
+# Version: 1.0
+# ---------------------------------------------
 """
-Joshua
-CS 30 Period 1
-May 12, 2023,
-This is the battling mechanic of the Pokémon game
+Current Assignment: battle.py
+
+
 """
+# Important package imports
 import enemies
 
 
