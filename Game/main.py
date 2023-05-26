@@ -28,6 +28,8 @@ class GUI:
         self.process1 = Process(target=self.gamewin)
         self.process2 = None
         self.process3 = None
+        self.connect_process = connection.GameConnection()
+        self.connect_process = None
         self.fight = Button(self.root, text="fight")
         self.team = Button(self.root, text="team")
         self.bag = Button(self.root, text="bag")
