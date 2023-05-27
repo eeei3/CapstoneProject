@@ -16,8 +16,10 @@ from tkinter import *
 import csv
 
 with open("Data/types.csv", newline='') as c:
-    EBAAD = csv.reader(c, delimiter=' ', quotechar='|')
-
+    EBAAD = []
+    a = csv.reader(c, delimiter=' ', quotechar='|')
+    for row in a:
+        EBAAD.append(row)
 
 class Player:
 
@@ -39,13 +41,43 @@ class Player:
         index = 0
         for x in pokemon_data:
             index += 1
-            y = JSON_Poke.JSONtoPoke(x, index, self)
+            y = JSON_Poke.JSON_to_Obj(x, index, self)
             poke = y.return_obj()
             poke.index = index
             pokemon_list.append(poke)
         return pokemon_list
 
+    def switch_pokemon(self, index):
+        self.played_pokemon.onfield = False
+        self.played_pokemon = self.pokemon[index]
+        self.played_pokemon.onfield = True
 
+    def turn(self, epokemon, attack):
+        for att in self.played_pokemon.moves:
+            if att["Name"] == attack:
+                attchoice = att
+                break
+            else:
+                print("You fucky wuckied")
+                return 9
+        for row in EBAAD:
+            for type in epokemon.types:
+                if (type in row) and (type in attchoice["Type"]):
+                    print(attchoice)
+                    self.played_pokemon.attack(attchoice, 1, epokemon)
+                    return
+        print(attchoice)
+        self.played_pokemon.attack(attchoice, 0, epokemon)
+
+    def check(self):
+        if self.played_pokemon.onfield.stats["hp"] <= 0:
+            self.played_pokemon.onfield = None
+            return 0
+        return 1
+
+
+
+"""
     def UI(self, pokemon_list):
         root = Tk()
         root.geometry("500x400")
@@ -78,35 +110,6 @@ class Player:
 
         # This will cause the program to run until we close it with the X\
         root.mainloop()"""
-
-    def turn(self, epokemon):
-        print("Trainer's turn!")
-        trainer_choice = random.randint(0, 100)
-        pokemon_choice = random.randint(0, len(self.pokemon) - 1)
-        if trainer_choice <= 80:
-            # Attack
-            if random.randint(0, 12) > self.difficulty:
-                for attack in self.played_pokemon.moves:
-                    if attack["Power"] == "N/A":
-                        pass
-                    else:
-                        if epokemon.stats["hp"] < attack["Power"]:
-                            self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0)
-                        else:
-                            for row in EBAAD:
-                                for type in epokemon.types:
-                                    if (type in row) and (type in attack["Type"]):
-                                        self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 1)
-                self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0)
-            else:
-                self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0)
-        else:
-            # Switch Pokémon
-            self.played_pokemon.onfield = False
-            self.played_pokemon = self.pokemon[pokemon_choice]
-            print(f"Trainer has chosen {self.played_pokemon.name}")
-            self.played_pokemon.onfield = True
-            return
 
 # when it starts, the player throws their first pokémon in the list
 # print a list of options

@@ -27,6 +27,22 @@ class Pokemon:
         self.caller = caller
 
 
+    def remove(self):
+        self.caller.pokemon.pop(self.index)
+
+    def attack(self, att, crit, target):
+        if crit == 1:
+            dmg = att["Power"] * 2
+        else:
+            dmg = att["Power"]
+        target.take_dmg(dmg)
+        return
+
+    def take_dmg(self, amount):
+        self.stats["hp"] -= amount
+        return
+
+
 """
 # Read the data from the JSON file
 with open("../Data/data.json", "r") as f:
