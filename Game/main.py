@@ -1,3 +1,15 @@
+# ---------------------------------------------
+# Title: main.py
+# Class: CS 30
+# Date: 15/05/23
+# Version: 1.0
+# ---------------------------------------------
+"""
+Current Assignment: main.py
+
+
+"""
+# Important import statements
 from tkinter import *
 import json
 import connection
