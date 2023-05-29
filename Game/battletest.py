@@ -26,6 +26,8 @@ class LBattle:
             print("switching")
             choice1 = input("")
             self.p1.switch_pokemon(int(choice1))
+        if self.p2.check() == 0:
+            print("p2 pokemon dead")
         print("p2 turn")
         self.p2.turn(self.p1.played_pokemon)
         if self.p1.check() == 0:
@@ -34,4 +36,5 @@ class LBattle:
             self.p1.switch_pokemon(int(choice3))
 
 a = LBattle()
-a.start_battle()
+while True:
+    a.start_battle()

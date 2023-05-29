@@ -53,24 +53,28 @@ class Player:
         self.played_pokemon.onfield = True
 
     def turn(self, epokemon, attack):
+        attchoice = None
         for att in self.played_pokemon.moves:
             if att["Name"] == attack:
                 attchoice = att
                 break
-            else:
-                print("You fucky wuckied")
-                return 9
+        if attchoice == None:
+            print("You messed up")
+            return 9
         for row in EBAAD:
             for type in epokemon.types:
                 if (type in row) and (type in attchoice["Type"]):
                     print(attchoice)
-                    self.played_pokemon.attack(attchoice, 1, epokemon)
+                    if 0.5 in row:
+                        self.played_pokemon(attchoice, 2, epokemon)
+                    else:
+                        self.played_pokemon.attack(attchoice, 1, epokemon)
                     return
         print(attchoice)
         self.played_pokemon.attack(attchoice, 0, epokemon)
 
     def check(self):
-        if self.played_pokemon.onfield.stats["hp"] <= 0:
+        if self.played_pokemon.stats["hp"] <= 0:
             self.played_pokemon.onfield = None
             return 0
         return 1

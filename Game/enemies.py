@@ -69,12 +69,19 @@ class Trainer:
                         pass
                     else:
                         if epokemon.stats["hp"] < attack["Power"]:
+                            print(f"Trainer has used {attack['Name']}")
                             self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0, epokemon)
                         else:
                             for row in EBAAD:
                                 for type in epokemon.types:
                                     if (type in row) and (type in attack["Type"]):
-                                        self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 1, epokemon)
+                                        print(f"Trainer has used {attack['Name']}")
+                                        if 0.5 in row:
+                                            self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 2, epokemon)
+                                        else:
+                                            self.played_pokemon.attack(
+                                                random.randint(0, len(self.played_pokemon.moves)), 1, epokemon)
+
                 self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0, epokemon)
             else:
                 self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0, epokemon)
@@ -87,7 +94,7 @@ class Trainer:
             return
 
     def check(self):
-        if self.played_pokemon.onfield.stats["hp"] <= 0:
+        if self.played_pokemon.stats["hp"] <= 0:
             self.played_pokemon.onfield = None
             return 0
         return 1
