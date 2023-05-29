@@ -71,7 +71,7 @@ class LBattle:
         self.sprite_label.place(x=50, y=100)
 
         # Create name buttons for each Pokémon
-        names = [pokemon["Name"][:6] for pokemon in self.pokemon_data]
+        names = [pokemon["Name"] for pokemon in self.pokemon_data]
         name_buttons = []
         for i, name in enumerate(names):
             button = Button(self.root, text=name, command=lambda index=i: self.switch_pokemon(index))

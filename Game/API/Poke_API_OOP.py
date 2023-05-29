@@ -104,7 +104,7 @@ class Main:
 
     # This part is what we use to print the data to our file.
     # We use json.dump so that our file would print into a dictionary
-    with open("../Data/data.json", "w+") as f:
+    with open("Data/data.json", "w+") as f:
         pokemon_list = [Pokemon(data).to_dict() for data in pokemon_data]
         json.dump(pokemon_list, f, indent=4)
 
