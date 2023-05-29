@@ -33,7 +33,7 @@ class LBattle:
     def load_pokemon_data(self):
         with open('Data/data.json') as json_file:
             data = json.load(json_file)
-            return data[:6]
+            return data[6:]
 
     def load_sprite(self, url):
         response = request.urlopen(url)
