@@ -1,6 +1,7 @@
 import enemies
 import player
 
+
 class LBattle:
     def __init__(self):
         self.lvl = 1
@@ -35,6 +36,7 @@ class LBattle:
                 print("p1 pokemon dead")
                 choice3 = input("")
                 self.p1.switch_pokemon(int(choice3))
+
 
 a = LBattle()
 a.start_battle()

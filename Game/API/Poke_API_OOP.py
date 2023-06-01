@@ -10,6 +10,9 @@ Current Assignment: Poke_API_OOP.py
 This file makes api calls to pokeapi.co.
 It then stores the data received in a .json file for later use.
 It also uses classes as per OOP formats.
+
+DO NOT USE THIS FILE.
+USE BATTLE.PY
 """
 # Important package imports
 import json
@@ -17,13 +20,10 @@ import requests
 import random
 
 
-# This is the Pokémon API class, which handles calls and returns from the API
 class PokemonAPI:
-    # Initializing an array so that it can take data when needed.
     def __init__(self):
         self.pokemon_data = []
 
-    # Calling on the PokeAPI and returning data and any error codes
     def call_api(self, pokemon_id):
         url = f'https://pokeapi.co/api/v2/pokemon/{pokemon_id}/'
         response = requests.get(url)
@@ -34,12 +34,10 @@ class PokemonAPI:
         else:
             print(f"Error: {response.status_code}")
 
-    # Returns whatever data pokemon_data has so that it can be used later
     def get_pokemon_data(self):
         return self.pokemon_data
 
 
-# This class deals with creating new objects with data retrieved from the API
 class Pokemon:
     def __init__(self, data):
         self.name = data['name']
@@ -73,7 +71,6 @@ class Pokemon:
             print(f" - {move['Name']} (PP: {move['PP']}, Accuracy: {move['Accuracy']},"
                   f" Power: {move['Power']}, Type: {move['Type']})")
 
-    # We use this to return some data in certain forms, used when printing to file
     def to_dict(self):
         return {
             "ID": self.id,
@@ -85,29 +82,21 @@ class Pokemon:
         }
 
 
-# This class is where the printing to the file happens,
-# As well as how many calls are made and more.
-# It relies on the other classes in the file
-class Main:
-    api = PokemonAPI()
+class Main(PokemonAPI):
+    def __init__(self):
+        super().__init__()
+        for i in range(12):
+            pokemon_id = random.randint(1, 1010)
+            self.call_api(pokemon_id)
 
-    # Makes 12 API calls with a random number from 1 to 1010
-    for i in range(12):
-        pokemon_id = random.randint(1, 1010)
-        api.call_api(pokemon_id)
+        pokemon_data = self.get_pokemon_data()
 
-    pokemon_data = api.get_pokemon_data()
+        for data in pokemon_data:
+            pokemon = Pokemon(data)
 
-    for data in pokemon_data:
-        pokemon = Pokemon(data)
-        # pokemon.print_info()
-
-    # This part is what we use to print the data to our file.
-    # We use json.dump so that our file would print into a dictionary
-    with open("Data/data.json", "w+") as f:
-        pokemon_list = [Pokemon(data).to_dict() for data in pokemon_data]
-        json.dump(pokemon_list, f, indent=4)
+        with open("Data/data.json", "w+") as f:
+            pokemon_list = [Pokemon(data).to_dict() for data in pokemon_data]
+            json.dump(pokemon_list, f, indent=4)
 
 
-# Call the main class, and start the API calls from here
 Main()
