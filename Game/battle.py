@@ -40,9 +40,9 @@ class LBattle:
         self.move_buttons = []
 
     def load_pokemon_data(self):
-        with open('./Data/player.json') as json_file:
+        with open('Data/data.json') as json_file:
             data = json.load(json_file)
-            return data
+            return data[6:]
 
     def load_sprite(self, url):
         response = request.urlopen(url)
