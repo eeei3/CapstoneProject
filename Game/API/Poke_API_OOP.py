@@ -100,7 +100,7 @@ class Main:
 
     for data in pokemon_data:
         pokemon = Pokemon(data)
-        pokemon.print_info()
+        # pokemon.print_info()
 
     # This part is what we use to print the data to our file.
     # We use json.dump so that our file would print into a dictionary

@@ -29,7 +29,6 @@ for i in parsed_json:
 class GUI:
     def __init__(self):
         self.mainframe = None
-        self.root = Tk()
         self.main = Tk()
         self.pipe = None
         self.online = False
@@ -37,16 +36,10 @@ class GUI:
         self.game = False
         self.ip = None
         self.port = None
-        self.process1 = Process(target=self.gamewin)
+        self.process1 = None
         self.process2 = None
         self.process3 = None
-        self.connect_process = connection.GameConnection()
         self.connect_process = None
-        self.fight = Button(self.root, text="fight")
-        self.team = Button(self.root, text="team")
-        self.bag = Button(self.root, text="bag")
-        self.run = Button(self.root, text="run")
-        self.root.withdraw()
 
     def connec(self, ip, port):
         ip = self.ip.get()
@@ -59,12 +52,13 @@ class GUI:
         self.pipe.create_server()
 
     def offgame(self):
-        self.game = battle.LBattle()
-        self.process1.start()
-        self.process2 = Process(target=self.game.start_battle)
+        self.process2 = Process(target=self.offgame_wrapper())
         self.process2.start()
-        self.process2.join()
-        self.process1.join()
+        # self.process2.join()
+
+    def offgame_wrapper(self):
+        self.game = battle.LBattle()
+        self.game.game_ui()
 
     def joingame(self):
         ip = self.ip.get()
@@ -126,17 +120,6 @@ class GUI:
         credit = Label(self.main, text="This program was made by Calvin, Ebaad and Josh", font=("MS Comic Sans", "10"))
         credit.pack(ipadx=20,ipady=20,expand=True)
         self.main.mainloop()
-
-    def gamewin(self):
-        self.root.deiconify()
-        self.main.withdraw()
-        self.root.geometry("900x500")
-        self.root.title("Pokémon Battle")
-        self.fight.pack(side=RIGHT)
-        self.team.pack(side=LEFT)
-        self.bag.pack(side=BOTTOM)
-        self.run.pack(side=BOTTOM)
-        self.root.mainloop()
 
 
 if __name__ == "__main__":

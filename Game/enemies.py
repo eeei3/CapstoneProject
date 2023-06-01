@@ -59,32 +59,35 @@ class Trainer:
         print("Trainer's turn!")
         trainer_choice = random.randint(0, 100)
         pokemon_choice = random.randint(0, len(self.pokemon) - 1)
+        attlen = 0
         if self.played_pokemon.stats["hp"] <= 0:
             trainer_choice = 90
         if trainer_choice <= 80:
             # Attack
             if random.randint(0, 12) > self.difficulty:
                 for attack in self.played_pokemon.moves:
+                    attlen += 1
                     if attack["Power"] == "N/A":
                         pass
                     else:
                         if epokemon.stats["hp"] < attack["Power"]:
                             print(f"Trainer has used {attack['Name']}")
-                            self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0, epokemon)
+                            self.played_pokemon.attack(attack, 0, epokemon)
+                            return
                         else:
                             for row in EBAAD:
                                 for type in epokemon.types:
                                     if (type in row) and (type in attack["Type"]):
                                         print(f"Trainer has used {attack['Name']}")
                                         if 0.5 in row:
-                                            self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 2, epokemon)
+                                            self.played_pokemon.attack(attack, 2, epokemon)
+                                            return
                                         else:
-                                            self.played_pokemon.attack(
-                                                random.randint(0, len(self.played_pokemon.moves)), 1, epokemon)
-
-                self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0, epokemon)
-            else:
-                self.played_pokemon.attack(random.randint(0, len(self.played_pokemon.moves)), 0, epokemon)
+                                            self.played_pokemon.attack(attack, 1, epokemon)
+                                            return
+                        if len(self.played_pokemon.moves) == attlen:
+                            self.played_pokemon.attack(attack, 0, epokemon)
+                            return
         else:
             # Switch Pokémon
             self.played_pokemon.onfield = False

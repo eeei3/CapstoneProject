@@ -13,6 +13,7 @@ It prints some data that can be used to verify if the file is working as intende
 """
 # Import package imports
 import json
+import random
 
 
 # Class that is being used to make objects from the data
@@ -31,8 +32,14 @@ class Pokemon:
         self.caller.pokemon.pop(self.index)
 
     def attack(self, att, crit, target):
+        print(type(att))
+        if random.randint(0, 100) < att["Accuracy"]:
+            print("Pokemon missed")
+            return
         if crit == 1:
             dmg = att["Power"] * 2
+        elif crit == 2:
+            dmg = att["Power"] * 0.5
         else:
             dmg = att["Power"]
         target.take_dmg(dmg)
