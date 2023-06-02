@@ -83,10 +83,6 @@ class LBattle:
             while self.turn == 2:
                 pass
 
-
-
-
-
             choice = input("")
             if choice == "attack":
                 print("attacking")
@@ -174,7 +170,6 @@ class LBattle:
             elif not button_state[i][0]:
                 button["state"] = "disabled"
 
-
         # Create move buttons
         moves = self.p1.played_pokemon.moves
         for i, move in enumerate(moves):
@@ -202,6 +197,7 @@ class NBattle(LBattle):
         self.p2 = None
         self.stream = stream
         return
+
 
 """
 a = LBattle()
