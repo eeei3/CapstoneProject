@@ -30,7 +30,7 @@ class Trainer:
         self.name = names[random.randint(0, 10)]
         self.pokemon = self.pokeget()
         self.difficulty = difficulty
-        self.played_pokemon = None
+        self.played_pokemon = self.pokemon[random.randint(0, 6)]
 
     def start(self):
         self.played_pokemon = self.pokemon[random.randint(0, 11)]

@@ -53,17 +53,20 @@ class LBattle:
         sprite = ImageTk.PhotoImage(sprite)
         return sprite
 
-    def action(self):
+    def action(self, move):
+        self.p1.turn(self.p2.played_pokemon, move)
+        self.turn = 2
         return
 
     def switch(self):
+        self.turn = 2
         return
 
     def start_battle(self):
         self.p2.start()
         self.t.insert('1.0', f"Start of match with Trainer {self.p2.name}")
         self.t.insert('1.0', f"Pick your Pokemon!")
-        while(self.p1.played_pokemon == None):
+        while self.p1.played_pokemon is None:
             pass
         for pokemon in self.p1.pokemon:
             print(pokemon.name)
@@ -95,6 +98,7 @@ class LBattle:
                 print("switching")
                 choice1 = input("")
                 self.p1.switch_pokemon(int(choice1))
+
             if self.p2.check() == 0:
                 print("p2 pokemon dead")
             print("p2 turn")
@@ -105,10 +109,14 @@ class LBattle:
                 self.p1.switch_pokemon(int(choice3))
 
     def update_sprite(self):
-        sprite_url = self.pokemon_data[self.current_pokemon_index]["Sprite"]
+        sprite_url = self.p1.played_pokemon.sprites
         sprite = self.load_sprite(sprite_url)
-        self.sprite_label.config(image=sprite)
-        self.sprite_label.image = sprite  # Keep a reference to avoid garbage collection
+        self.psprite_label.config(image=sprite)
+        self.psprite_label.image = sprite  # Keep a reference to avoid garbage collection
+        sprite_url = self.p2.played_pokemon.sprites
+        sprite = self.load_sprite(sprite_url)
+        self.esprite_label.config(image=sprite)
+        self.esprite_label.image = sprite  # Keep a reference to avoid garbage collection
 
     def update_moves(self):
         moves = self.pokemon_data[self.current_pokemon_index]["Moves"]
@@ -132,18 +140,26 @@ class LBattle:
         for button in self.pbuttons:
             button["stats"] = "enabled"
 
+        
+
     def game_ui(self):
         self.root.geometry("900x500")
         self.root.title("Pokémon Battle")
 
         # Create sprite label
-        sprite_url = self.pokemon_data[self.current_pokemon_index]["Sprite"]
+        sprite_url = self.p1.played_pokemon.sprites
         sprite = self.load_sprite(sprite_url)
-        self.sprite_label = Label(self.root, image=sprite)
-        self.sprite_label.place(x=50, y=100)
+        self.psprite_label = Label(self.root, image=sprite)
+        self.psprite_label.place(x=50, y=100)
+
+        sprite_url =self.p2.played_pokemon.sprites
+        esprite = self.load_sprite(sprite_url)
+        self.esprite_label = Label(self.root, image=esprite)
+        self.esprite_label.place(x=650, y=100)
+
 
         # Create name buttons for each Pokémon
-        names = [pokemon["Name"] for pokemon in self.pokemon_data]
+        names = [pokemon.name for pokemon in self.p1.pokemon]
         button_state = []
         for i, name in enumerate(names):
             button_state.append([False, True, name])
@@ -160,9 +176,9 @@ class LBattle:
 
 
         # Create move buttons
-        moves = self.pokemon_data[self.current_pokemon_index]["Moves"]
+        moves = self.p1.played_pokemon.moves
         for i, move in enumerate(moves):
-            button = Button(self.root, text=move["Name"])
+            button = Button(self.root, text=move["Name"], command=lambda g=move: self.action(g))
             button.place(x=150 + i * 150, y=350)
             self.move_buttons.append(button)
 

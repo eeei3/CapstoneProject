@@ -26,6 +26,7 @@ class JSON_to_Obj:
         self.stats = None
         self.index = index
         self.caller = caller
+        self.sprites = None
 
     # Class reads the moves PP value and returns the value.
     def get_moves(self):
@@ -41,6 +42,10 @@ class JSON_to_Obj:
     def get_type(self):
         self.types = self.rawdata["Types"]
         return self.types
+
+    def get_sprite(self):
+        self.sprites = self.rawdata["Sprite"]
+        return self.sprites
 
     # Class reads the Pokémons name and returns the value.
     def get_name(self):
@@ -64,5 +69,6 @@ class JSON_to_Obj:
         self.types = self.get_type()
         self.moves = self.get_moves()
         self.stats = self.get_stats()
-        pokemon = Poke_Obj.Pokemon(self.name, self.id, self.types, self.moves, self.stats, self.index, self.caller)
+        self.sprites = self.get_sprite()
+        pokemon = Poke_Obj.Pokemon(self.name, self.id, self.types, self.moves, self.stats, self.index, self.caller, self.sprites)
         return pokemon

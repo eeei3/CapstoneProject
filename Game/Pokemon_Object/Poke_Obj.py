@@ -18,7 +18,7 @@ import random
 
 # Class that is being used to make objects from the data
 class Pokemon:
-    def __init__(self, name, id, types, moves, stats, index, caller):
+    def __init__(self, name, id, types, moves, stats, index, caller, sprites):
         self.name = name
         self.id = id
         self.types = types
@@ -26,6 +26,7 @@ class Pokemon:
         self.stats = stats
         self.index = index
         self.caller = caller
+        self.sprites = sprites
 
 
     def remove(self):

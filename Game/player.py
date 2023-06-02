@@ -21,17 +21,18 @@ with open("Data/types.csv", newline='') as c:
     for row in a:
         EBAAD.append(row)
 
+
 class Player:
 
     def __init__(self, name):
         self.api = Poke_API_OOP.PokemonAPI()
         self.name = name
         self.pokemon = self.pokeget()
-        self.played_pokemon = None
+        self.played_pokemon = self.pokemon[random.randint(0, 6)]
 
     def pokeget(self):
         pokemon_list = []  # Empty list
-        for i in range(12):
+        for i in range(6):
             pokemon_id = random.randint(1, 1010)  # random selection between ID 1 and ID 1010
             self.api.call_api(pokemon_id)  # call the pokemon based on the ID randomly selected
 
