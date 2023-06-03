@@ -25,21 +25,21 @@ with open("Data/types.csv", newline='') as c:
 
 
 class Trainer:
-    def __init__(self, difficulty):
+    def __init__(self, difficulty, turn):
         self.api = Poke_API_OOP.PokemonAPI()
         self.name = names[random.randint(0, 10)]
         self.pokemon = self.pokeget()
         self.difficulty = difficulty
-        self.played_pokemon = self.pokemon[random.randint(0, 6)]
+        self.played_pokemon = self.pokemon[random.randint(0, 5)]
+        self.turn = turn
 
     def start(self):
-        self.played_pokemon = self.pokemon[random.randint(0, 11)]
-        print(f"Trainer has chosen {self.played_pokemon.name}")
         self.played_pokemon.onfield = True
+        return
 
     def pokeget(self):
         pokemon = []
-        for i in range(12):
+        for i in range(6):
             pokemon_id = random.randint(1, 1010)
             self.api.call_api(pokemon_id)
 
@@ -73,6 +73,7 @@ class Trainer:
                         if epokemon.stats["hp"] < attack["Power"]:
                             print(f"Trainer has used {attack['Name']}")
                             self.played_pokemon.attack(attack, 0, epokemon)
+                            self.turn = 1
                             return
                         else:
                             for row in EBAAD:
@@ -81,12 +82,15 @@ class Trainer:
                                         print(f"Trainer has used {attack['Name']}")
                                         if 0.5 in row:
                                             self.played_pokemon.attack(attack, 2, epokemon)
+                                            self.turn = 1
                                             return
                                         else:
                                             self.played_pokemon.attack(attack, 1, epokemon)
+                                            self.turn = 1
                                             return
                         if len(self.played_pokemon.moves) == attlen:
                             self.played_pokemon.attack(attack, 0, epokemon)
+                            self.turn = 1
                             return
         else:
             # Switch Pokémon
@@ -94,6 +98,7 @@ class Trainer:
             self.played_pokemon = self.pokemon[pokemon_choice]
             print(f"Trainer has chosen {self.played_pokemon.name}")
             self.played_pokemon.onfield = True
+            self.turn = 1
             return
 
     def check(self):

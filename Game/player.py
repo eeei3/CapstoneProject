@@ -12,7 +12,6 @@ Current Assignment: player.py
 import random
 from API import Poke_API_OOP
 from Pokemon_Object import JSON_Poke
-from tkinter import *
 import csv
 
 with open("Data/types.csv", newline='') as c:
@@ -28,7 +27,7 @@ class Player:
         self.api = Poke_API_OOP.PokemonAPI()
         self.name = name
         self.pokemon = self.pokeget()
-        self.played_pokemon = self.pokemon[random.randint(0, 6)]
+        self.played_pokemon = self.pokemon[random.randint(0, 5)]
 
     def pokeget(self):
         pokemon_list = []  # Empty list
@@ -79,43 +78,6 @@ class Player:
             self.played_pokemon.onfield = None
             return 0
         return 1
-
-
-
-"""
-    def UI(self, pokemon_list):
-        root = Tk()
-        root.geometry("500x400")
-        root.title("Player Setup")
-
-        # List of pokemon after pulling from API
-        # pokemon_list = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"]
-        team = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
-
-        # setup the pick variables
-        pick = tkinter.StringVar(root)
-        pick.set("Pick your first pokemon.")
-        # Add dropdown menu to the GUI
-
-        pokemon_dropdown = tkinter.OptionMenu(root, pick, *pokemon_list['Name'])
-        pokemon_dropdown.pack()
-        count = 0
-
-        # this button will add the pokemon to the team
-        def add_pokemon():
-            global count
-            dropdown = pick.get()
-            index = pokemon_list['Name'].index(dropdown)
-            pokemon_dropdown['menu'].delete(index)
-            team[count] = pick
-            count = 1 + count
-
-        add = Button(root, text="Add Pokemon", command=add_pokemon)
-        add.pack()
-
-        # This will cause the program to run until we close it with the X\
-        root.mainloop()"""
-
 # when it starts, the player throws their first pokémon in the list
 # print a list of options
 # if the player chooses to attack, open a menu of different moves

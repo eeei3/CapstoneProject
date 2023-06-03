@@ -18,6 +18,7 @@ from PIL import Image, ImageTk
 import ssl
 import enemies
 import player
+from multiprocessing import Process
 
 # Disable certificate verification
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -32,12 +33,19 @@ class LBattle:
         self.pokemon_data = self.load_pokemon_data()
         self.current_pokemon_index = 0
         self.lvl = 1
-        self.p1 = player.Player("Larry")
-        self.p2 = enemies.Trainer(self.lvl)
-        self.t = None
         self.turn = 1
+        self.p1 = player.Player("Larry")
+        self.p2 = enemies.Trainer(self.lvl, self.turn)
+        self.t = None
         self.pbuttons = []
+        self.pcmds = []
         self.move_buttons = []
+        self.movecmds = []
+        self.hp1 = StringVar()
+        self.hp2 = StringVar()
+        self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
+        self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
+        self.process = Process(target=self.start_battle)
 
     def load_pokemon_data(self):
         with open('Data/data.json') as json_file:
@@ -53,56 +61,42 @@ class LBattle:
         sprite = ImageTk.PhotoImage(sprite)
         return sprite
 
-    def action(self, move):
+    def paction(self, move):
         self.p1.turn(self.p2.played_pokemon, move)
         self.turn = 2
+        self.message(f"Player has used {move}\n")
         return
 
     def switch(self):
         self.turn = 2
         return
 
+    def message(self, msg):
+        self.t["state"] = "normal"
+        self.t.insert(END, msg)
+        self.t["state"] = "disabled"
+
     def start_battle(self):
+        print("Game has started properly")
+        self.message(f"Start of match with Trainer {self.p2.name}\n")
+        self.message(f"Trainer has chosen {self.p2.played_pokemon.name}\n")
         self.p2.start()
-        self.t.insert('1.0', f"Start of match with Trainer {self.p2.name}")
-        self.t.insert('1.0', f"Pick your Pokemon!")
-        while self.p1.played_pokemon is None:
-            pass
-        for pokemon in self.p1.pokemon:
-            print(pokemon.name)
-        choice4 = input("")
-        self.p1.played_pokemon = self.p1.pokemon[int(choice4)]
+        print("More progress!")
         while True:
-            self.t.insert('1.0', f"{self.p1.name}'s turn")
+            print("Here")
+            self.message(f"{self.p1.name}'s turn\n")
             self.turn = 1
+            self.validate_buttons(3)
             while self.turn == 1:
                 pass
+            print("Player turn over")
+            self.message(f"{self.p2.name}'s turn\n")
             self.invalidate_buttons(3)
-            self.t.insert('1.0', f"{self.p2.name}'s turn")
+            self.message(f"{self.p2.name}'s turn\n")
             self.turn = 2
+            self.p2.turn()
             while self.turn == 2:
                 pass
-
-            choice = input("")
-            if choice == "attack":
-                print("attacking")
-                for attack in self.p1.played_pokemon.moves:
-                    print(attack["Name"])
-                choice2 = input("")
-                self.p1.turn(self.p2.played_pokemon, choice2)
-            elif choice == "switch":
-                print("switching")
-                choice1 = input("")
-                self.p1.switch_pokemon(int(choice1))
-
-            if self.p2.check() == 0:
-                print("p2 pokemon dead")
-            print("p2 turn")
-            self.p2.turn(self.p1.played_pokemon)
-            if self.p1.check() == 0:
-                print("p1 pokemon dead")
-                choice3 = input("")
-                self.p1.switch_pokemon(int(choice3))
 
     def update_sprite(self):
         sprite_url = self.p1.played_pokemon.sprites
@@ -132,9 +126,13 @@ class LBattle:
             for button in self.move_buttons:
                 button["state"] = "disabled"
 
-    def validate_buttons(self):
-        for button in self.pbuttons:
-            button["stats"] = "enabled"
+    def validate_buttons(self, num):
+        if num == 1 or num == 3:
+            for button in self.pbuttons:
+                button["state"] = "normal"
+        elif num == 2 or num == 3:
+            for button in self.move_buttons:
+                button["state"] = "normal"
 
         
 
@@ -153,6 +151,12 @@ class LBattle:
         self.esprite_label = Label(self.root, image=esprite)
         self.esprite_label.place(x=650, y=100)
 
+        self.hitpointlabel1 = Label(self.root, textvariable=self.hp1)
+        self.hitpointlabel1.place(x=50, y=250)
+
+        self.hitpointlabel2 = Label(self.root, textvariable=self.hp2)
+        self.hitpointlabel2.place(x=650, y=250)
+
 
         # Create name buttons for each Pokémon
         names = [pokemon.name for pokemon in self.p1.pokemon]
@@ -160,7 +164,8 @@ class LBattle:
         for i, name in enumerate(names):
             button_state.append([False, True, name])
         for i, name in enumerate(names):
-            button = Button(self.root, text=name, command=lambda index=i: self.switch_pokemon(index))
+            button = Button(self.root, text=name)
+            button["command"] = lambda arg1=i: self.switch_pokemon(arg1)
             button.place(x=125 + i * 100, y=400)
             self.pbuttons.append(button)
 
@@ -173,7 +178,8 @@ class LBattle:
         # Create move buttons
         moves = self.p1.played_pokemon.moves
         for i, move in enumerate(moves):
-            button = Button(self.root, text=move["Name"], command=lambda g=move: self.action(g))
+            button = Button(self.root, text=move["Name"])
+            button["command"] = lambda arg1 = button["text"]:self.paction(arg1)
             button.place(x=150 + i * 150, y=350)
             self.move_buttons.append(button)
 
@@ -186,6 +192,8 @@ class LBattle:
         self.t["state"] = "disabled"
 
         v.config(command=self.t.yview)
+
+        self.process.start()
 
         self.root.mainloop()
 
