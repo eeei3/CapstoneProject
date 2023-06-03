@@ -78,8 +78,8 @@ class LBattle:
 
     def start_battle(self):
         print("Game has started properly")
-        self.message(f"Start of match with Trainer {self.p2.name}\n")
-        self.message(f"Trainer has chosen {self.p2.played_pokemon.name}\n")
+        # self.message(f"Start of match with Trainer {self.p2.name}\n")
+        # self.message(f"Trainer has chosen {self.p2.played_pokemon.name}\n")
         self.p2.start()
         print("More progress!")
         while True:
@@ -90,9 +90,9 @@ class LBattle:
             while self.turn == 1:
                 pass
             print("Player turn over")
-            self.message(f"{self.p2.name}'s turn\n")
+            # self.message(f"{self.p2.name}'s turn\n")
             self.invalidate_buttons(3)
-            self.message(f"{self.p2.name}'s turn\n")
+            # self.message(f"{self.p2.name}'s turn\n")
             self.turn = 2
             self.p2.turn()
             while self.turn == 2:
@@ -164,7 +164,7 @@ class LBattle:
         for i, name in enumerate(names):
             button_state.append([False, True, name])
         for i, name in enumerate(names):
-            button = Button(self.root, text=name)
+            button = Button(self.root, text=name, command=lambda arg1=i: self.switch_pokemon(arg1))
             button["command"] = lambda arg1=i: self.switch_pokemon(arg1)
             button.place(x=125 + i * 100, y=400)
             self.pbuttons.append(button)
@@ -207,8 +207,8 @@ class NBattle(LBattle):
         return
 
 
-"""
+
 a = LBattle()
 # if __name__ == '__main__':
     # a.root = Tk()
-a.game_ui()"""
+a.game_ui()
