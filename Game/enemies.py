@@ -31,7 +31,7 @@ class Trainer:
         self.pokemon = self.pokeget()
         self.difficulty = difficulty
         self.played_pokemon = self.pokemon[random.randint(0, 5)]
-        self.turn = turn
+        self.gturn = turn
 
     def start(self):
         self.played_pokemon.onfield = True
@@ -73,8 +73,8 @@ class Trainer:
                         if epokemon.stats["hp"] < attack["Power"]:
                             print(f"Trainer has used {attack['Name']}")
                             self.played_pokemon.attack(attack, 0, epokemon)
-                            self.turn = 1
-                            return
+                            self.gturn = 1
+                            return [1, attack["Name"]]
                         else:
                             for row in EBAAD:
                                 for type in epokemon.types:
@@ -82,24 +82,24 @@ class Trainer:
                                         print(f"Trainer has used {attack['Name']}")
                                         if 0.5 in row:
                                             self.played_pokemon.attack(attack, 2, epokemon)
-                                            self.turn = 1
-                                            return
+                                            self.gturn = 1
+                                            return [1, attack["Name"]]
                                         else:
                                             self.played_pokemon.attack(attack, 1, epokemon)
-                                            self.turn = 1
-                                            return
+                                            self.gturn = 1
+                                            return [1, attack["Name"]]
                         if len(self.played_pokemon.moves) == attlen:
                             self.played_pokemon.attack(attack, 0, epokemon)
-                            self.turn = 1
-                            return
+                            self.gturn = 1
+                            return [1, attack["Name"]]
         else:
             # Switch Pokémon
             self.played_pokemon.onfield = False
             self.played_pokemon = self.pokemon[pokemon_choice]
             print(f"Trainer has chosen {self.played_pokemon.name}")
             self.played_pokemon.onfield = True
-            self.turn = 1
-            return
+            self.gturn = 1
+            return [2, self.played_pokemon.name]
 
     def check(self):
         if self.played_pokemon.stats["hp"] <= 0:
