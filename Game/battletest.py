@@ -1,13 +1,30 @@
+# ---------------------------------------------
+# Title: battletest.py
+# Class: CS 30
+# Date: 27/05/23
+# Version: 1.0
+# ---------------------------------------------
+"""
+Current Assignment: battletest.py
+
+This file is what we use for testing our various battle mechanics.
+Do not run this file, run MAIN.PY
+"""
+# Important import statements
 import enemies
 import player
 
 
+# Battle Class
 class LBattle:
+
+    # Initializing attributes
     def __init__(self):
         self.lvl = 1
         self.p1 = player.Player("Larry")
         self.p2 = enemies.Trainer(self.lvl)
 
+    # Battle testing code
     def start_battle(self):
         self.p2.start()
         print("start")

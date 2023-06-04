@@ -9,13 +9,16 @@ Current Assignment: enemies.py
 
 
 """
+# Important import statements
 import random
 from API import Poke_API_OOP
 from Pokemon_Object import JSON_Poke
 import csv
 
+# List of all enemy trainers
 names = ["Ebaad", "Blue", "Red", "Trace", "Lance", "Leon", "Cynthia", "Alder", "Iris", "Elio", "Ash"]
 
+# Opening and reading data from types.cvs
 with open("Data/types.csv", newline='') as c:
     EBAAD = []
     a = csv.reader(c, delimiter=' ', quotechar='|')
@@ -23,8 +26,10 @@ with open("Data/types.csv", newline='') as c:
         EBAAD.append(row)
 
 
-
+# This is the main Trainer class
 class Trainer:
+
+    # Initializing various attributes
     def __init__(self, difficulty, turn):
         self.api = Poke_API_OOP.PokemonAPI()
         self.name = names[random.randint(0, 10)]
@@ -33,6 +38,7 @@ class Trainer:
         self.played_pokemon = self.pokemon[random.randint(0, 5)]
         self.gturn = turn
 
+    # Checks if Pokémon is on the field
     def start(self):
         self.played_pokemon.onfield = True
         return
@@ -55,26 +61,31 @@ class Trainer:
             pokemon.append(poke)
         return pokemon
 
+    # Here is the logic that we use in the trainers' turn.
     def turn(self, epokemon):
         print("Trainer's turn!")
         trainer_choice = random.randint(0, 100)
         pokemon_choice = random.randint(0, len(self.pokemon) - 1)
         attlen = 0
+
         if self.played_pokemon.stats["hp"] <= 0:
             trainer_choice = 90
+
         if trainer_choice <= 80:
-            # Attack
+            # This is our logic for attacking as a trainer
             if random.randint(0, 12) > self.difficulty:
                 for attack in self.played_pokemon.moves:
                     attlen += 1
                     if attack["Power"] == "N/A":
                         pass
+
                     else:
                         if epokemon.stats["hp"] < attack["Power"]:
                             print(f"Trainer has used {attack['Name']}")
                             self.played_pokemon.attack(attack, 0, epokemon)
                             self.gturn = 1
                             return [1, attack["Name"]]
+
                         else:
                             for row in EBAAD:
                                 for type in epokemon.types:
@@ -88,12 +99,13 @@ class Trainer:
                                             self.played_pokemon.attack(attack, 1, epokemon)
                                             self.gturn = 1
                                             return [1, attack["Name"]]
+
                         if len(self.played_pokemon.moves) == attlen:
                             self.played_pokemon.attack(attack, 0, epokemon)
                             self.gturn = 1
                             return [1, attack["Name"]]
         else:
-            # Switch Pokémon
+            # This is the logic for switching the trainers onfield Pokémon
             self.played_pokemon.onfield = False
             self.played_pokemon = self.pokemon[pokemon_choice]
             print(f"Trainer has chosen {self.played_pokemon.name}")
@@ -101,6 +113,7 @@ class Trainer:
             self.gturn = 1
             return [2, self.played_pokemon.name]
 
+    # Checks if onfield Pokémon has fainted or not
     def check(self):
         if self.played_pokemon.stats["hp"] <= 0:
             self.played_pokemon.onfield = None

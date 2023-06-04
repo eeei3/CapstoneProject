@@ -10,7 +10,6 @@ Current Assignment: connection.py
 
 """
 import socket
-import time
 from multiprocessing import Process
 
 
@@ -21,7 +20,7 @@ The server opens up a port on it's IP Address
 The server waits for a connection
 If the connection sends the word "Accept" 
 the server responds with the word "Connect"
-Once this exchange has compeleted, the server
+Once this exchange has completed, the server
 will send it's data and read the received data from
 the client every second
 """

@@ -7,26 +7,19 @@
 """
 Current Assignment: main.py
 
-
+This file contains important GUI code.
+Always run the game from this file.
 """
 # Important import statements
 from tkinter import *
-import json
 import connection
 import battle
 from multiprocessing import Process
-# from API import Poke_API_OOP
-
-"""with open('Data/data.json', 'r') as file:
-    data = file.read()
-
-parsed_json = json.loads(data)
-
-for i in parsed_json:
-    print(i['Sprite'])"""
 
 
+# This class contains import GUI code that we need from Tkinter
 class GUI:
+    # Initializing attributes
     def __init__(self):
         self.mainframe = None
         self.main = Tk()
@@ -41,12 +34,14 @@ class GUI:
         self.process3 = None
         self.connect_process = None
 
+    # Defines our variables to connect with others
     def connec(self, ip, port):
         ip = self.ip.get()
         port = self.port.get()
         self.pipe = connection.GameConnection(ip, port)
         self.pipe.make_connection()
 
+    # Defines the variables needed for creating a server
     def makeserver(self, ip, port):
         self.pipe = connection.GameConnection(ip, port)
         self.pipe.create_server()
@@ -54,12 +49,12 @@ class GUI:
     def offgame(self):
         self.process2 = Process(target=self.offgame_wrapper())
         self.process2.start()
-        # self.process2.join()
 
     def offgame_wrapper(self):
         self.game = battle.LBattle()
         self.game.game_ui()
 
+    # Defines variables that we use to join a hosted game on a server
     def joingame(self):
         ip = self.ip.get()
         port = self.port.get()
@@ -69,7 +64,6 @@ class GUI:
         except Exception as e:
             print("Could not connect!")
         self.process1.start()
-        #self.game = battle.NBattle(self.pipe)
 
     def ongame(self):
         ip = self.ip.get()
@@ -81,13 +75,9 @@ class GUI:
             self.process3.join()
             print("Could not create a new server!")
         self.process3.join()
-        """self.game = battle.NBattle(self.pipe)
-        self.process2 = Process(target=self.game.start_battle)
-        self.process1.start()
-        self.process2.start()
-        self.process1.join()
-        self.process2.join()"""
 
+    # This is the code that we use to design our main title screen that the user sees
+    # It includes text, buttons and input areas
     def temp_name(self):
         self.ip = StringVar(self.main)
         self.port = StringVar(self.main)
@@ -96,9 +86,9 @@ class GUI:
         self.main.geometry("600x900")
         self.main.title("Pokémon Battle - Title Screen")
         maintitle = Label(self.main, text="Welcome to the Pokemon Battle!", font=("MS Comic Sans", "18"))
-        maintitle.pack(ipadx=20,ipady=10,expand=True)
+        maintitle.pack(ipadx=20, ipady=10, expand=True)
         choice1 = Label(self.main, text="Join a battle server", font=("MS Comic Sans", "14"))
-        choice1.pack(ipadx=20,ipady=20,expand=True)
+        choice1.pack(ipadx=20, ipady=20, expand=True)
         ip1 = Entry(self.main, textvariable=self.ip)
         ip1.pack(ipadx=20)
         port1 = Entry(self.main, textvariable=self.port)
@@ -106,7 +96,7 @@ class GUI:
         connect1 = Button(self.main, text="Connect!", command=self.joingame)
         connect1.pack()
         choice2 = Label(self.main, text="Create a battle server", font=("MS Comic Sans", "14"))
-        choice2.pack(ipadx=20,ipady=20,expand=True)
+        choice2.pack(ipadx=20, ipady=20, expand=True)
         ip2 = Entry(self.main, textvariable=self.ip)
         ip2.pack(ipadx=20)
         port2 = Entry(self.main, textvariable=self.port)
@@ -118,12 +108,11 @@ class GUI:
         start = Button(self.main, text="Play Bot!", command=self.offgame)
         start.pack()
         credit = Label(self.main, text="This program was made by Calvin, Ebaad and Josh", font=("MS Comic Sans", "10"))
-        credit.pack(ipadx=20,ipady=20,expand=True)
+        credit.pack(ipadx=20, ipady=20, expand=True)
         self.main.mainloop()
 
 
+# We call this once the main file is run
 if __name__ == "__main__":
     b = GUI()
-    # b.main()
-    # Poke_API_OOP.PokemonAPI()
     b.temp_name()
