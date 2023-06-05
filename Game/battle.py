@@ -14,12 +14,9 @@ from tkinter import *
 import io
 from urllib import request
 from PIL import Image, ImageTk
-import threading
-import time
 import ssl
 import enemies
 import player
-from multiprocessing import Process
 import threading
 import time
 
@@ -72,9 +69,6 @@ class LBattle:
         self.turn = 2
         self.message(f"Player has used {move}\n")
 
-    def switch(self):
-        self.turn = 2
-
     def message(self, msg):
         self.t.config(state="normal")
         self.t.insert(END, msg)
@@ -96,13 +90,24 @@ class LBattle:
                 pass
 
             self.message(f"{self.p2.name}'s turn\n")
+            self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
+            self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
+            self.p2.check()
             self.invalidate_buttons(3)
+            print(self.p1.played_pokemon.name)
             m = self.p2.turn(self.p1.played_pokemon)
+            while m is None:
+                pass
             if m[0] == 1:
                 self.message(f"{self.p2.played_pokemon.name} has used {m[1]}\n")
             elif m[0] == 2:
-                self.message(f"Trainer {self.p2.name} has switched to {self.p2.played_pokemon.name}")
-                print("G")
+                self.message(f"Trainer {self.p2.name} has switched to {self.p2.played_pokemon.name}\n")
+                self.update_sprite()
+            self.p1.check()
+            self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
+            self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
+            self.update_sprite()
+
     def update_sprite(self):
         sprite_url = self.p1.played_pokemon.sprites
         sprite = self.load_sprite(sprite_url)
@@ -120,14 +125,16 @@ class LBattle:
 
     def switch_pokemon(self, index):
         self.current_pokemon_index = index
+        self.p1.switch_pokemon(index)
         self.update_sprite()
         self.update_moves()
+        self.turn = 2
 
     def invalidate_buttons(self, num):
         if num == 1 or num == 3:
             for button in self.pbuttons:
                 button.config(state="disabled")
-        elif num == 2 or num == 3:
+        if num == 2 or num == 3:
             for button in self.move_buttons:
                 button.config(state="disabled")
 
@@ -209,12 +216,4 @@ class NBattle(LBattle):
         return
 
 
-
 a = LBattle()
-# if __name__ == '__main__':
-    # a.root = Tk()
-# g = Process(target=a.game_ui)
-# g.start()
-# a.game_ui()
-# t = Process(target=a.start_battle)
-# a.process.start()

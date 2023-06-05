@@ -71,14 +71,13 @@ class Trainer:
         """
         print("Trainer's turn!")
         trainer_choice = random.randint(0, 100)
-        pokemon_choice = random.randint(0, len(self.pokemon) - 1)
         attlen = 0
 
         if self.played_pokemon.stats["hp"] <= 0:
             trainer_choice = 90
 
         if trainer_choice <= 80:
-            # This is our logic for attacking as a trainer
+            # This is our logic for attackiself.hp2.set(str(self.p2.played_pokemon.stats["hp"]))ng as a trainer
             if random.randint(0, 12) > self.difficulty:
                 for attack in self.played_pokemon.moves:
                     attlen += 1
@@ -112,7 +111,9 @@ class Trainer:
                             return [1, attack["Name"]]
         else:
             # This is the logic for switching the trainers onfield Pokémon
+            self.played_pokemon.remove()
             self.played_pokemon.onfield = False
+            pokemon_choice = random.randint(0, len(self.pokemon) - 1)
             self.played_pokemon = self.pokemon[pokemon_choice]
             print(f"Trainer has chosen {self.played_pokemon.name}")
             self.played_pokemon.onfield = True

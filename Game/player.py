@@ -91,6 +91,7 @@ class Player:
         Checks the HP of the currently played Pokémon.
         """
         if self.played_pokemon.stats["hp"] <= 0:
-            self.played_pokemon.onfield = None
+            self.played_pokemon.onfield = False
+            self.played_pokemon.remove()
             return 0
         return 1
