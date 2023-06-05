@@ -10,17 +10,18 @@ Current Assignment: main.py
 This file contains important GUI code.
 Always run the game from this file.
 """
-# Important import statements
 from tkinter import *
+from multiprocessing import Process
 import connection
 import battle
-from multiprocessing import Process
 
 
-# This class contains import GUI code that we need from Tkinter
+# Represents the graphical user interface of the game.
 class GUI:
-    # Initializing attributes
     def __init__(self):
+        """
+        Initialize the GUI object.
+        """
         self.mainframe = None
         self.main = Tk()
         self.pipe = None
@@ -34,28 +35,40 @@ class GUI:
         self.process3 = None
         self.connect_process = None
 
-    # Defines our variables to connect with others
     def connec(self, ip, port):
+        """
+        Connects to another player's game.
+        """
         ip = self.ip.get()
         port = self.port.get()
         self.pipe = connection.GameConnection(ip, port)
         self.pipe.make_connection()
 
-    # Defines the variables needed for creating a server
     def makeserver(self, ip, port):
+        """
+        Creates a game server.
+        """
         self.pipe = connection.GameConnection(ip, port)
         self.pipe.create_server()
 
     def offgame(self):
+        """
+        Starts an offline game with a bot.
+        """
         self.process2 = Process(target=self.offgame_wrapper())
         self.process2.start()
 
     def offgame_wrapper(self):
+        """
+        Wraps the function for starting an offline game with a bot.
+        """
         self.game = battle.LBattle()
         self.game.game_ui()
 
-    # Defines variables that we use to join a hosted game on a server
     def joingame(self):
+        """
+        Joins a hosted game on a server.
+        """
         ip = self.ip.get()
         port = self.port.get()
         self.pipe = connection.GameConnection(ip, port)
@@ -66,6 +79,9 @@ class GUI:
         self.process1.start()
 
     def ongame(self):
+        """
+        Starts a new server for hosting a game.
+        """
         ip = self.ip.get()
         port = self.port.get()
         try:
@@ -76,9 +92,16 @@ class GUI:
             print("Could not create a new server!")
         self.process3.join()
 
-    # This is the code that we use to design our main title screen that the user sees
-    # It includes text, buttons and input areas
+        def quit_game(self):
+            """
+            Quits the game and closes the GUI.
+            """
+            self.main.destroy()
+
     def temp_name(self):
+        """
+        Design the main title screen.
+        """
         self.ip = StringVar(self.main)
         self.port = StringVar(self.main)
         self.ip.set("Enter IP Address Here")
@@ -109,10 +132,11 @@ class GUI:
         start.pack()
         credit = Label(self.main, text="This program was made by Calvin, Ebaad and Josh", font=("MS Comic Sans", "10"))
         credit.pack(ipadx=20, ipady=20, expand=True)
+        quit_button = Button(self.main, text="Quit", command=self.quit_game)
+        quit_button.pack()
         self.main.mainloop()
 
 
-# We call this once the main file is run
 if __name__ == "__main__":
     b = GUI()
     b.temp_name()

@@ -7,13 +7,12 @@
 """
 Current Assignment: enemies.py
 
-
+This file contains the Trainer class and related functions.
 """
-# Important import statements
 import random
+import csv
 from API import Poke_API_OOP
 from Pokemon_Object import JSON_Poke
-import csv
 
 # List of all enemy trainers
 names = ["Ebaad", "Blue", "Red", "Trace", "Lance", "Leon", "Cynthia", "Alder", "Iris", "Elio", "Ash"]
@@ -26,11 +25,12 @@ with open("Data/types.csv", newline='') as c:
         EBAAD.append(row)
 
 
-# This is the main Trainer class
+# Trainer object used in game
 class Trainer:
-
-    # Initializing various attributes
     def __init__(self, difficulty, turn):
+        """
+        Initialize the Trainer object.
+        """
         self.api = Poke_API_OOP.PokemonAPI()
         self.name = names[random.randint(0, 10)]
         self.pokemon = self.pokeget()
@@ -38,12 +38,16 @@ class Trainer:
         self.played_pokemon = self.pokemon[random.randint(0, 5)]
         self.gturn = turn
 
-    # Checks if Pokémon is on the field
     def start(self):
+        """
+        Marks the trainer's Pokémon as on the field.
+        """
         self.played_pokemon.onfield = True
-        return
 
     def pokeget(self):
+        """
+        Retrieves a list of randomly generated Pokémon.
+        """
         pokemon = []
         for i in range(6):
             pokemon_id = random.randint(1, 1010)
@@ -61,8 +65,10 @@ class Trainer:
             pokemon.append(poke)
         return pokemon
 
-    # Here is the logic that we use in the trainers' turn.
     def turn(self, epokemon):
+        """
+        Perform the trainer's turn.
+        """
         print("Trainer's turn!")
         trainer_choice = random.randint(0, 100)
         pokemon_choice = random.randint(0, len(self.pokemon) - 1)
@@ -113,8 +119,10 @@ class Trainer:
             self.gturn = 1
             return [2, self.played_pokemon.name]
 
-    # Checks if onfield Pokémon has fainted or not
     def check(self):
+        """
+        Check if the onfield Pokémon has fainted.
+        """
         if self.played_pokemon.stats["hp"] <= 0:
             self.played_pokemon.onfield = None
             return 0

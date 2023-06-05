@@ -10,39 +10,40 @@ Current Assignment: player.py
 This file is used to create a Player object using data from the API
 We also use this file for some of our game logic
 """
-# Important import statements
 import random
+import csv
 from API import Poke_API_OOP
 from Pokemon_Object import JSON_Poke
-import csv
 
-# Here we open and read the types.csv file which we use for in-game mechanics
-with open("Data/types.csv", newline='') as c:
+# Read types.csv file for in-game mechanics
+with open("Data/types.csv", newline='') as csv_file:
     EBAAD = []
-    a = csv.reader(c, delimiter=' ', quotechar='|')
-    for row in a:
+    csv_reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
+    for row in csv_reader:
         EBAAD.append(row)
 
 
-# Our main Player class is declared here
+# Represents a Player object in the game.
 class Player:
-
-    # Initializing attributes
     def __init__(self, name):
+        """
+        Initialize the Player object.
+        """
         self.api = Poke_API_OOP.PokemonAPI()
         self.name = name
         self.pokemon = self.pokeget()
         self.played_pokemon = self.pokemon[random.randint(0, 5)]
 
-    # Here we have an empty list that we populate with data from the PokeAPI
     def pokeget(self):
-        pokemon_list = []  # Empty list
-        for i in range(6):
-            pokemon_id = random.randint(1, 1010)  # random selection between ID 1 and ID 1010
-            self.api.call_api(pokemon_id)  # call the pokemon based on the ID randomly selected
+        """
+        Fetches Pokémon data from the PokeAPI and returns a list of Pokémon objects.
+        """
+        pokemon_list = []
+        for _ in range(6):
+            pokemon_id = random.randint(1, 1010)
+            self.api.call_api(pokemon_id)
 
         pokemon_raw = self.api.get_pokemon_data()
-
         pokemon_data = [Poke_API_OOP.Pokemon(data).to_dict() for data in pokemon_raw]
         index = 0
         for x in pokemon_data:
@@ -53,19 +54,24 @@ class Player:
             pokemon_list.append(poke)
         return pokemon_list
 
-    # Checks to see if Pokémon is currently on the field or not
     def switch_pokemon(self, index):
+        """
+        Switches the currently played Pokémon.
+        """
         self.played_pokemon.onfield = False
         self.played_pokemon = self.pokemon[index]
         self.played_pokemon.onfield = True
 
     def turn(self, epokemon, attack):
+        """
+        Performs a turn in the game.
+        """
         attchoice = None
         for att in self.played_pokemon.moves:
             if att["Name"] == attack:
                 attchoice = att
                 break
-        if attchoice == None:
+        if attchoice is None:
             print("You messed up")
             return 9
         for row in EBAAD:
@@ -80,14 +86,11 @@ class Player:
         print(attchoice)
         self.played_pokemon.attack(attchoice, 0, epokemon)
 
-    # Checks HP of Pokémon on the field to see if fainted or not
     def check(self):
+        """
+        Checks the HP of the currently played Pokémon.
+        """
         if self.played_pokemon.stats["hp"] <= 0:
             self.played_pokemon.onfield = None
             return 0
         return 1
-# when it starts, the player throws their first pokémon in the list
-# print a list of options
-# if the player chooses to attack, open a menu of different moves
-# if the player chooses to switch, open a list of pokémon
-# if the player chooses the bag, open a list of items the player can use

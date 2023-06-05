@@ -10,48 +10,45 @@ Current Assignment: battletest.py
 This file is what we use for testing our various battle mechanics.
 Do not run this file, run MAIN.PY
 """
-# Important import statements
 import enemies
 import player
 
 
-# Battle Class
 class LBattle:
-
-    # Initializing attributes
     def __init__(self):
         self.lvl = 1
         self.p1 = player.Player("Larry")
         self.p2 = enemies.Trainer(self.lvl)
 
-    # Battle testing code
     def start_battle(self):
         self.p2.start()
         print("start")
-        for pokemon in self.p1.pokemon:
-            print(pokemon.name)
-        choice4 = input("")
-        self.p1.played_pokemon = self.p1.pokemon[int(choice4)]
+        for index, pokemon in enumerate(self.p1.pokemon):
+            print(f"{index}. {pokemon.name}")
+
         while True:
             print("p1 turn")
-            choice = input("")
+            choice = input("Enter your choice: ")
             if choice == "attack":
                 print("attacking")
-                for attack in self.p1.played_pokemon.moves:
-                    print(attack["Name"])
-                choice2 = input("")
-                self.p1.turn(self.p2.played_pokemon, choice2)
+                for index, attack in enumerate(self.p1.played_pokemon.moves):
+                    print(f"{index}. {attack['Name']}")
+                choice2 = input("Enter the attack number: ")
+                self.p1.turn(self.p2.played_pokemon, int(choice2))
             elif choice == "switch":
                 print("switching")
-                choice1 = input("")
+                choice1 = input("Enter the Pokemon number to switch: ")
                 self.p1.switch_pokemon(int(choice1))
+
             if self.p2.check() == 0:
                 print("p2 pokemon dead")
+
             print("p2 turn")
             self.p2.turn(self.p1.played_pokemon)
+
             if self.p1.check() == 0:
                 print("p1 pokemon dead")
-                choice3 = input("")
+                choice3 = input("Enter the Pokemon number to switch: ")
                 self.p1.switch_pokemon(int(choice3))
 
 
