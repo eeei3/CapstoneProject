@@ -97,7 +97,7 @@ class LBattle:
             print(self.p1.played_pokemon.name)
             m = self.p2.turn(self.p1.played_pokemon)
             while m is None:
-                pass
+                print(type(m))
             if m[0] == 1:
                 self.message(f"{self.p2.played_pokemon.name} has used {m[1]}\n")
             elif m[0] == 2:
@@ -142,7 +142,7 @@ class LBattle:
         if num == 1 or num == 3:
             for button in self.pbuttons:
                 button.config(state="normal")
-        elif num == 2 or num == 3:
+        if num == 2 or num == 3:
             for button in self.move_buttons:
                 button.config(state="normal")
 

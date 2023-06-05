@@ -59,7 +59,7 @@ class Player:
         Switches the currently played Pokémon.
         """
         self.played_pokemon.onfield = False
-        self.played_pokemon = self.pokemon[index]
+        self.played_pokemon = self.pokemon[index - 1]
         self.played_pokemon.onfield = True
 
     def turn(self, epokemon, attack):
