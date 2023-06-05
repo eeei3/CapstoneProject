@@ -18,7 +18,7 @@ class LBattle:
     def __init__(self):
         self.lvl = 1
         self.p1 = player.Player("Larry")
-        self.p2 = enemies.Trainer(self.lvl)
+        self.p2 = enemies.Trainer(self.lvl, )
 
     def start_battle(self):
         self.p2.start()

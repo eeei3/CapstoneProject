@@ -116,7 +116,6 @@ class Trainer:
             self.played_pokemon = self.pokemon[pokemon_choice]
             print(f"Trainer has chosen {self.played_pokemon.name}")
             self.played_pokemon.onfield = True
-            self.gturn = 1
             return [2, self.played_pokemon.name]
 
     def check(self):

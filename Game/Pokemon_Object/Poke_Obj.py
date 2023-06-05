@@ -45,5 +45,8 @@ class Pokemon:
         return
 
     def take_dmg(self, amount):
-        self.stats["hp"] -= amount
+        try:
+            self.stats["hp"] -= amount
+        except:
+            pass
         return

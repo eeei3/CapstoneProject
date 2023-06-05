@@ -63,7 +63,7 @@ class GUI:
         Wraps the function for starting an offline game with a bot.
         """
         self.game = battle.LBattle()
-        self.game.game_ui()
+        # self.game.game_ui()
 
     def joingame(self):
         """

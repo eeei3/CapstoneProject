@@ -19,6 +19,9 @@ import time
 import ssl
 import enemies
 import player
+from multiprocessing import Process
+import threading
+import time
 
 # Allows for connecting to an outside domain
 # Bypasses error on macOS
@@ -95,14 +98,11 @@ class LBattle:
             self.message(f"{self.p2.name}'s turn\n")
             self.invalidate_buttons(3)
             m = self.p2.turn(self.p1.played_pokemon)
-            while self.turn == 2:
-                pass
-
             if m[0] == 1:
                 self.message(f"{self.p2.played_pokemon.name} has used {m[1]}\n")
             elif m[0] == 2:
                 self.message(f"Trainer {self.p2.name} has switched to {self.p2.played_pokemon.name}")
-
+                print("G")
     def update_sprite(self):
         sprite_url = self.p1.played_pokemon.sprites
         sprite = self.load_sprite(sprite_url)
@@ -209,4 +209,12 @@ class NBattle(LBattle):
         return
 
 
+
 a = LBattle()
+# if __name__ == '__main__':
+    # a.root = Tk()
+# g = Process(target=a.game_ui)
+# g.start()
+# a.game_ui()
+# t = Process(target=a.start_battle)
+# a.process.start()
