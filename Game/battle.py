@@ -14,12 +14,9 @@ from tkinter import *
 import io
 from urllib import request
 from PIL import Image, ImageTk
-import threading
-import time
 import ssl
 import enemies
 import player
-from multiprocessing import Process
 import threading
 import time
 
@@ -103,6 +100,7 @@ class LBattle:
             elif m[0] == 2:
                 self.message(f"Trainer {self.p2.name} has switched to {self.p2.played_pokemon.name}")
                 print("G")
+
     def update_sprite(self):
         sprite_url = self.p1.played_pokemon.sprites
         sprite = self.load_sprite(sprite_url)
@@ -120,6 +118,7 @@ class LBattle:
 
     def switch_pokemon(self, index):
         self.current_pokemon_index = index
+        self.p1.switch_pokemon(index)
         self.update_sprite()
         self.update_moves()
 
@@ -189,7 +188,7 @@ class LBattle:
         v = Scrollbar(self.root, orient='vertical')
         v.place(x=500, y=100)
 
-        self.t = Text(self.root, width=30, height=13, wrap=NONE, yscrollcommand=v.set)
+        self.t = Text(self.root, width=50, height=13, wrap=NONE, yscrollcommand=v.set)
         self.t.pack()
 
         self.t.config(state="disabled")
@@ -209,12 +208,4 @@ class NBattle(LBattle):
         return
 
 
-
 a = LBattle()
-# if __name__ == '__main__':
-    # a.root = Tk()
-# g = Process(target=a.game_ui)
-# g.start()
-# a.game_ui()
-# t = Process(target=a.start_battle)
-# a.process.start()
