@@ -66,8 +66,8 @@ class LBattle:
 
     def paction(self, move):
         self.p1.turn(self.p2.played_pokemon, move)
-        self.turn = 2
         self.message(f"Player has used {move}\n")
+        self.turn = 2
 
     def message(self, msg):
         self.t.config(state="normal")
@@ -140,9 +140,11 @@ class LBattle:
         self.esprite_label.image = sprite
 
     def update_moves(self):
-        moves = self.pokemon_data[self.current_pokemon_index]["Moves"]
+        # moves = self.pokemon_data[self.current_pokemon_index]["Moves"]
+        moves = self.p1.played_pokemon.moves
         for i, move in enumerate(moves):
             self.move_buttons[i][0].config(text=move["Name"])
+            self.move_buttons[i][0]["command"] = lambda arg1=self.move_buttons[i][0]["text"]: self.paction(arg1)
 
     def switch_pokemon(self, index):
         self.message(f"{self.p1.name} has switched to {self.p1.played_pokemon.name}\n")
@@ -229,15 +231,6 @@ class LBattle:
 
         self.loading = True
         self.root.mainloop()
-
-
-class NBattle(LBattle):
-    def __init__(self, stream):
-        super().__init__()
-        self.p1 = None
-        self.p2 = None
-        self.stream = stream
-        return
 
 
 a = LBattle()
