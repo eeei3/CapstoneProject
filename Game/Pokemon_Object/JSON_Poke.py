@@ -10,7 +10,7 @@ Current Assignment: JSON_Poke.py
 This file is what we use to make objects from
 """
 # Import module Poke_Obj, which is used later on
-from CapstoneProject.Game.Pokemon_Object import Poke_Obj
+from Game.Pokemon_Object import Poke_Obj
 
 
 # This class turns the data given from the .json into objects for later usage

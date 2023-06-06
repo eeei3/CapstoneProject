@@ -140,7 +140,6 @@ class LBattle:
         self.esprite_label.image = sprite
 
     def update_moves(self):
-        # moves = self.pokemon_data[self.current_pokemon_index]["Moves"]
         moves = self.p1.played_pokemon.moves
         for i, move in enumerate(moves):
             self.move_buttons[i][0].config(text=move["Name"])
@@ -206,12 +205,6 @@ class LBattle:
             button.place(x=125 + i * 100, y=400)
             self.pbuttons.append([button, 0, name])
 
-        """for i, button in enumerate(self.pbuttons):
-            if not button_state[i][1]:
-                button.config(state="disabled")
-            elif not button_state[i][0]:
-                button.config(state="disabled")
-"""
         moves = self.p1.played_pokemon.moves
         for i, move in enumerate(moves):
             button = Button(self.root, text=move["Name"])
@@ -232,5 +225,3 @@ class LBattle:
         self.loading = True
         self.root.mainloop()
 
-
-a = LBattle()
