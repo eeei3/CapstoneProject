@@ -35,13 +35,14 @@ class Pokemon:
         if (random.randint(0, 100) < att["Accuracy"]) and (att["Accuracy"] != 100):
             print("Pokemon missed")
             return
-        if crit == 1:
-            dmg = att["Power"] * 2
-        elif crit == 2:
-            dmg = att["Power"] * 0.5
         else:
-            dmg = att["Power"]
-        target.take_dmg(dmg)
+            if crit == 1:
+                dmg = att["Power"] * 2
+            elif crit == 2:
+                dmg = att["Power"] * 0.5
+            else:
+                dmg = att["Power"]
+            target.take_dmg(dmg)
         return
 
     def take_dmg(self, amount):

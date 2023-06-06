@@ -58,6 +58,8 @@ class Player:
         """
         Switches the currently played Pokémon.
         """
+        print(index)
+        print(len(self.pokemon))
         self.played_pokemon.onfield = False
         self.played_pokemon = self.pokemon[index]
         self.played_pokemon.onfield = True
@@ -72,7 +74,6 @@ class Player:
                 attchoice = att
                 break
         if attchoice is None:
-            print("You messed up")
             return 9
         for row in EBAAD:
             for type in epokemon.types:
