@@ -10,7 +10,6 @@ The game should include all Pokémon from every generation, with their typing an
 ## Need to have list
 - List of Pokémon
 - Moves
-- Effects
 - Player v Machine
 - Critical Hit Chance
 - Type advantages/disadvantages
