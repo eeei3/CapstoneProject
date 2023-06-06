@@ -31,7 +31,6 @@ class Pokemon:
         self.caller.pokemon.pop(self.index)
 
     def attack(self, att, crit, target):
-        print(type(att))
         if (random.randint(0, 100) < att["Accuracy"]) and (att["Accuracy"] != 100):
             print("Pokemon missed")
             return

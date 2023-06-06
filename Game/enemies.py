@@ -63,15 +63,12 @@ class Trainer:
             poke.index = index
             pokemon.append(poke)
             index += 1
-        print(len(pokemon_data))
-        print(len(pokemon))
         return pokemon
 
     def turn(self, epokemon):
         """
         Perform the trainer's turn.
         """
-        print("Trainer's turn!")
         trainer_choice = random.randint(0, 100)
         attlen = 0
 
@@ -79,7 +76,6 @@ class Trainer:
             trainer_choice = 90
 
         if trainer_choice <= 80:
-            print("Trainer is going to attack")
             # This is our logic for attackiself.hp2.set(str(self.p2.played_pokemon.stats["hp"]))ng as a trainer
             if random.randint(0, 12) > self.difficulty:
                 for attack in self.played_pokemon.moves:
@@ -88,48 +84,23 @@ class Trainer:
                         pass
                     else:
                         if epokemon.stats["hp"] < attack["Power"]:
-                            print(f"Trainer has used {attack['Name']}")
-                            print(epokemon.name)
                             self.played_pokemon.attack(attack, 0, epokemon)
                             self.gturn = 1
-                            print(self.played_pokemon.name)
-                            print("F\n\n")
-                            print(attack["Name"])
-                            print("\n\nF")
                             return [1, attack["Name"]]
 
                         else:
                             for row in EBAAD:
                                 for type in epokemon.types:
                                     if (type in row) and (type in attack["Type"]):
-                                        print(f"Trainer has used {attack['Name']}")
                                         if 0.5 in row:
-                                            print(epokemon.name)
                                             self.played_pokemon.attack(attack, 2, epokemon)
-                                            # self.gturn = 1
-                                            print(self.played_pokemon.name)
-                                            print("T\n\n")
-                                            print(attack["Name"])
-                                            print("\n\nT")
-                                            return [1, attack["Name"]]
+                                            return [5, attack["Name"]]
                                         else:
-                                            print(epokemon.name)
                                             self.played_pokemon.attack(attack, 1, epokemon)
-                                            # self.gturn = 1
-                                            print(self.played_pokemon.name)
-                                            print("G\n\n")
-                                            print(attack["Name"])
-                                            print("\n\nG")
-                                            return [1, attack["Name"]]
+                                            return [6, attack["Name"]]
 
                         if len(self.played_pokemon.moves) == attlen:
-                            print(epokemon.name)
                             self.played_pokemon.attack(attack, 0, epokemon)
-                            # self.gturn = 1
-                            print(self.played_pokemon.name)
-                            print("Z\n\n")
-                            print(attack["Name"])
-                            print("\n\nZ")
                             return [1, attack["Name"]]
             else:
                 length = len(self.played_pokemon.moves)
@@ -137,14 +108,9 @@ class Trainer:
                 self.played_pokemon.attack(choice, 0, epokemon)
                 return [1, choice["Name"]]
         else:
-            print("Trainer is gonna switch")
             # This is the logic for switching the trainers onfield Pokémon
             pokemon_choice = random.randint(0, len(self.pokemon) - 1)
             self.played_pokemon = self.pokemon[pokemon_choice]
-            print(f"Trainer has chosen {self.played_pokemon.name}")
-            print("H\n\n")
-            print(self.played_pokemon)
-            print("\n\nH")
             return [2, self.played_pokemon.name]
 
     def check(self):
@@ -155,9 +121,7 @@ class Trainer:
             self.played_pokemon.onfield = None
             self.played_pokemon.remove()
             for i, pokemon in enumerate(self.pokemon):
-                print(f"cur_index {pokemon.index}")
                 pokemon.index = i
-                print(i)
             return 0
         else:
             return 1

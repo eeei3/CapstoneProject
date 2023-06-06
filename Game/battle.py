@@ -95,30 +95,26 @@ class LBattle:
             self.invalidate_buttons(3)
             time.sleep(3)
             m = self.p2.turn(self.p1.played_pokemon)
-            g = 0
             time.sleep(3)
             while m is None:
-                if g == 15:
-                    raise EXCEPTION
-                else:
-                    print(type(m))
-                    g += 1
+                pass
             if m[0] == 1:
                 self.message(f"{self.p2.played_pokemon.name} has used {m[1]}\n")
             elif m[0] == 2:
                 self.message(f"Trainer {self.p2.name} has switched to {self.p2.played_pokemon.name}\n")
                 self.update_sprite()
+            elif m[0] == 5:
+                self.message(f"{self.p2.played_pokemon.name} has used {m[1]}, its not very effective\n")
+            elif m[0] == 6:
+                self.message(f"{self.p2.played_pokemon.name} has used {m[1]}, its very effective!\n")
             name = self.p1.played_pokemon.name
-            print("\n\nbruh\n\n")
             if self.p1.check() == 0:
                 i = 0
                 for button in self.pbuttons:
                     if button[2] == name:
                         button[1] = 1
                     elif button[1] == 0:
-                        print(f"{button[0]['text']} is still in the fight")
                         button[0]["command"] = lambda arg1=i: self.switch_pokemon(arg1)
-                        print(i)
                         i += 1
                 for button in self.move_buttons:
                     button[1] = 1
