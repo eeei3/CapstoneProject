@@ -58,11 +58,11 @@ class Trainer:
         pokemon_data = [Poke_API_OOP.Pokemon(data).to_dict() for data in pokemon_raw]
         index = 0
         for x in pokemon_data:
-            index += 1
             y = JSON_Poke.JSON_to_Obj(x, index, self)
             poke = y.return_obj()
             poke.index = index
             pokemon.append(poke)
+            index += 1
         return pokemon
 
     def turn(self, epokemon):
@@ -89,6 +89,7 @@ class Trainer:
                             print(f"Trainer has used {attack['Name']}")
                             self.played_pokemon.attack(attack, 0, epokemon)
                             self.gturn = 1
+                            print(self.played_pokemon.name)
                             return [1, attack["Name"]]
 
                         else:
@@ -99,15 +100,18 @@ class Trainer:
                                         if 0.5 in row:
                                             self.played_pokemon.attack(attack, 2, epokemon)
                                             self.gturn = 1
+                                            print(self.played_pokemon.name)
                                             return [1, attack["Name"]]
                                         else:
                                             self.played_pokemon.attack(attack, 1, epokemon)
                                             self.gturn = 1
+                                            print(self.played_pokemon.name)
                                             return [1, attack["Name"]]
 
                         if len(self.played_pokemon.moves) == attlen:
                             self.played_pokemon.attack(attack, 0, epokemon)
                             self.gturn = 1
+                            print(self.played_pokemon.name)
                             return [1, attack["Name"]]
         else:
             # This is the logic for switching the trainers onfield Pokémon
@@ -125,5 +129,10 @@ class Trainer:
         """
         if self.played_pokemon.stats["hp"] <= 0:
             self.played_pokemon.onfield = None
+            self.played_pokemon.remove()
+            for i, pokemon in enumerate(self.pokemon):
+                print(f"cur_index {pokemon.index}")
+                pokemon.index = i
+                print(i)
             return 0
         return 1

@@ -88,13 +88,12 @@ class LBattle:
             self.validate_buttons(3)
             while self.turn == 1:
                 pass
-
             self.message(f"{self.p2.name}'s turn\n")
             self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
             self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
             self.p2.check()
             self.invalidate_buttons(3)
-            print(self.p1.played_pokemon.name)
+            time.sleep(3)
             m = self.p2.turn(self.p1.played_pokemon)
             while m is None:
                 print(type(m))
@@ -103,7 +102,16 @@ class LBattle:
             elif m[0] == 2:
                 self.message(f"Trainer {self.p2.name} has switched to {self.p2.played_pokemon.name}\n")
                 self.update_sprite()
-            self.p1.check()
+            name = self.p1.played_pokemon.name
+            if self.p1.check() == 0:
+                for button in self.pbuttons:
+                    if button[2] == name:
+                        button[1] = 1
+                for button in self.move_buttons:
+                    button[1] = 1
+            else:
+                for button in self.move_buttons:
+                    button[1] = 0
             self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
             self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
             self.update_sprite()
@@ -121,7 +129,7 @@ class LBattle:
     def update_moves(self):
         moves = self.pokemon_data[self.current_pokemon_index]["Moves"]
         for i, move in enumerate(moves):
-            self.move_buttons[i].config(text=move["Name"])
+            self.move_buttons[i][0].config(text=move["Name"])
 
     def switch_pokemon(self, index):
         self.current_pokemon_index = index
@@ -133,18 +141,20 @@ class LBattle:
     def invalidate_buttons(self, num):
         if num == 1 or num == 3:
             for button in self.pbuttons:
-                button.config(state="disabled")
+                button[0].config(state="disabled")
         if num == 2 or num == 3:
             for button in self.move_buttons:
-                button.config(state="disabled")
+                button[0].config(state="disabled")
 
     def validate_buttons(self, num):
         if num == 1 or num == 3:
-            for button in self.pbuttons:
-                button.config(state="normal")
+            for i, button in enumerate(self.pbuttons):
+                if button[1] == 0:
+                    button[0].config(state="normal")
         if num == 2 or num == 3:
-            for button in self.move_buttons:
-                button.config(state="normal")
+            for i, button in enumerate(self.move_buttons):
+                if button[1] == 0:
+                    button[0].config(state="normal")
 
     def quit_game(self):
         self.root.destroy()
@@ -173,25 +183,25 @@ class LBattle:
         self.hitpointlabel2.place(x=650, y=250)
 
         names = [pokemon.name for pokemon in self.p1.pokemon]
-        button_state = [[False, True, name] for name in names]
+        """button_state = [[False, True, name] for name in names]"""
         for i, name in enumerate(names):
             button = Button(self.root, text=name, command=lambda arg1=i: self.switch_pokemon(arg1))
             button["command"] = lambda arg1=i: self.switch_pokemon(arg1)
             button.place(x=125 + i * 100, y=400)
-            self.pbuttons.append(button)
+            self.pbuttons.append([button, 0, name])
 
-        for i, button in enumerate(self.pbuttons):
+        """for i, button in enumerate(self.pbuttons):
             if not button_state[i][1]:
                 button.config(state="disabled")
             elif not button_state[i][0]:
                 button.config(state="disabled")
-
+"""
         moves = self.p1.played_pokemon.moves
         for i, move in enumerate(moves):
             button = Button(self.root, text=move["Name"])
             button["command"] = lambda arg1=button["text"]: self.paction(arg1)
             button.place(x=150 + i * 150, y=350)
-            self.move_buttons.append(button)
+            self.move_buttons.append([button, 0])
 
         v = Scrollbar(self.root, orient='vertical')
         v.place(x=500, y=100)

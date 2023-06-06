@@ -47,11 +47,11 @@ class Player:
         pokemon_data = [Poke_API_OOP.Pokemon(data).to_dict() for data in pokemon_raw]
         index = 0
         for x in pokemon_data:
-            index += 1
             y = JSON_Poke.JSON_to_Obj(x, index, self)
             poke = y.return_obj()
             poke.index = index
             pokemon_list.append(poke)
+            index += 1
         return pokemon_list
 
     def switch_pokemon(self, index):
@@ -59,7 +59,7 @@ class Player:
         Switches the currently played Pokémon.
         """
         self.played_pokemon.onfield = False
-        self.played_pokemon = self.pokemon[index - 1]
+        self.played_pokemon = self.pokemon[index]
         self.played_pokemon.onfield = True
 
     def turn(self, epokemon, attack):
@@ -91,7 +91,9 @@ class Player:
         Checks the HP of the currently played Pokémon.
         """
         if self.played_pokemon.stats["hp"] <= 0:
-            self.played_pokemon.onfield = False
+            self.played_pokemon.onfield = None
             self.played_pokemon.remove()
+            for i, pokemon in enumerate(self.pokemon):
+                pokemon.index = i
             return 0
         return 1
