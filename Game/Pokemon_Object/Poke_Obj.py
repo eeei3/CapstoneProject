@@ -32,7 +32,7 @@ class Pokemon:
 
     def attack(self, att, crit, target):
         if (random.randint(0, 100) < att["Accuracy"]) and (att["Accuracy"] != 100):
-            return
+            return 1
         else:
             if crit == 1:
                 dmg = att["Power"] * 2
@@ -41,7 +41,7 @@ class Pokemon:
             else:
                 dmg = att["Power"]
             target.take_dmg(dmg)
-        return
+        return 0
 
     def take_dmg(self, amount):
         try:

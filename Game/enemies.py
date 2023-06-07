@@ -84,29 +84,43 @@ class Trainer:
                         pass
                     else:
                         if epokemon.stats["hp"] < attack["Power"]:
-                            self.played_pokemon.attack(attack, 0, epokemon)
-                            self.gturn = 1
-                            return [1, attack["Name"]]
+                            att = self.played_pokemon.attack(attack, 0, epokemon)
+                            if att == 0:
+                                return [1, attack["Name"]]
+                            else:
+                                return [9, attack["Name"]]
 
                         else:
                             for row in EBAAD:
                                 for type in epokemon.types:
                                     if (type in row) and (type in attack["Type"]):
                                         if 0.5 in row:
-                                            self.played_pokemon.attack(attack, 2, epokemon)
-                                            return [5, attack["Name"]]
+                                            att = self.played_pokemon.attack(attack, 2, epokemon)
+                                            if att == 0:
+                                                return [5, attack["Name"]]
+                                            else:
+                                                return [9, attack["Name"]]
                                         else:
-                                            self.played_pokemon.attack(attack, 1, epokemon)
-                                            return [6, attack["Name"]]
+                                            att = self.played_pokemon.attack(attack, 1, epokemon)
+                                            if att == 0:
+                                                return [6, attack["Name"]]
+                                            else:
+                                                return [9, attack["Name"]]
 
                         if len(self.played_pokemon.moves) == attlen:
-                            self.played_pokemon.attack(attack, 0, epokemon)
-                            return [1, attack["Name"]]
+                            att = self.played_pokemon.attack(attack, 0, epokemon)
+                            if att == 0:
+                                return [1, attack["Name"]]
+                            else:
+                                return [9, attack["Name"]]
             else:
                 length = len(self.played_pokemon.moves)
-                choice = self.played_pokemon.moves[random.randint(0, length - 1)]
-                self.played_pokemon.attack(choice, 0, epokemon)
-                return [1, choice["Name"]]
+                attack = self.played_pokemon.moves[random.randint(0, length - 1)]
+                att = self.played_pokemon.attack(attack, 0, epokemon)
+                if att == 0:
+                    return [1, attack["Name"]]
+                else:
+                    return [9, attack["Name"]]
         else:
             # This is the logic for switching the trainers onfield Pokémon
             pokemon_choice = random.randint(0, len(self.pokemon) - 1)

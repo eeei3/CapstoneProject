@@ -72,6 +72,8 @@ class LBattle:
             self.message(f"{self.p2.played_pokemon.name} has used {move}, its not very effective\n")
         elif m == 6:
             self.message(f"{self.p2.played_pokemon.name} has used {move}, its very effective!\n")
+        elif m == 9:
+            self.message(f"{self.p1.played_pokemon.name} missed!\n")
         else:
             self.message(f"{self.p2.played_pokemon.name} has used {move}\n")
         self.turn = 2
@@ -116,6 +118,8 @@ class LBattle:
                 self.message(f"{self.p2.played_pokemon.name} has used {m[1]}, its not very effective\n")
             elif m[0] == 6:
                 self.message(f"{self.p2.played_pokemon.name} has used {m[1]}, its very effective!\n")
+            elif m[0] == 9:
+                self.message(f"{self.p2.played_pokemon.name} missed their attack!\n")
             name = self.p1.played_pokemon.name
             if self.p1.check() == 0:
                 i = 0

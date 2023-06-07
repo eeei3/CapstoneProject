@@ -77,13 +77,22 @@ class Player:
             for type in epokemon.types:
                 if (type in row) and (type in attchoice["Type"]):
                     if 0.5 in row:
-                        self.played_pokemon(attchoice, 2, epokemon)
-                        return 5
+                        att = self.played_pokemon(attchoice, 2, epokemon)
+                        if att == 0:
+                            return 5
+                        else
+                            return 9
                     else:
-                        self.played_pokemon.attack(attchoice, 1, epokemon)
-                        return 6
-        self.played_pokemon.attack(attchoice, 0, epokemon)
-        return
+                        att = self.played_pokemon.attack(attchoice, 1, epokemon)
+                        if att == 0:
+                            return 6
+                        else:
+                            return 9
+        att = self.played_pokemon.attack(attchoice, 0, epokemon)
+        if att == 0:
+            return
+        else:
+            return 9
 
     def check(self):
         """
