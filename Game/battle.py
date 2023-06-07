@@ -65,8 +65,13 @@ class LBattle:
         return sprite
 
     def paction(self, move):
-        self.p1.turn(self.p2.played_pokemon, move)
-        self.message(f"Player has used {move}\n")
+        m = self.p1.turn(self.p2.played_pokemon, move)
+        if m == 5:
+            self.message(f"{self.p2.played_pokemon.name} has used {move}, its not very effective\n")
+        elif m == 6:
+            self.message(f"{self.p2.played_pokemon.name} has used {move}, its very effective!\n")
+        else:
+            self.message(f"{self.p2.played_pokemon.name} has used {move}\n")
         self.turn = 2
 
     def message(self, msg):
@@ -89,7 +94,8 @@ class LBattle:
             while self.turn == 1:
                 pass
             self.message(f"{self.p2.name}'s turn\n")
-            self.p2.check()
+            if self.p2.check() == 0:
+                self.message(f"{self.p2.name}'s pokemon has fainted!\n")
             self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
             self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
             self.invalidate_buttons(3)
@@ -110,6 +116,7 @@ class LBattle:
             name = self.p1.played_pokemon.name
             if self.p1.check() == 0:
                 i = 0
+                self.message(f"{self.p1.name}'s pokemon has fainted!")
                 for button in self.pbuttons:
                     if button[2] == name:
                         button[1] = 1
@@ -142,11 +149,11 @@ class LBattle:
             self.move_buttons[i][0]["command"] = lambda arg1=self.move_buttons[i][0]["text"]: self.paction(arg1)
 
     def switch_pokemon(self, index):
-        self.message(f"{self.p1.name} has switched to {self.p1.played_pokemon.name}\n")
         self.current_pokemon_index = index
         self.p1.switch_pokemon(index)
         self.update_sprite()
         self.update_moves()
+        self.message(f"{self.p1.name} has switched to {self.p1.played_pokemon.name}\n")
         self.turn = 2
 
     def invalidate_buttons(self, num):
@@ -194,7 +201,6 @@ class LBattle:
         self.hitpointlabel2.place(x=650, y=250)
 
         names = [pokemon.name for pokemon in self.p1.pokemon]
-        """button_state = [[False, True, name] for name in names]"""
         for i, name in enumerate(names):
             button = Button(self.root, text=name, command=lambda arg1=i: self.switch_pokemon(arg1))
             button["command"] = lambda arg1=i: self.switch_pokemon(arg1)
@@ -211,7 +217,7 @@ class LBattle:
         v = Scrollbar(self.root, orient='vertical')
         v.place(x=500, y=100)
 
-        self.t = Text(self.root, width=30, height=13, wrap=NONE, yscrollcommand=v.set)
+        self.t = Text(self.root, width=50, height=13, wrap=NONE, yscrollcommand=v.set)
         self.t.pack()
 
         self.t.config(state="disabled")

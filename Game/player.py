@@ -78,10 +78,12 @@ class Player:
                 if (type in row) and (type in attchoice["Type"]):
                     if 0.5 in row:
                         self.played_pokemon(attchoice, 2, epokemon)
+                        return 5
                     else:
                         self.played_pokemon.attack(attchoice, 1, epokemon)
-                    return
+                        return 6
         self.played_pokemon.attack(attchoice, 0, epokemon)
+        return
 
     def check(self):
         """

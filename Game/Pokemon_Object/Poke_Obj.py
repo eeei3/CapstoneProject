@@ -32,7 +32,6 @@ class Pokemon:
 
     def attack(self, att, crit, target):
         if (random.randint(0, 100) < att["Accuracy"]) and (att["Accuracy"] != 100):
-            print("Pokemon missed")
             return
         else:
             if crit == 1:

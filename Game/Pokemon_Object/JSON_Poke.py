@@ -33,8 +33,10 @@ class JSON_to_Obj:
         y = 0
         self.moves = []
         for x in self.rawdata["Moves"]:
-            if x["Power"] is not int:
+            if "N/A" == x["Power"]:
                 x["Power"] = 10
+            if "N/A" == x["Accuracy"]:
+                x["Accuracy"] = 50
             self.moves.append(x)
             self.moves[y]["DefaultPP"] = self.moves[0]["PP"]
             y += 1
