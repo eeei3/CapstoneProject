@@ -80,7 +80,7 @@ class Player:
                         att = self.played_pokemon(attchoice, 2, epokemon)
                         if att == 0:
                             return 5
-                        else
+                        else:
                             return 9
                     else:
                         att = self.played_pokemon.attack(attchoice, 1, epokemon)

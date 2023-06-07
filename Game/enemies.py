@@ -122,6 +122,8 @@ class Trainer:
                 else:
                     return [9, attack["Name"]]
         else:
+            if len(self.pokemon) == 0:
+                return [8, None]
             # This is the logic for switching the trainers onfield Pokémon
             pokemon_choice = random.randint(0, len(self.pokemon) - 1)
             self.played_pokemon = self.pokemon[pokemon_choice]

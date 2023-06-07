@@ -11,8 +11,7 @@ This file contains important GUI code.
 Always run the game from this file.
 """
 from tkinter import *
-from multiprocessing import Process
-import connection
+import threading
 import battle
 
 
@@ -24,29 +23,28 @@ class GUI:
         """
         self.mainframe = None
         self.main = Tk()
-        self.pipe = None
-        self.online = False
         self.op = False
         self.game = False
-        self.ip = None
-        self.port = None
+        self.start = None
         self.process1 = None
         self.process2 = None
         self.process3 = None
         self.connect_process = None
+        self.name = StringVar(self.main)
+        self.name.set("Pick your username")
 
     def offgame(self):
         """
         Starts an offline game with a bot.
         """
-        self.process2 = Process(target=self.offgame_wrapper())
+        self.process2 = threading.Thread(target=self.offgame_wrapper())
         self.process2.start()
 
     def offgame_wrapper(self):
         """
         Wraps the function for starting an offline game with a bot.
         """
-        self.game = battle.LBattle()
+        self.game = battle.LBattle(1)
         # self.game.game_ui()
 
     def quit_game(self):
@@ -55,7 +53,13 @@ class GUI:
         """
         self.main.destroy()
 
-    def temp_name(self):
+    def checker(self):
+        while self.name.get() == "Pick your username" or self.name.get() == "":
+            self.start.config(state="disabled")
+        self.start.config(state="normal")
+
+
+    def maingui(self):
         """
         Design the main title screen.
         """
@@ -65,8 +69,10 @@ class GUI:
         maintitle.pack(ipadx=20, ipady=10, expand=True)
         choice3 = Label(self.main, text="Play a Trainer!", font=("MS Comic Sans", "14"))
         choice3.pack(ipadx=20, ipady=20, expand=True)
-        start = Button(self.main, text="Play Bot!", command=self.offgame)
-        start.pack()
+        username = Label(self.main, textvariable=self.name)
+        username.pack()
+        self.start = Button(self.main, text="Play Bot!", command=self.offgame)
+        self.start.pack()
         credit = Label(self.main, text="This program was made by Calvin, Ebaad and Josh", font=("MS Comic Sans", "10"))
         credit.pack(ipadx=20, ipady=20, expand=True)
         quit_button = Button(self.main, text="Quit", command=self.quit_game)
@@ -76,4 +82,4 @@ class GUI:
 
 if __name__ == "__main__":
     b = GUI()
-    b.temp_name()
+    b.maingui()
