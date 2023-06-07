@@ -44,6 +44,8 @@ class LBattle:
         self.hp2 = StringVar()
         self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
         self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
+        self.enemypokemon = IntVar()
+        self.enemypokemon.set(len(self.p2.pokemon))
         self.loading = False
         self.thread = threading.Thread(target=self.start_battle)
         self.thread.daemon = True
@@ -96,6 +98,7 @@ class LBattle:
             self.message(f"{self.p2.name}'s turn\n")
             if self.p2.check() == 0:
                 self.message(f"{self.p2.name}'s pokemon has fainted!\n")
+            self.enemypokemon.set(len(self.p2.pokemon))
             self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
             self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
             self.invalidate_buttons(3)
@@ -199,6 +202,9 @@ class LBattle:
 
         self.hitpointlabel2 = Label(self.root, textvariable=self.hp2)
         self.hitpointlabel2.place(x=650, y=250)
+
+        enemypokemonlabel = Label(self.root, textvariable=self.enemypokemon)
+        enemypokemonlabel.place(x=650, y=300)
 
         names = [pokemon.name for pokemon in self.p1.pokemon]
         for i, name in enumerate(names):
