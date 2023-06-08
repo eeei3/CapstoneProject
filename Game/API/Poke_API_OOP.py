@@ -15,6 +15,7 @@ DO NOT USE THIS FILE.
 USE BATTLE.PY
 """
 # Important package imports
+import json
 import requests
 import random
 
@@ -78,5 +79,8 @@ class Main(PokemonAPI):
         for data in pokemon_data:
             pokemon = Pokemon(data)
 
+        with open("Data/data.json", "w+") as f:
+            pokemon_list = [Pokemon(data).to_dict() for data in pokemon_data]
+            json.dump(pokemon_list, f, indent=4)
 
 Main()
