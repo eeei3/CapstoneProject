@@ -84,7 +84,7 @@ class Trainer:
                         pass
                     else:
                         if epokemon.stats["hp"] < attack["Power"]:
-                            att = self.played_pokemon.attack(attack, 0, epokemon)
+                            att = self.played_pokemon.attack(attack, 0, epokemon, self.difficulty)
                             if att == 0:
                                 return [1, attack["Name"]]
                             else:
@@ -95,20 +95,20 @@ class Trainer:
                                 for type in epokemon.types:
                                     if (type in row) and (type in attack["Type"]):
                                         if 0.5 in row:
-                                            att = self.played_pokemon.attack(attack, 2, epokemon)
+                                            att = self.played_pokemon.attack(attack, 2, epokemon, self.difficulty)
                                             if att == 0:
                                                 return [5, attack["Name"]]
                                             else:
                                                 return [9, attack["Name"]]
                                         else:
-                                            att = self.played_pokemon.attack(attack, 1, epokemon)
+                                            att = self.played_pokemon.attack(attack, 1, epokemon, self.difficulty)
                                             if att == 0:
                                                 return [6, attack["Name"]]
                                             else:
                                                 return [9, attack["Name"]]
 
                         if len(self.played_pokemon.moves) == attlen:
-                            att = self.played_pokemon.attack(attack, 0, epokemon)
+                            att = self.played_pokemon.attack(attack, 0, epokemon, self.difficulty)
                             if att == 0:
                                 return [1, attack["Name"]]
                             else:
@@ -116,7 +116,7 @@ class Trainer:
             else:
                 length = len(self.played_pokemon.moves)
                 attack = self.played_pokemon.moves[random.randint(0, length - 1)]
-                att = self.played_pokemon.attack(attack, 0, epokemon)
+                att = self.played_pokemon.attack(attack, 0, epokemon, self.difficulty)
                 if att == 0:
                     return [1, attack["Name"]]
                 else:

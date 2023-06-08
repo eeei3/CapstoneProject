@@ -13,6 +13,7 @@ Always run the game from this file.
 from tkinter import *
 import threading
 import battle
+import time
 
 
 # Represents the graphical user interface of the game.
@@ -44,8 +45,10 @@ class GUI:
         """
         Wraps the function for starting an offline game with a bot.
         """
+        self.main.withdraw()
         self.game = battle.LBattle(1)
-        # self.game.game_ui()
+        print("done")
+        self.main.deiconify()
 
     def quit_game(self):
         """
@@ -54,9 +57,11 @@ class GUI:
         self.main.destroy()
 
     def checker(self):
-        while self.name.get() == "Pick your username" or self.name.get() == "":
-            self.start.config(state="disabled")
-        self.start.config(state="normal")
+        while True:
+            while self.name.get() == "Pick your username" or self.name.get() == "":
+                self.start.config(state="disabled")
+            self.start.config(state="normal")
+            time.sleep(1)
 
 
     def maingui(self):
@@ -69,7 +74,7 @@ class GUI:
         maintitle.pack(ipadx=20, ipady=10, expand=True)
         choice3 = Label(self.main, text="Play a Trainer!", font=("MS Comic Sans", "14"))
         choice3.pack(ipadx=20, ipady=20, expand=True)
-        username = Label(self.main, textvariable=self.name)
+        username = Entry(self.main, textvariable=self.name)
         username.pack()
         self.start = Button(self.main, text="Play Bot!", command=self.offgame)
         self.start.pack()
@@ -81,5 +86,7 @@ class GUI:
 
 
 if __name__ == "__main__":
-    b = GUI()
-    b.maingui()
+    main = GUI()
+    side = threading.Thread(target=main.checker)
+    side.start()
+    main.maingui()

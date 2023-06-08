@@ -95,7 +95,7 @@ class LBattle:
         self.message(f"Trainer has chosen {self.p2.played_pokemon.name}\n")
         self.p2.start()
 
-        while True:
+        while len(self.p2.pokemon) != 0:
             self.message(f"{self.p1.name}'s turn\n")
             self.turn = 1
             self.validate_buttons(3)
@@ -145,6 +145,7 @@ class LBattle:
             self.update_sprite()
 
 
+
     def update_sprite(self):
         sprite_url = self.p1.played_pokemon.sprites
         sprite = self.load_sprite(sprite_url)
@@ -187,14 +188,14 @@ class LBattle:
                 if button[1] == 0:
                     button[0].config(state="normal")
 
-    def quit_game(self):
+    def quit_window(self):
         self.root.destroy()
 
     def game_ui(self):
         self.root.geometry("900x500")
         self.root.title("Pokémon Battle")
 
-        quit_button = Button(self.root, text="Quit", command=self.quit_game)
+        quit_button = Button(self.root, text="Quit", command=self.quit_window)
         quit_button.place(x=450, y=450)
 
         sprite_url = self.p1.played_pokemon.sprites
@@ -242,5 +243,6 @@ class LBattle:
 
         self.loading = True
         self.root.mainloop()
+        print("L")
         return 0
 
