@@ -7,7 +7,7 @@
 """
 Current Assignment: player.py
 
-This file is used to create a Player object using data from the API
+This file is used to create a Player object using data from the API.
 We also use this file for some of our game logic
 """
 import random
