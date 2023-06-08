@@ -24,9 +24,13 @@ import time
 # Bypasses error on macOS
 ssl._create_default_https_context = ssl._create_unverified_context
 
+class BattleManager:
+    def __init__(self):
+        self.level = 1
+
 
 class LBattle:
-    def __init__(self):
+    def __init__(self, lvl):
         self.lvl = 1
         self.root = Toplevel()
         self.pokemon_data = self.load_pokemon_data()
@@ -72,6 +76,8 @@ class LBattle:
             self.message(f"{self.p2.played_pokemon.name} has used {move}, its not very effective\n")
         elif m == 6:
             self.message(f"{self.p2.played_pokemon.name} has used {move}, its very effective!\n")
+        elif m == 9:
+            self.message(f"{self.p1.played_pokemon.name} missed!\n")
         else:
             self.message(f"{self.p2.played_pokemon.name} has used {move}\n")
         self.turn = 2
@@ -116,6 +122,9 @@ class LBattle:
                 self.message(f"{self.p2.played_pokemon.name} has used {m[1]}, its not very effective\n")
             elif m[0] == 6:
                 self.message(f"{self.p2.played_pokemon.name} has used {m[1]}, its very effective!\n")
+            elif m[0] == 9:
+                self.message(f"{self.p2.played_pokemon.name} missed their attack!\n")
+
             name = self.p1.played_pokemon.name
             if self.p1.check() == 0:
                 i = 0
@@ -134,6 +143,7 @@ class LBattle:
             self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
             self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
             self.update_sprite()
+
 
     def update_sprite(self):
         sprite_url = self.p1.played_pokemon.sprites
@@ -232,4 +242,5 @@ class LBattle:
 
         self.loading = True
         self.root.mainloop()
+        return 0
 
