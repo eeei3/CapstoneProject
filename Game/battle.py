@@ -55,6 +55,7 @@ class LBattle:
         self.thread.daemon = True
         self.thread.start()
         self.game_ui()
+        print("H")
 
     def load_pokemon_data(self):
         with open('Data/data.json') as json_file:
@@ -94,55 +95,58 @@ class LBattle:
         self.message(f"Start of match with Trainer {self.p2.name}\n")
         self.message(f"Trainer has chosen {self.p2.played_pokemon.name}\n")
         self.p2.start()
+        while 'normal' == self.root.state():
+            while len(self.p2.pokemon) != 0:
+                self.message(f"{self.p1.name}'s turn\n")
+                self.turn = 1
+                self.validate_buttons(3)
+                while self.turn == 1:
+                    pass
+                self.message(f"{self.p2.name}'s turn\n")
+                if self.p2.check() == 0:
+                    self.message(f"{self.p2.name}'s pokemon has fainted!\n")
+                self.enemypokemon.set(len(self.p2.pokemon))
+                self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
+                self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
+                self.invalidate_buttons(3)
+                time.sleep(3)
+                m = self.p2.turn(self.p1.played_pokemon)
+                time.sleep(3)
+                while m is None:
+                    pass
+                if m[0] == 1:
+                    self.message(f"{self.p2.played_pokemon.name} has used {m[1]}\n")
+                elif m[0] == 2:
+                    self.message(f"Trainer {self.p2.name} has switched to {self.p2.played_pokemon.name}\n")
+                    self.update_sprite()
+                elif m[0] == 5:
+                    self.message(f"{self.p2.played_pokemon.name} has used {m[1]}, its not very effective\n")
+                elif m[0] == 6:
+                    self.message(f"{self.p2.played_pokemon.name} has used {m[1]}, its very effective!\n")
+                elif m[0] == 9:
+                    self.message(f"{self.p2.played_pokemon.name} missed their attack!\n")
 
-        while len(self.p2.pokemon) != 0:
-            self.message(f"{self.p1.name}'s turn\n")
-            self.turn = 1
-            self.validate_buttons(3)
-            while self.turn == 1:
-                pass
-            self.message(f"{self.p2.name}'s turn\n")
-            if self.p2.check() == 0:
-                self.message(f"{self.p2.name}'s pokemon has fainted!\n")
-            self.enemypokemon.set(len(self.p2.pokemon))
-            self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
-            self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
-            self.invalidate_buttons(3)
-            time.sleep(3)
-            m = self.p2.turn(self.p1.played_pokemon)
-            time.sleep(3)
-            while m is None:
-                pass
-            if m[0] == 1:
-                self.message(f"{self.p2.played_pokemon.name} has used {m[1]}\n")
-            elif m[0] == 2:
-                self.message(f"Trainer {self.p2.name} has switched to {self.p2.played_pokemon.name}\n")
-                self.update_sprite()
-            elif m[0] == 5:
-                self.message(f"{self.p2.played_pokemon.name} has used {m[1]}, its not very effective\n")
-            elif m[0] == 6:
-                self.message(f"{self.p2.played_pokemon.name} has used {m[1]}, its very effective!\n")
-            elif m[0] == 9:
-                self.message(f"{self.p2.played_pokemon.name} missed their attack!\n")
-
-            name = self.p1.played_pokemon.name
-            if self.p1.check() == 0:
-                i = 0
-                self.message(f"{self.p1.name}'s pokemon has fainted!")
-                for button in self.pbuttons:
-                    if button[2] == name:
+                name = self.p1.played_pokemon.name
+                if self.p1.check() == 0:
+                    i = 0
+                    self.message(f"{self.p1.name}'s pokemon has fainted!")
+                    for button in self.pbuttons:
+                        if button[2] == name:
+                            button[1] = 1
+                        elif button[1] == 0:
+                            button[0]["command"] = lambda arg1=i: self.switch_pokemon(arg1)
+                            i += 1
+                    for button in self.move_buttons:
                         button[1] = 1
-                    elif button[1] == 0:
-                        button[0]["command"] = lambda arg1=i: self.switch_pokemon(arg1)
-                        i += 1
-                for button in self.move_buttons:
-                    button[1] = 1
-            else:
-                for button in self.move_buttons:
-                    button[1] = 0
-            self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
-            self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
-            self.update_sprite()
+                else:
+                    for button in self.move_buttons:
+                        button[1] = 0
+                self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
+                self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
+                self.update_sprite()
+                return 1
+        print("T")
+        return 0
 
 
 
