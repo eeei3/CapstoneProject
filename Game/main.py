@@ -63,7 +63,6 @@ class GUI:
             self.start.config(state="normal")
             time.sleep(1)
 
-
     def maingui(self):
         """
         Design the main title screen.
