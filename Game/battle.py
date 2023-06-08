@@ -52,10 +52,10 @@ class LBattle:
         self.enemypokemon.set(len(self.p2.pokemon))
         self.loading = False
         self.thread = threading.Thread(target=self.start_battle)
-        self.thread.daemon = True
+        self.thread.daemon = False
         self.thread.start()
         self.game_ui()
-        print("H")
+        print("D")
 
     def load_pokemon_data(self):
         with open('Data/data.json') as json_file:
@@ -95,8 +95,15 @@ class LBattle:
         self.message(f"Start of match with Trainer {self.p2.name}\n")
         self.message(f"Trainer has chosen {self.p2.played_pokemon.name}\n")
         self.p2.start()
-        while 'normal' == self.root.state():
-            while len(self.p2.pokemon) != 0:
+        b = bool(self.t.winfo_ismapped())
+        while b is True:
+            try:
+                b = bool(self.t.winfo_ismapped())
+            except:
+                b = False
+            while (len(self.p2.pokemon) != 0) and (b is True):
+                b = bool(self.t.winfo_ismapped())
+                print(b)
                 self.message(f"{self.p1.name}'s turn\n")
                 self.turn = 1
                 self.validate_buttons(3)
@@ -105,6 +112,9 @@ class LBattle:
                 self.message(f"{self.p2.name}'s turn\n")
                 if self.p2.check() == 0:
                     self.message(f"{self.p2.name}'s pokemon has fainted!\n")
+                if len(self.p2.pokemon) == 0:
+                    self.quit_window()
+                    continue
                 self.enemypokemon.set(len(self.p2.pokemon))
                 self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
                 self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
@@ -144,7 +154,7 @@ class LBattle:
                 self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
                 self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
                 self.update_sprite()
-                return 1
+            print("G")
         print("T")
         return 0
 
@@ -193,6 +203,7 @@ class LBattle:
                     button[0].config(state="normal")
 
     def quit_window(self):
+        self.root.quit()
         self.root.destroy()
 
     def game_ui(self):
@@ -222,6 +233,7 @@ class LBattle:
         enemypokemonlabel.place(x=650, y=300)
 
         names = [pokemon.name for pokemon in self.p1.pokemon]
+
         for i, name in enumerate(names):
             button = Button(self.root, text=name, command=lambda arg1=i: self.switch_pokemon(arg1))
             button["command"] = lambda arg1=i: self.switch_pokemon(arg1)
@@ -229,6 +241,7 @@ class LBattle:
             self.pbuttons.append([button, 0, name])
 
         moves = self.p1.played_pokemon.moves
+
         for i, move in enumerate(moves):
             button = Button(self.root, text=move["Name"])
             button["command"] = lambda arg1=button["text"]: self.paction(arg1)
