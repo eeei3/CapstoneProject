@@ -24,6 +24,7 @@ import time
 # Bypasses error on macOS
 ssl._create_default_https_context = ssl._create_unverified_context
 
+
 class BattleManager:
     def __init__(self):
         self.level = 1
@@ -158,8 +159,6 @@ class LBattle:
         print("T")
         return 0
 
-
-
     def update_sprite(self):
         sprite_url = self.p1.played_pokemon.sprites
         sprite = self.load_sprite(sprite_url)
@@ -262,4 +261,3 @@ class LBattle:
         self.root.mainloop()
         print("L")
         return 0
-

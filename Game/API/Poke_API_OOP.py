@@ -56,21 +56,6 @@ class Pokemon:
             self.moves.append({"Name": move_name, "PP": move_pp, "Accuracy": move_accuracy,
                                "Power": move_power, "Type": move_type})
 
-    def print_info(self):
-        print(f"Name: {self.name}")
-        print(f"ID: {self.id}")
-        print(f"Sprite: {self.sprites}")
-        print("Stats:")
-        for stat_name, stat_value in self.stats.items():
-            print(f" - {stat_name}: {stat_value}")
-        print("Types:")
-        for type_name in self.types:
-            print(f" - {type_name}")
-        print("Moves:")
-        for move in self.moves:
-            print(f" - {move['Name']} (PP: {move['PP']}, Accuracy: {move['Accuracy']},"
-                  f" Power: {move['Power']}, Type: {move['Type']})")
-
     def to_dict(self):
         return {
             "ID": self.id,
