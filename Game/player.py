@@ -7,7 +7,7 @@
 """
 Current Assignment: player.py
 
-This file is used to create a Player object using data from the API
+This file is used to create a Player object using data from the API.
 We also use this file for some of our game logic
 """
 import random
@@ -74,14 +74,31 @@ class Player:
         if attchoice is None:
             return 9
         for row in EBAAD:
-            for type in epokemon.types:
-                if (type in row) and (type in attchoice["Type"]):
+            for atype in epokemon.types:
+                print(atype.title())
+                print(row)
+                print(type(attchoice))
+                if (atype.title() in row[0]) and (
+                        ((atype.title() in attchoice["Type"].title())) or (attchoice["Type"].title()) in atype.title()):
+                    print("Effective type triggered")
                     if 0.5 in row:
-                        self.played_pokemon(attchoice, 2, epokemon)
+                        att = self.played_pokemon(attchoice, 2, epokemon)
+                        if att == 0:
+                            return 5
+                        else:
+                            return 9
                     else:
-                        self.played_pokemon.attack(attchoice, 1, epokemon)
-                    return
-        self.played_pokemon.attack(attchoice, 0, epokemon)
+                        att = self.played_pokemon.attack(attchoice, 1, epokemon)
+                        if att == 0:
+                            return 6
+                        else:
+                            return 9
+        print("No type effectiveness")
+        att = self.played_pokemon.attack(attchoice, 0, epokemon)
+        if att == 0:
+            return
+        else:
+            return 9
 
     def check(self):
         """

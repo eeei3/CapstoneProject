@@ -30,10 +30,13 @@ class Pokemon:
     def remove(self):
         self.caller.pokemon.pop(self.index)
 
-    def attack(self, att, crit, target):
-        if (random.randint(0, 100) < att["Accuracy"]) and (att["Accuracy"] != 100):
-            print("Pokemon missed")
-            return
+    def attack(self, att, crit, target, *diff):
+        if len(diff) < 0:
+            attack_chance = random.randint(0, 100) * (int(diff[0]**0.8) << 2)/10
+        else:
+            attack_chance = random.randint(0, 100)
+        if (attack_chance < att["Accuracy"]) and (att["Accuracy"] != 100):
+            return 1
         else:
             if crit == 1:
                 dmg = att["Power"] * 2
@@ -42,7 +45,7 @@ class Pokemon:
             else:
                 dmg = att["Power"]
             target.take_dmg(dmg)
-        return
+            return 0
 
     def take_dmg(self, amount):
         try:

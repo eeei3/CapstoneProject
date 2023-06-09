@@ -84,30 +84,69 @@ class Trainer:
                         pass
                     else:
                         if epokemon.stats["hp"] < attack["Power"]:
-                            self.played_pokemon.attack(attack, 0, epokemon)
-                            self.gturn = 1
-                            return [1, attack["Name"]]
+                            att = self.played_pokemon.attack(attack, 0, epokemon, self.difficulty)
+                            if att == 0:
+                                return [1, attack["Name"]]
+                            else:
+                                return [9, attack["Name"]]
 
                         else:
                             for row in EBAAD:
-                                for type in epokemon.types:
-                                    if (type in row) and (type in attack["Type"]):
+                                for atype in epokemon.types:
+                                    if (atype.title() in row[0]) and (
+                                            (atype.title() in attack["Type"].title()) or (
+                                    attack["Type"].title()) in atype.title()):
+                                        print("Type effectiveness triggered")
                                         if 0.5 in row:
-                                            self.played_pokemon.attack(attack, 2, epokemon)
-                                            return [5, attack["Name"]]
+                                            att = self.played_pokemon.attack(attack, 2, epokemon, self.difficulty)
+                                            if att == 0:
+                                                return [5, attack["Name"]]
+                                            else:
+                                                return [9, attack["Name"]]
                                         else:
-                                            self.played_pokemon.attack(attack, 1, epokemon)
-                                            return [6, attack["Name"]]
+                                            att = self.played_pokemon.attack(attack, 1, epokemon, self.difficulty)
+                                            if att == 0:
+                                                return [6, attack["Name"]]
+                                            else:
+                                                return [9, attack["Name"]]
 
                         if len(self.played_pokemon.moves) == attlen:
-                            self.played_pokemon.attack(attack, 0, epokemon)
-                            return [1, attack["Name"]]
+                            print("No type effectiveness")
+                            maxim = len(self.played_pokemon.moves) - 1
+                            attchoice = self.played_pokemon.moves[random.randint(0, maxim)]
+                            att = self.played_pokemon.attack(attchoice, 0, epokemon, self.difficulty)
+                            if att == 0:
+                                return [1, attack["Name"]]
+                            else:
+                                return [9, attack["Name"]]
             else:
                 length = len(self.played_pokemon.moves)
-                choice = self.played_pokemon.moves[random.randint(0, length - 1)]
-                self.played_pokemon.attack(choice, 0, epokemon)
-                return [1, choice["Name"]]
+                attack = self.played_pokemon.moves[random.randint(0, length - 1)]
+                for row in EBAAD:
+                    for atype in epokemon.types:
+                        if (atype.title() in row[0]) and (
+                        ((atype.title() in attack["Type"].title())) or (attack["Type"].title()) in atype.title()):
+                            print("Type effectiveness triggered")
+                            if 0.5 in row:
+                                att = self.played_pokemon.attack(attack, 2, epokemon, self.difficulty)
+                                if att == 0:
+                                    return [5, attack["Name"]]
+                                else:
+                                    return [9, attack["Name"]]
+                            else:
+                                att = self.played_pokemon.attack(attack, 1, epokemon, self.difficulty)
+                                if att == 0:
+                                    return [6, attack["Name"]]
+                                else:
+                                    return [9, attack["Name"]]
+                att = self.played_pokemon.attack(attack, 0, epokemon, self.difficulty)
+                if att == 0:
+                    return [1, attack["Name"]]
+                else:
+                    return [9, attack["Name"]]
         else:
+            if len(self.pokemon) == 0:
+                return [8, None]
             # This is the logic for switching the trainers onfield Pokémon
             pokemon_choice = random.randint(0, len(self.pokemon) - 1)
             self.played_pokemon = self.pokemon[pokemon_choice]

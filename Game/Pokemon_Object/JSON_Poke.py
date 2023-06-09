@@ -9,8 +9,11 @@ Current Assignment: JSON_Poke.py
 
 This file is what we use to make objects from
 """
-# Import module Poke_Obj, which is used later on
+# Import module Poke_Obj, which is used later on,
+# DO NOT DELETE - Comment out if this breaks your code
+# from CapstoneProject.Game.Pokemon_Object import Poke_Obj
 from Game.Pokemon_Object import Poke_Obj
+# from Pokemon_Object import Poke_Obj
 
 
 # This class turns the data given from the .json into objects for later usage
@@ -33,8 +36,10 @@ class JSON_to_Obj:
         y = 0
         self.moves = []
         for x in self.rawdata["Moves"]:
-            if x["Power"] is not int:
+            if "N/A" == x["Power"]:
                 x["Power"] = 10
+            if "N/A" == x["Accuracy"]:
+                x["Accuracy"] = 50
             self.moves.append(x)
             self.moves[y]["DefaultPP"] = self.moves[0]["PP"]
             y += 1
