@@ -92,8 +92,9 @@ class Trainer:
 
                         else:
                             for row in EBAAD:
-                                for type in epokemon.types:
-                                    if (type in row) and (type in attack["Type"]):
+                                for atype in epokemon.types:
+                                    if (atype in row) and (atype in attack["Type"]):
+                                        print("Type effectiveness triggered")
                                         if 0.5 in row:
                                             att = self.played_pokemon.attack(attack, 2, epokemon, self.difficulty)
                                             if att == 0:
@@ -108,7 +109,10 @@ class Trainer:
                                                 return [9, attack["Name"]]
 
                         if len(self.played_pokemon.moves) == attlen:
-                            att = self.played_pokemon.attack(attack, 0, epokemon, self.difficulty)
+                            print("No type effectiveness")
+                            maxim = len(self.played_pokemon.moves) - 1
+                            attchoice = self.played_pokemon.moves[random.randint(0, maxim)]
+                            att = self.played_pokemon.attack(attchoice, 0, epokemon, self.difficulty)
                             if att == 0:
                                 return [1, attack["Name"]]
                             else:

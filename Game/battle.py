@@ -9,7 +9,6 @@ Current Assignment: battle.py
 
 
 """
-import json
 from tkinter import *
 import io
 from urllib import request
@@ -34,7 +33,6 @@ class LBattle:
     def __init__(self, lvl):
         self.lvl = 1
         self.root = Toplevel()
-        self.pokemon_data = self.load_pokemon_data()
         self.current_pokemon_index = 0
         self.lvl = 1
         self.turn = 1
@@ -54,14 +52,14 @@ class LBattle:
         self.loading = False
         self.thread = threading.Thread(target=self.start_battle)
         self.thread.daemon = False
+        self.code = 1
+
+    def start(self):
         self.thread.start()
         self.game_ui()
-        print("D")
-
-    def load_pokemon_data(self):
-        with open('Data/data.json') as json_file:
-            data = json.load(json_file)
-            return data[6:]
+        print("Code")
+        print(self.code)
+        return self.code
 
     def load_sprite(self, url):
         response = request.urlopen(url)
@@ -114,15 +112,16 @@ class LBattle:
                 if self.p2.check() == 0:
                     self.message(f"{self.p2.name}'s pokemon has fainted!\n")
                 if len(self.p2.pokemon) == 0:
+                    self.code = 0
                     self.quit_window()
                     continue
                 self.enemypokemon.set(len(self.p2.pokemon))
                 self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
                 self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
                 self.invalidate_buttons(3)
-                time.sleep(3)
+                time.sleep(1)
                 m = self.p2.turn(self.p1.played_pokemon)
-                time.sleep(3)
+                time.sleep(1)
                 while m is None:
                     pass
                 if m[0] == 1:
@@ -140,7 +139,7 @@ class LBattle:
                 name = self.p1.played_pokemon.name
                 if self.p1.check() == 0:
                     i = 0
-                    self.message(f"{self.p1.name}'s pokemon has fainted!")
+                    self.message(f"{self.p1.name}'s pokemon has fainted!\n")
                     for button in self.pbuttons:
                         if button[2] == name:
                             button[1] = 1
@@ -201,15 +200,18 @@ class LBattle:
                 if button[1] == 0:
                     button[0].config(state="normal")
 
-    def quit_window(self):
-        self.root.quit()
+    def quit_window(self, *code):
+        if len(code) > 0:
+            self.code = 1
         self.root.destroy()
+        self.root.quit()
 
     def game_ui(self):
         self.root.geometry("900x500")
         self.root.title("Pokémon Battle")
 
-        quit_button = Button(self.root, text="Quit", command=self.quit_window)
+        quit_button = Button(
+            self.root, text="Quit", command=lambda arg1=1: self.quit_window)
         quit_button.place(x=450, y=450)
 
         sprite_url = self.p1.played_pokemon.sprites

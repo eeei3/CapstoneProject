@@ -45,7 +45,7 @@ class Pokemon:
             else:
                 dmg = att["Power"]
             target.take_dmg(dmg)
-        return 0
+            return 0
 
     def take_dmg(self, amount):
         try:

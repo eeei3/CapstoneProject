@@ -14,6 +14,7 @@ from tkinter import *
 import threading
 import battle
 import time
+import gc
 
 
 # Represents the graphical user interface of the game.
@@ -45,9 +46,16 @@ class GUI:
         """
         Wraps the function for starting an offline game with a bot.
         """
+        level = 1
         self.main.withdraw()
-        self.game = battle.LBattle(1)
-        print("done")
+        self.game = battle.LBattle(level)
+        gamestatus = self.game.start()
+        while gamestatus == 0:
+            level += 1
+            gc.collect()
+            self.game = battle.LBattle(level)
+            gamestatus = self.game.start()
+
         self.main.deiconify()
 
     def quit_game(self):
@@ -55,13 +63,17 @@ class GUI:
         Quits the game and closes the GUI.
         """
         self.main.destroy()
+        self.main.quit()
 
     def checker(self):
         while True:
-            while self.name.get() == "Pick your username" or self.name.get() == "":
-                self.start.config(state="disabled")
-            self.start.config(state="normal")
-            time.sleep(1)
+            try:
+                while self.name.get() == "Pick your username" or self.name.get() == "":
+                    self.start.config(state="disabled")
+                self.start.config(state="normal")
+                time.sleep(1)
+            except RuntimeError:
+                pass
 
     def maingui(self):
         """

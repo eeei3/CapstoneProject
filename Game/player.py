@@ -74,8 +74,9 @@ class Player:
         if attchoice is None:
             return 9
         for row in EBAAD:
-            for type in epokemon.types:
-                if (type in row) and (type in attchoice["Type"]):
+            for atype in epokemon.types:
+                if (atype in row) and ((attchoice["Type"] == row).all(1).any()):
+                    print("Effective type triggered")
                     if 0.5 in row:
                         att = self.played_pokemon(attchoice, 2, epokemon)
                         if att == 0:
@@ -88,6 +89,7 @@ class Player:
                             return 6
                         else:
                             return 9
+        print("No type effectiveness")
         att = self.played_pokemon.attack(attchoice, 0, epokemon)
         if att == 0:
             return
