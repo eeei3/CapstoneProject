@@ -75,10 +75,11 @@ class Player:
             return 9
         for row in EBAAD:
             for atype in epokemon.types:
-                print(atype)
-                print(type(atype))
-                if (atype.title() in row) and (
-                        ((atype.title() in attack["Type"].title())) or (attack["Type"].title()) in atype.title()):
+                print(atype.title())
+                print(row)
+                print(type(attchoice))
+                if (atype.title() in row[0]) and (
+                        ((atype.title() in attchoice["Type"].title())) or (attchoice["Type"].title()) in atype.title()):
                     print("Effective type triggered")
                     if 0.5 in row:
                         att = self.played_pokemon(attchoice, 2, epokemon)

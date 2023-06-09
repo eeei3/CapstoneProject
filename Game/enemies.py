@@ -93,9 +93,7 @@ class Trainer:
                         else:
                             for row in EBAAD:
                                 for atype in epokemon.types:
-                                    print(atype)
-                                    print(type(atype))
-                                    if (atype.title() in row) and (
+                                    if (atype.title() in row[0]) and (
                                             (atype.title() in attack["Type"].title()) or (
                                     attack["Type"].title()) in atype.title()):
                                         print("Type effectiveness triggered")
@@ -126,9 +124,7 @@ class Trainer:
                 attack = self.played_pokemon.moves[random.randint(0, length - 1)]
                 for row in EBAAD:
                     for atype in epokemon.types:
-                        print(atype)
-                        print(type(atype))
-                        if (atype.title() in row) and (
+                        if (atype.title() in row[0]) and (
                         ((atype.title() in attack["Type"].title())) or (attack["Type"].title()) in atype.title()):
                             print("Type effectiveness triggered")
                             if 0.5 in row:
