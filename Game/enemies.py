@@ -95,9 +95,9 @@ class Trainer:
                                 for atype in epokemon.types:
                                     print(atype)
                                     print(type(atype))
-                                    if (atype in row):
-                                        print(f"{atype} in row")
-                                    if (atype in row) and (atype in attack["Type"]):
+                                    if (atype.title() in row) and (
+                                            (atype.title() in attack["Type"].title()) or (
+                                    attack["Type"].title()) in atype.title()):
                                         print("Type effectiveness triggered")
                                         if 0.5 in row:
                                             att = self.played_pokemon.attack(attack, 2, epokemon, self.difficulty)
@@ -128,7 +128,8 @@ class Trainer:
                     for atype in epokemon.types:
                         print(atype)
                         print(type(atype))
-                        if (atype in row) and (atype in attack["Type"]):
+                        if (atype.title() in row) and (
+                        ((atype.title() in attack["Type"].title())) or (attack["Type"].title()) in atype.title()):
                             print("Type effectiveness triggered")
                             if 0.5 in row:
                                 att = self.played_pokemon.attack(attack, 2, epokemon, self.difficulty)

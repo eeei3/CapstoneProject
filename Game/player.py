@@ -77,7 +77,8 @@ class Player:
             for atype in epokemon.types:
                 print(atype)
                 print(type(atype))
-                if (atype in row) and ((attchoice["Type"] == row).all(1).any()):
+                if (atype.title() in row) and (
+                        ((atype.title() in attack["Type"].title())) or (attack["Type"].title()) in atype.title()):
                     print("Effective type triggered")
                     if 0.5 in row:
                         att = self.played_pokemon(attchoice, 2, epokemon)

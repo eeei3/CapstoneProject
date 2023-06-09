@@ -110,9 +110,12 @@ class LBattle:
                 self.message(f"{self.p2.name}'s turn\n")
                 if self.p2.check() == 0:
                     self.message(f"{self.p2.name}'s pokemon has fainted!\n")
+                self.enemypokemon.set(len(self.p2.pokemon))
+                self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
+                self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
                 if len(self.p2.pokemon) == 0:
                     self.code = 0
-                    self.message("You won congrats! You will mvoe onto a harder trainer in\n")
+                    self.message("You won congrats! You will move onto a harder trainer in\n")
                     self.message("5\n")
                     time.sleep(1)
                     self.message("4\n")
@@ -125,9 +128,6 @@ class LBattle:
                     time.sleep(1)
                     self.quit_window()
                     continue
-                self.enemypokemon.set(len(self.p2.pokemon))
-                self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
-                self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
                 self.invalidate_buttons(3)
                 time.sleep(1)
                 m = self.p2.turn(self.p1.played_pokemon)
@@ -237,7 +237,7 @@ class LBattle:
         self.root.title("Pokémon Battle")
 
         quit_button = Button(
-            self.root, text="Quit", command=lambda arg1=1: self.quit_window)
+            self.root, text="Quit", command=lambda arg1=1: self.quit_window(arg1))
         quit_button.place(x=450, y=450)
 
         sprite_url = self.p1.played_pokemon.sprites
