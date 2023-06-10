@@ -1,11 +1,11 @@
 # ---------------------------------------------
-# Title: Poke_API_OOP.py
+# Title: pokemon_api.py
 # Class: CS 30
 # Date: 13/05/23
 # Version: 1.0
 # ---------------------------------------------
 """
-Current Assignment: Poke_API_OOP.py
+Current Assignment: pokemon_api.py
 
 This file makes api calls to pokeapi.co.
 It then stores the data received in a .json file for later use.
@@ -49,7 +49,7 @@ class Pokemon(PokemonAPI):
     def __init__(self, data):
         """
         Initializes certain values that API return.
-        Only strips the information that we actually need, to avoid garbage
+        Only strips the information that we actually need to avoid garbage
         calls
         """
         super().__init__()
@@ -72,7 +72,7 @@ class Pokemon(PokemonAPI):
                                "Accuracy": move_accuracy, "Power": move_power,
                                "Type": move_type})
 
-    def to_dict(self):
+    def add_to_dict(self):
         """
         Returning the data that we have collected, striped and stored.
         """

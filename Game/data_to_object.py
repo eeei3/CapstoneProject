@@ -1,41 +1,41 @@
 # ---------------------------------------------
-# Title: JSON_Poke.py
+# Title: data_to_object.py
 # Class: CS 30
 # Date: 17/05/23
 # Version: 1.0
 # ---------------------------------------------
 """
-Current Assignment: JSON_Poke.py
+Current Assignment: data_to_object.py
 
-This file is what we use to make objects from
+We use this file to create objects from the data we have received
 """
 # Important package imports
-import Poke_Obj
+import pokemon_object
 
 
-# This class turns the data given from the .json into objects for later usage
-class JSON_to_Obj:
+# This class turns the data we have received into objects for later usage
+class data_to_obj:
     def __init__(self, rawdata, index, caller):
         """
         Initializes default values.
         Some values assume None, until given data later.
         """
         self.rawdata = rawdata
-        # Pokemon name
+        # Pokémon name
         self.name = None
-        # Pokemon ID
+        # Pokémon ID
         self.id = None
-        # Pokemon types
+        # Pokémon types
         self.types = None
-        # Pokemon moves
+        # Pokémon moves
         self.moves = None
-        # Pokemon stats such as HP
+        # Pokémon stats such as HP
         self.stats = None
-        # Pokemon's place in the owner's list
+        # Pokémon's place in the owner's list
         self.index = index
-        # The pokemon's owner
+        # The Pokémon's owner
         self.caller = caller
-        # The pokemon's sprite
+        # The Pokémon's sprite
         self.sprites = None
 
     def get_moves(self):
@@ -99,7 +99,7 @@ class JSON_to_Obj:
         self.moves = self.get_moves()
         self.stats = self.get_stats()
         self.sprites = self.get_sprite()
-        pokemon = Poke_Obj.Pokemon(self.name, self.id, self.types, self.moves,
-                                   self.stats, self.index, self.caller,
-                                   self.sprites)
+        pokemon = pokemon_object.Pokemon(self.name, self.id, self.types, self.moves,
+                                         self.stats, self.index, self.caller,
+                                         self.sprites)
         return pokemon

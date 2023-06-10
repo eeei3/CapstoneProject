@@ -14,16 +14,16 @@ We also use this file for some of our game logic
 import csv
 import os
 import random
-import JSON_Poke
-import Poke_API_OOP
+import data_to_object
+import pokemon_api
 
 # Read types.csv file for in-game mechanics
 with open(os.path.join(os.getcwd(), "types.csv"), newline='') as \
         csv_file:
-    EBAAD = []
+    type_list = []
     csv_reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
     for row in csv_reader:
-        EBAAD.append(row)
+        type_list.append(row)
 
 
 # Represents a Player object in the game.
@@ -33,15 +33,15 @@ class Player:
         Initialize the Player object.
         """
         # Object for the API
-        self.api = Poke_API_OOP.PokemonAPI()
+        self.api = pokemon_api.PokemonAPI()
         # Player name
         self.name = name
-        # List of player pokemon
-        self.pokemon = self.pokeget()
-        # The pokemon that the player has on the field
+        # List of player's Pokémon
+        self.pokemon = self.get_return_pokemon()
+        # The Pokémon that the player has on the field
         self.played_pokemon = self.pokemon[random.randint(0, 5)]
 
-    def pokeget(self):
+    def get_return_pokemon(self):
         """
         Fetches Pokémon data from the PokeAPI and returns a list of
         Pokémon objects.
@@ -52,11 +52,11 @@ class Player:
             self.api.call_api(pokemon_id)
 
         pokemon_raw = self.api.get_pokemon_data()
-        pokemon_data = [Poke_API_OOP.Pokemon(data).to_dict() for data
+        pokemon_data = [pokemon_api.Pokemon(data).add_to_dict() for data
                         in pokemon_raw]
         index = 0
         for x in pokemon_data:
-            y = JSON_Poke.JSON_to_Obj(x, index, self)
+            y = data_to_object.data_to_obj(x, index, self)
             poke = y.return_obj()
             poke.index = index
             pokemon_list.append(poke)
@@ -82,7 +82,7 @@ class Player:
                 break
         if attchoice is None:
             return 9
-        for row in EBAAD:
+        for row in type_list:
             for atype in epokemon.types:
                 if (atype.title() in row[0]) and (
                         (atype.title() in attchoice["Type"].title()) or
@@ -107,7 +107,7 @@ class Player:
         else:
             return 9
 
-    def check(self):
+    def hp_check(self):
         """
         Checks the HP of the currently played Pokémon.
         """

@@ -12,8 +12,8 @@ This file contains the Trainer class and related functions.
 # Important package imports
 import random
 import csv
-import Poke_API_OOP
-import JSON_Poke
+import pokemon_api
+import data_to_object
 import os
 
 # List of all enemy trainers
@@ -22,10 +22,10 @@ names = ["Ebaad", "Blue", "Red", "Trace", "Lance", "Leon", "Cynthia",
 
 # Opening and reading data from types.cvs
 with open(os.path.join(os.getcwd(), "types.csv"), newline='') as c:
-    EBAAD = []
+    type_list = []
     a = csv.reader(c, delimiter=' ', quotechar='|')
     for row in a:
-        EBAAD.append(row)
+        type_list.append(row)
 
 
 # Trainer object used in game
@@ -35,23 +35,23 @@ class Trainer:
         Initialize the Trainer object.
         """
         # Object for the API
-        self.api = Poke_API_OOP.PokemonAPI()
+        self.api = pokemon_api.PokemonAPI()
         # Picking trainer name
         self.name = names[random.randint(0, 10)]
-        # Getting list of pokemon
-        self.pokemon = self.pokeget()
+        # Getting a list of Pokémon
+        self.pokemon = self.get_return_pokemon()
         # Difficulty of trainer
         self.difficulty = difficulty
-        # Pokemon that the trainer has played
+        # Pokémon that the trainer has played
         self.played_pokemon = self.pokemon[random.randint(0, 5)]
 
-    def start(self):
+    def mark_field(self):
         """
         Marks the trainer's Pokémon as on the field.
         """
         self.played_pokemon.onfield = True
 
-    def pokeget(self):
+    def get_return_pokemon(self):
         """
         Retrieves a list of randomly generated Pokémon.
         """
@@ -62,11 +62,11 @@ class Trainer:
 
         pokemon_raw = self.api.get_pokemon_data()
 
-        pokemon_data = [Poke_API_OOP.Pokemon(data).to_dict() for data in
+        pokemon_data = [pokemon_api.Pokemon(data).add_to_dict() for data in
                         pokemon_raw]
         index = 0
         for x in pokemon_data:
-            y = JSON_Poke.JSON_to_Obj(x, index, self)
+            y = data_to_object.data_to_obj(x, index, self)
             poke = y.return_obj()
             poke.index = index
             pokemon.append(poke)
@@ -100,7 +100,7 @@ class Trainer:
                                 return [9, attack["Name"]]
 
                         else:
-                            for row in EBAAD:
+                            for row in type_list:
                                 for atype in epokemon.types:
                                     if (atype.title() in row[0]) and (
                                             (atype.title() in
@@ -138,7 +138,7 @@ class Trainer:
                 length = len(self.played_pokemon.moves)
                 attack = self.played_pokemon.moves[
                     random.randint(0, length - 1)]
-                for row in EBAAD:
+                for row in type_list:
                     for atype in epokemon.types:
                         if (atype.title() in row[0]) and (
                                 (atype.title() in attack["Type"].title()) or (
@@ -171,7 +171,7 @@ class Trainer:
             self.played_pokemon = self.pokemon[pokemon_choice]
             return [2, self.played_pokemon.name]
 
-    def check(self):
+    def hp_check(self):
         """
         Check if the onfield Pokémon has fainted.
         """

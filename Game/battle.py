@@ -14,22 +14,17 @@ sprites when changing
 """
 # Important package imports
 from tkinter import *
-import io
 from urllib import request
 from PIL import Image, ImageTk
-import ssl
 import enemies
 import player
 import threading
 import time
-
-# Allows for connecting to an outside domain
-# Bypasses error on macOS
-ssl._create_default_https_context = ssl._create_unverified_context
+import io
 
 
 # The Main battle class contains codes for various battling obejcts
-class LBattle:
+class Battle:
     def __init__(self, lvl, username):
         """
         Initializing the battle class
@@ -53,24 +48,24 @@ class LBattle:
         # List of moves buttons
         self.move_buttons = []
         # self.movecmds = []
-        # Variable for storing player pokemon health
+        # Variable for storing player Pokémon health
         self.hp1 = StringVar()
-        # Variable for storing enemy pokemon health
+        # Variable for storing enemy Pokémon health
         self.hp2 = StringVar()
         self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
         self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
-        # Number of enemy pokemon
+        # Number of enemy Pokémon
         self.enemypokemon = IntVar()
         self.enemypokemon.set(len(self.p2.pokemon))
         # Checking if the game is finished loading
         self.loading = False
         # Object for thread
-        self.thread = threading.Thread(target=self.start_battle)
+        self.thread = threading.Thread(target=self.battle_logic)
         self.thread.daemon = False
         # Return code
         self.code = 1
 
-    def start(self):
+    def begin_game(self):
         """
         Starting the battle thread and the game UI
         """
@@ -90,7 +85,7 @@ class LBattle:
         sprite = ImageTk.PhotoImage(sprite)
         return sprite
 
-    def paction(self, move):
+    def player_action(self, move):
         """
         Wrapper function for player action
         """
@@ -116,7 +111,7 @@ class LBattle:
         self.t.insert(END, msg)
         self.t.config(state="disabled")
 
-    def start_battle(self):
+    def battle_logic(self):
         """
         Main battle loop and logic
         """
@@ -125,7 +120,7 @@ class LBattle:
         self.message(f"Start of match with Trainer {self.p2.name}\n")
         self.message(f"Trainer has chosen {self.p2.played_pokemon.name}"
                      f"\n")
-        self.p2.start()
+        self.p2.mark_field()
         b = bool(self.t.winfo_ismapped())
         while b is True:
             try:
@@ -140,7 +135,7 @@ class LBattle:
                 while self.turn == 1:
                     pass
                 self.message(f"{self.p2.name}'s turn\n")
-                if self.p2.check() == 0:
+                if self.p2.hp_check() == 0:
                     self.message(f"{self.p2.name}'s pokemon has fainted"
                                  f"!\n")
                 self.enemypokemon.set(len(self.p2.pokemon))
@@ -189,7 +184,7 @@ class LBattle:
                     self.message(f"{self.p2.played_pokemon.name} "
                                  f"missed their attack!\n")
                 name = self.p1.played_pokemon.name
-                if self.p1.check() == 0:
+                if self.p1.hp_check() == 0:
                     i = 0
                     self.message(f"{self.p1.name}'s pokemon has fainted"
                                  f"!\n")
@@ -238,7 +233,7 @@ class LBattle:
             for i, move in enumerate(moves):
                 button = Button(self.root, text=move["Name"])
                 button["command"] = lambda arg1=button["text"]: \
-                    self.paction(arg1)
+                    self.player_action(arg1)
                 button.place(x=150 + i * 150, y=350)
                 self.move_buttons.append([button, 0])
         elif len(self.move_buttons) > len(moves):
@@ -246,15 +241,15 @@ class LBattle:
             for i, move in enumerate(moves):
                 button = Button(self.root, text=move["Name"])
                 button["command"] = lambda arg1=button["text"]: \
-                    self.paction(arg1)
+                    self.player_action(arg1)
                 button.place(x=150 + i * 150, y=350)
                 self.move_buttons.append([button, 0])
         else:
             for i, move in enumerate(moves):
                 self.move_buttons[i][0].config(text=move["Name"])
                 self.move_buttons[i][0]["command"] = lambda \
-                        arg1=self.move_buttons[i][0]["text"]: \
-                    self.paction(arg1)
+                    arg1=self.move_buttons[i][0]["text"]: \
+                    self.player_action(arg1)
 
     def switch_pokemon(self, index):
         """
@@ -333,15 +328,14 @@ class LBattle:
             self.root, text="Enemy's remaining pokemon:")
         enemypokemonlabel.place(x=650, y=300)
 
-        enemypokemonnum = Label(self.root, textvariable=
-        self.enemypokemon)
+        enemypokemonnum = Label(self.root, textvariable=self.enemypokemon)
         enemypokemonnum.place(x=820, y=300)
 
         names = [pokemon.name for pokemon in self.p1.pokemon]
 
         for i, name in enumerate(names):
             button = Button(self.root, text=name, command=lambda
-                arg1=i: self.switch_pokemon(arg1))
+                            arg1=i: self.switch_pokemon(arg1))
             button["command"] = lambda arg1=i: self.switch_pokemon(arg1)
             button.place(x=125 + i * 100, y=400)
             self.pbuttons.append([button, 0, name])
@@ -351,7 +345,7 @@ class LBattle:
         for i, move in enumerate(moves):
             button = Button(self.root, text=move["Name"])
             button["command"] = lambda arg1=button["text"]: \
-                self.paction(arg1)
+                self.player_action(arg1)
             button.place(x=150 + i * 150, y=350)
             self.move_buttons.append([button, 0])
 

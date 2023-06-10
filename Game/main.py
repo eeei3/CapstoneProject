@@ -23,7 +23,7 @@ class GUI:
         """
         Initialize the GUI object.
         """
-        # Object for main window
+        # Object for the main window
         self.main = Tk()
         # Object for the main game
         self.game = None
@@ -35,25 +35,25 @@ class GUI:
         self.name = StringVar(self.main)
         self.name.set("Pick your username")
 
-    def offgame(self):
+    def begin_offline(self):
         """
         Starts an offline game with a bot.
         """
-        self.process1 = threading.Thread(target=self.offgame_wrapper())
+        self.process1 = threading.Thread(target=self.offline_wrapper())
         self.process1.start()
 
-    def offgame_wrapper(self):
+    def offline_wrapper(self):
         """
         Wraps the function for starting an offline game with a bot.
         """
         level = 1
         self.main.withdraw()
-        self.game = battle.LBattle(level, self.name.get())
-        gamestatus = self.game.start()
+        self.game = battle.Battle(level, self.name.get())
+        gamestatus = self.game.begin_game()
         while gamestatus == 0:
             level += 1
-            self.game = battle.LBattle(level, self.name.get())
-            gamestatus = self.game.start()
+            self.game = battle.Battle(level, self.name.get())
+            gamestatus = self.game.begin_game()
 
         self.main.deiconify()
 
@@ -64,7 +64,7 @@ class GUI:
         self.main.destroy()
         self.main.quit()
 
-    def checker(self):
+    def name_checker(self):
         """
         Checking if the player's username is valid
         """
@@ -78,7 +78,7 @@ class GUI:
             except RuntimeError:
                 pass
 
-    def maingui(self):
+    def title_gui(self):
         """
         Design the main title screen.
         """
@@ -92,7 +92,7 @@ class GUI:
         choice3.pack(ipadx=20, ipady=20, expand=True)
         username = Entry(self.main, textvariable=self.name)
         username.pack()
-        self.start = Button(self.main, text="Play Bot!", command=self.offgame)
+        self.start = Button(self.main, text="Play Bot!", command=self.begin_offline)
         self.start.pack()
         credit = Label(self.main,
                        text="This program was made by Calvin, Ebaad and Josh",
@@ -105,6 +105,6 @@ class GUI:
 
 if __name__ == "__main__":
     main = GUI()
-    side = threading.Thread(target=main.checker)
+    side = threading.Thread(target=main.name_checker)
     side.start()
-    main.maingui()
+    main.title_gui()

@@ -1,11 +1,11 @@
 # ---------------------------------------------
-# Title: Poke_Obj.py
+# Title: pokemon_object.py
 # Class: CS 30
 # Date: 13/05/23
 # Version: 1.0
 # ---------------------------------------------
 """
-Current Assignment: Poke_Obj.py
+Current Assignment: pokemon_object.py
 
 This file is used to make objects from our stored data in our .json file.
 It opens the .json file in read mode, creates a list of objects from the data.
@@ -22,21 +22,21 @@ class Pokemon:
         """
         Initialize various values that we need later
         """
-        # Pokemon name
+        # Pokémon name
         self.name = name
-        # Pokemon ID
+        # Pokémon ID
         self.id = id
-        # Pokemon types
+        # Pokémon types
         self.types = types
-        # Pokemon moves
+        # Pokémon moves
         self.moves = moves
-        # Pokemon stats such as HP
+        # Pokémon stats such as HP
         self.stats = stats
-        # Pokemon owner
+        # Pokémon owner
         self.index = index
-        # Pokemon's index in the owners pokemon list
+        # Pokémon's index in the owners Pokémon list
         self.caller = caller
-        # Pokemon's sprite
+        # Pokémon's sprite
         self.sprites = sprites
 
     def remove(self):
@@ -79,7 +79,7 @@ class Pokemon:
 
     def take_dmg(self, amount):
         """
-        Reduce the Pokemon's HP by the given amount
+        Reduce the Pokémon's HP by the given amount
         """
         try:
             self.stats["hp"] -= amount
