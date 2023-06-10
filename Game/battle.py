@@ -32,7 +32,7 @@ class BattleManager:
         self.level = 1
 
 
-# Main battle class, contains codes for various battling obejcts
+# The Main battle class contains codes for various battling obejcts
 class LBattle:
     def __init__(self, lvl, username):
         """

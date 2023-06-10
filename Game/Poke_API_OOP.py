@@ -18,7 +18,6 @@ USE BATTLE.PY
 import requests
 
 
-# The class, that we use to gather and make data from the API
 class PokemonAPI:
     def __init__(self):
         """
@@ -46,13 +45,13 @@ class PokemonAPI:
         return self.pokemon_data
 
 
-# Class that handles the data that was collected from the API
-class Pokemon:
+class Pokemon(PokemonAPI):
     def __init__(self, data):
         """
-        Initializes certain values that API returns.
+        Initializes certain values that API return.
         Only strips the information that we actually need, to avoid garbage calls
         """
+        super().__init__()
         self.name = data['name']
         self.id = data['id']
         self.stats = {stat_data['stat']['name']: stat_data['base_stat'] for stat_data in data['stats']}
@@ -71,7 +70,6 @@ class Pokemon:
 
     def to_dict(self):
         """
-
         Returning the data that we have collected, striped and stored.
         """
         return {

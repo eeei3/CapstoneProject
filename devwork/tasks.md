@@ -18,7 +18,6 @@
 - ~~Type~~
 - ~~Name~~
 - ~~ID~~
-- Dialogue
 - ### Player object
 - ~~Pokemon~~
 - ~~Name~~
