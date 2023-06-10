@@ -77,7 +77,7 @@ class Player:
         for row in EBAAD:
             for atype in epokemon.types:
                 if (atype.title() in row[0]) and (
-                        ((atype.title() in attchoice["Type"].title())) or (attchoice["Type"].title()) in atype.title()):
+                        (atype.title() in attchoice["Type"].title()) or (attchoice["Type"].title()) in atype.title()):
                     if 0.5 in row:
                         att = self.played_pokemon(attchoice, 2, epokemon)
                         if att == 0:

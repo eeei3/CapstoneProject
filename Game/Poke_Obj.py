@@ -32,7 +32,7 @@ class Pokemon:
 
     def attack(self, att, crit, target, *diff):
         if len(diff) < 0:
-            attack_chance = random.randint(0, 100) * (int(diff[0]**0.8) << 2)/10
+            attack_chance = random.randint(0, 100) * (int(diff[0] ** 0.8) << 2) / 10
         else:
             attack_chance = random.randint(0, 100)
         if (attack_chance < att["Accuracy"]) and (att["Accuracy"] != 100):

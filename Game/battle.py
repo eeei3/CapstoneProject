@@ -9,6 +9,7 @@ Current Assignment: battle.py
 
 
 """
+# Important import statements
 from tkinter import *
 import io
 from urllib import request
@@ -22,6 +23,7 @@ import time
 # Allows for connecting to an outside domain
 # Bypasses error on macOS
 ssl._create_default_https_context = ssl._create_unverified_context
+
 
 class BattleManager:
     def __init__(self):
@@ -278,4 +280,3 @@ class LBattle:
         self.loading = True
         self.root.mainloop()
         return 0
-

@@ -75,7 +75,6 @@ class GUI:
             except RuntimeError:
                 pass
 
-
     def maingui(self):
         """
         Design the main title screen.

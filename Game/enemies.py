@@ -9,6 +9,7 @@ Current Assignment: enemies.py
 
 This file contains the Trainer class and related functions.
 """
+# Important import statements
 import random
 import csv
 import Poke_API_OOP
@@ -96,7 +97,7 @@ class Trainer:
                                 for atype in epokemon.types:
                                     if (atype.title() in row[0]) and (
                                             (atype.title() in attack["Type"].title()) or (
-                                    attack["Type"].title()) in atype.title()):
+                                            attack["Type"].title()) in atype.title()):
                                         if 0.5 in row:
                                             att = self.played_pokemon.attack(attack, 2, epokemon, self.difficulty)
                                             if att == 0:
@@ -124,7 +125,8 @@ class Trainer:
                 for row in EBAAD:
                     for atype in epokemon.types:
                         if (atype.title() in row[0]) and (
-                        ((atype.title() in attack["Type"].title())) or (attack["Type"].title()) in atype.title()):
+                                (atype.title() in attack["Type"].title()) or (
+                                attack["Type"].title()) in atype.title()):
                             if 0.5 in row:
                                 att = self.played_pokemon.attack(attack, 2, epokemon, self.difficulty)
                                 if att == 0:
