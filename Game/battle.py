@@ -29,13 +29,13 @@ class BattleManager:
 
 
 class LBattle:
-    def __init__(self, lvl):
-        self.lvl = 1
+    def __init__(self, lvl, username):
+        self.lvl = lvl
         self.root = Toplevel()
         self.current_pokemon_index = 0
         self.lvl = 1
         self.turn = 1
-        self.p1 = player.Player("Larry")
+        self.p1 = player.Player(username)
         self.p2 = enemies.Trainer(self.lvl, self.turn)
         self.t = None
         self.pbuttons = []
@@ -87,7 +87,6 @@ class LBattle:
     def start_battle(self):
         while not self.loading:
             time.sleep(1)
-
         self.message(f"Start of match with Trainer {self.p2.name}\n")
         self.message(f"Trainer has chosen {self.p2.played_pokemon.name}\n")
         self.p2.start()
@@ -142,7 +141,6 @@ class LBattle:
                     self.message(f"{self.p2.played_pokemon.name} has used {m[1]}, its very effective!\n")
                 elif m[0] == 9:
                     self.message(f"{self.p2.played_pokemon.name} missed their attack!\n")
-
                 name = self.p1.played_pokemon.name
                 if self.p1.check() == 0:
                     i = 0
@@ -162,8 +160,6 @@ class LBattle:
                 self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
                 self.update_sprite()
         return 0
-
-
 
     def update_sprite(self):
         sprite_url = self.p1.played_pokemon.sprites

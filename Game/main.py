@@ -48,12 +48,12 @@ class GUI:
         """
         level = 1
         self.main.withdraw()
-        self.game = battle.LBattle(level)
+        self.game = battle.LBattle(level, self.name.get())
         gamestatus = self.game.start()
         while gamestatus == 0:
             level += 1
             gc.collect()
-            self.game = battle.LBattle(level)
+            self.game = battle.LBattle(level, self.name.get())
             gamestatus = self.game.start()
 
         self.main.deiconify()
