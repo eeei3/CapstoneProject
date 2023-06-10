@@ -248,8 +248,12 @@ class LBattle:
         self.hitpointlabel2 = Label(self.root, textvariable=self.hp2)
         self.hitpointlabel2.place(x=650, y=250)
 
-        enemypokemonlabel = Label(self.root, textvariable=self.enemypokemon)
+        enemypokemonlabel = Label(
+            self.root, text="Enemy's remaining pokemon:")
         enemypokemonlabel.place(x=650, y=300)
+
+        enemypokemonnum = Label(self.root, textvariable=self.enemypokemon)
+        enemypokemonnum.place(x=820, y=300)
 
         names = [pokemon.name for pokemon in self.p1.pokemon]
 

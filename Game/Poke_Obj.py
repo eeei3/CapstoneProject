@@ -43,7 +43,10 @@ class Pokemon:
             elif crit == 2:
                 dmg = att["Power"] * 0.5
             else:
-                dmg = att["Power"]
+                if random.randint(0, 2) == random.randint(0, 2):
+                    dmg = att["Power"] * 1.5
+                else:
+                    dmg = att["Power"]
             target.take_dmg(dmg)
             return 0
 
