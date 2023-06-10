@@ -9,7 +9,7 @@ Current Assignment: enemies.py
 
 This file contains the Trainer class and related functions.
 """
-# Important import statements
+# Important package imports
 import random
 import csv
 import Poke_API_OOP

@@ -18,6 +18,9 @@ import random
 # Class that is being used to make objects from the data
 class Pokemon:
     def __init__(self, name, id, types, moves, stats, index, caller, sprites):
+        """
+        Initialize various values that we need later
+        """
         self.name = name
         self.id = id
         self.types = types
@@ -28,9 +31,15 @@ class Pokemon:
         self.sprites = sprites
 
     def remove(self):
+        """
+        Remove the Pokémon from the caller's list
+        """
         self.caller.pokemon.pop(self.index)
 
     def attack(self, att, crit, target, *diff):
+        """
+        Pokémon attack logic
+        """
         if len(diff) < 0:
             attack_chance = random.randint(0, 100) * (int(diff[0] ** 0.8) << 2) / 10
         else:
@@ -48,6 +57,9 @@ class Pokemon:
             return 0
 
     def take_dmg(self, amount):
+        """
+        Reduce the Pokemon's HP by the given amount
+        """
         try:
             self.stats["hp"] -= amount
         except:
