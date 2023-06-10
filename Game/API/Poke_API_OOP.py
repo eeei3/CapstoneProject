@@ -15,9 +15,8 @@ DO NOT USE THIS FILE.
 USE BATTLE.PY
 """
 # Important package imports
-import json
+
 import requests
-import random
 
 
 class PokemonAPI:
@@ -65,23 +64,3 @@ class Pokemon:
             "Stats": self.stats,
             "Moves": self.moves
         }
-
-
-class Main(PokemonAPI):
-    def __init__(self):
-        super().__init__()
-        for i in range(12):
-            pokemon_id = random.randint(1, 1010)
-            self.call_api(pokemon_id)
-
-        pokemon_data = self.get_pokemon_data()
-
-        for data in pokemon_data:
-            pokemon = Pokemon(data)
-
-        with open("Data/data.json", "w+") as f:
-            pokemon_list = [Pokemon(data).to_dict() for data in pokemon_data]
-            json.dump(pokemon_list, f, indent=4)
-
-
-Main()
