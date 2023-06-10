@@ -27,11 +27,6 @@ import time
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
-class BattleManager:
-    def __init__(self):
-        self.level = 1
-
-
 # The Main battle class contains codes for various battling obejcts
 class LBattle:
     def __init__(self, lvl, username):
