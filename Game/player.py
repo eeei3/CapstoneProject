@@ -18,7 +18,8 @@ import JSON_Poke
 import Poke_API_OOP
 
 # Read types.csv file for in-game mechanics
-with open(os.path.join(os.getcwd(), "types.csv"), newline='') as csv_file:
+with open(os.path.join(os.getcwd(), "types.csv"), newline='') as \
+        csv_file:
     EBAAD = []
     csv_reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
     for row in csv_reader:
@@ -38,7 +39,8 @@ class Player:
 
     def pokeget(self):
         """
-        Fetches Pokémon data from the PokeAPI and returns a list of Pokémon objects.
+        Fetches Pokémon data from the PokeAPI and returns a list of
+        Pokémon objects.
         """
         pokemon_list = []
         for _ in range(6):
@@ -46,7 +48,8 @@ class Player:
             self.api.call_api(pokemon_id)
 
         pokemon_raw = self.api.get_pokemon_data()
-        pokemon_data = [Poke_API_OOP.Pokemon(data).to_dict() for data in pokemon_raw]
+        pokemon_data = [Poke_API_OOP.Pokemon(data).to_dict() for data
+                        in pokemon_raw]
         index = 0
         for x in pokemon_data:
             y = JSON_Poke.JSON_to_Obj(x, index, self)
@@ -78,15 +81,18 @@ class Player:
         for row in EBAAD:
             for atype in epokemon.types:
                 if (atype.title() in row[0]) and (
-                        (atype.title() in attchoice["Type"].title()) or (attchoice["Type"].title()) in atype.title()):
+                        (atype.title() in attchoice["Type"].title()) or
+                        (attchoice["Type"].title()) in atype.title()):
                     if 0.5 in row:
-                        att = self.played_pokemon(attchoice, 2, epokemon)
+                        att = self.played_pokemon(attchoice, 2,
+                                                  epokemon)
                         if att == 0:
                             return 5
                         else:
                             return 9
                     else:
-                        att = self.played_pokemon.attack(attchoice, 1, epokemon)
+                        att = self.played_pokemon.attack(attchoice, 1,
+                                                         epokemon)
                         if att == 0:
                             return 6
                         else:
