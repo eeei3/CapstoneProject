@@ -12,10 +12,12 @@ We also use this file for some of our game logic
 """
 import random
 import csv
-from CapstoneProject.Game import Poke_API_OOP, JSON_Poke
+import Poke_API_OOP, JSON_Poke
+import os
+
 
 # Read types.csv file for in-game mechanics
-with open("types.csv", newline='') as csv_file:
+with open(os.path.join(os.getcwd(), "types.csv"), newline='') as csv_file:
     EBAAD = []
     csv_reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
     for row in csv_reader:
