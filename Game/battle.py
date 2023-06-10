@@ -23,7 +23,6 @@ import time
 # Bypasses error on macOS
 ssl._create_default_https_context = ssl._create_unverified_context
 
-
 class BattleManager:
     def __init__(self):
         self.level = 1
@@ -73,13 +72,13 @@ class LBattle:
     def paction(self, move):
         m = self.p1.turn(self.p2.played_pokemon, move)
         if m == 5:
-            self.message(f"{self.p2.played_pokemon.name} has used {move}, its not very effective\n")
+            self.message(f"{self.p1.played_pokemon.name} has used {move}, its not very effective\n")
         elif m == 6:
-            self.message(f"{self.p2.played_pokemon.name} has used {move}, its very effective!\n")
+            self.message(f"{self.p1.played_pokemon.name} has used {move}, its very effective!\n")
         elif m == 9:
             self.message(f"{self.p1.played_pokemon.name} missed!\n")
         else:
-            self.message(f"{self.p2.played_pokemon.name} has used {move}\n")
+            self.message(f"{self.p1.played_pokemon.name} has used {move}\n")
         self.turn = 2
 
     def message(self, msg):
@@ -111,13 +110,24 @@ class LBattle:
                 self.message(f"{self.p2.name}'s turn\n")
                 if self.p2.check() == 0:
                     self.message(f"{self.p2.name}'s pokemon has fainted!\n")
-                if len(self.p2.pokemon) == 0:
-                    self.code = 0
-                    self.quit_window()
-                    continue
                 self.enemypokemon.set(len(self.p2.pokemon))
                 self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
                 self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
+                if len(self.p2.pokemon) == 0:
+                    self.code = 0
+                    self.message("You won congrats! You will move onto a harder trainer in\n")
+                    self.message("5\n")
+                    time.sleep(1)
+                    self.message("4\n")
+                    time.sleep(1)
+                    self.message("3\n")
+                    time.sleep(1)
+                    self.message("2\n")
+                    time.sleep(1)
+                    self.message("1\n")
+                    time.sleep(1)
+                    self.quit_window()
+                    continue
                 self.invalidate_buttons(3)
                 time.sleep(1)
                 m = self.p2.turn(self.p1.played_pokemon)
@@ -158,6 +168,8 @@ class LBattle:
         print("T")
         return 0
 
+
+
     def update_sprite(self):
         sprite_url = self.p1.played_pokemon.sprites
         sprite = self.load_sprite(sprite_url)
@@ -170,6 +182,19 @@ class LBattle:
 
     def update_moves(self):
         moves = self.p1.played_pokemon.moves
+        if len(self.move_buttons) < len(moves):
+            for i, move in enumerate(moves):
+                button = Button(self.root, text=move["Name"])
+                button["command"] = lambda arg1=button["text"]: self.paction(arg1)
+                button.place(x=150 + i * 150, y=350)
+                self.move_buttons.append([button, 0])
+        elif len(self.move_buttons) > len(moves):
+            self.move_buttons = []
+            for i, move in enumerate(moves):
+                button = Button(self.root, text=move["Name"])
+                button["command"] = lambda arg1=button["text"]: self.paction(arg1)
+                button.place(x=150 + i * 150, y=350)
+                self.move_buttons.append([button, 0])
         for i, move in enumerate(moves):
             self.move_buttons[i][0].config(text=move["Name"])
             self.move_buttons[i][0]["command"] = lambda arg1=self.move_buttons[i][0]["text"]: self.paction(arg1)
@@ -203,6 +228,7 @@ class LBattle:
     def quit_window(self, *code):
         if len(code) > 0:
             self.code = 1
+        print("Exit")
         self.root.destroy()
         self.root.quit()
 
@@ -211,7 +237,7 @@ class LBattle:
         self.root.title("Pokémon Battle")
 
         quit_button = Button(
-            self.root, text="Quit", command=lambda arg1=1: self.quit_window)
+            self.root, text="Quit", command=lambda arg1=1: self.quit_window(arg1))
         quit_button.place(x=450, y=450)
 
         sprite_url = self.p1.played_pokemon.sprites
@@ -263,3 +289,4 @@ class LBattle:
         self.root.mainloop()
         print("L")
         return 0
+
