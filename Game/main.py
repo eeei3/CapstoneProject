@@ -15,7 +15,6 @@ from tkinter import *
 import threading
 import battle
 import time
-import gc
 
 
 # Represents the graphical user interface of the game.
@@ -24,15 +23,15 @@ class GUI:
         """
         Initialize the GUI object.
         """
-        self.mainframe = None
+        # Object for main window
         self.main = Tk()
-        self.op = False
-        self.game = False
+        # Object for the main game
+        self.game = None
+        # Object for the start game
         self.start = None
+        # Object for additional thread
         self.process1 = None
-        self.process2 = None
-        self.process3 = None
-        self.connect_process = None
+        # Variable for player username
         self.name = StringVar(self.main)
         self.name.set("Pick your username")
 
@@ -40,8 +39,8 @@ class GUI:
         """
         Starts an offline game with a bot.
         """
-        self.process2 = threading.Thread(target=self.offgame_wrapper())
-        self.process2.start()
+        self.process1 = threading.Thread(target=self.offgame_wrapper())
+        self.process1.start()
 
     def offgame_wrapper(self):
         """
@@ -53,7 +52,6 @@ class GUI:
         gamestatus = self.game.start()
         while gamestatus == 0:
             level += 1
-            gc.collect()
             self.game = battle.LBattle(level, self.name.get())
             gamestatus = self.game.start()
 
