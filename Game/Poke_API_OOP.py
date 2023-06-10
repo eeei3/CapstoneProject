@@ -49,13 +49,16 @@ class Pokemon(PokemonAPI):
     def __init__(self, data):
         """
         Initializes certain values that API return.
-        Only strips the information that we actually need, to avoid garbage calls
+        Only strips the information that we actually need, to avoid garbage
+        calls
         """
         super().__init__()
         self.name = data['name']
         self.id = data['id']
-        self.stats = {stat_data['stat']['name']: stat_data['base_stat'] for stat_data in data['stats']}
-        self.types = [types_data['type']['name'] for types_data in data['types']]
+        self.stats = {stat_data['stat']['name']: stat_data['base_stat']
+                      for stat_data in data['stats']}
+        self.types = [types_data['type']['name']
+                      for types_data in data['types']]
         self.sprites = data['sprites']['front_default']
         self.moves = []
         for move_data in data['moves'][:4]:
@@ -65,8 +68,9 @@ class Pokemon(PokemonAPI):
             move_accuracy = move_response['accuracy'] or "N/A"
             move_power = move_response['power'] or "N/A"
             move_type = move_response['type']['name']
-            self.moves.append({"Name": move_name, "PP": move_pp, "Accuracy": move_accuracy,
-                               "Power": move_power, "Type": move_type})
+            self.moves.append({"Name": move_name, "PP": move_pp,
+                               "Accuracy": move_accuracy, "Power": move_power,
+                               "Type": move_type})
 
     def to_dict(self):
         """

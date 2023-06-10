@@ -21,13 +21,21 @@ class JSON_to_Obj:
         Some values assume None, until given data later.
         """
         self.rawdata = rawdata
+        # Pokemon name
         self.name = None
+        # Pokemon ID
         self.id = None
+        # Pokemon types
         self.types = None
+        # Pokemon moves
         self.moves = None
+        # Pokemon stats such as HP
         self.stats = None
+        # Pokemon's place in the owner's list
         self.index = index
+        # The pokemon's owner
         self.caller = caller
+        # The pokemon's sprite
         self.sprites = None
 
     def get_moves(self):
@@ -92,5 +100,6 @@ class JSON_to_Obj:
         self.stats = self.get_stats()
         self.sprites = self.get_sprite()
         pokemon = Poke_Obj.Pokemon(self.name, self.id, self.types, self.moves,
-                                   self.stats, self.index, self.caller, self.sprites)
+                                   self.stats, self.index, self.caller,
+                                   self.sprites)
         return pokemon

@@ -32,9 +32,13 @@ class Player:
         """
         Initialize the Player object.
         """
+        # Object for the API
         self.api = Poke_API_OOP.PokemonAPI()
+        # Player name
         self.name = name
+        # List of player pokemon
         self.pokemon = self.pokeget()
+        # The pokemon that the player has on the field
         self.played_pokemon = self.pokemon[random.randint(0, 5)]
 
     def pokeget(self):
@@ -69,7 +73,7 @@ class Player:
 
     def turn(self, epokemon, attack):
         """
-        Performs a turn in the game.
+        Player is performing their move
         """
         attchoice = None
         for att in self.played_pokemon.moves:

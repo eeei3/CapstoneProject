@@ -34,27 +34,40 @@ class LBattle:
         """
         Initializing the battle class
         """
+        # Enemy difficulty
         self.lvl = lvl
+        # Tkinter window
         self.root = Toplevel()
-        self.current_pokemon_index = 0
-        self.lvl = 1
+        # self.current_pokemon_index = 0
+        # Keeping track of turn
         self.turn = 1
+        # Player object
         self.p1 = player.Player(username)
-        self.p2 = enemies.Trainer(self.lvl, self.turn)
+        # Enemy object
+        self.p2 = enemies.Trainer(self.lvl)
+        # Object for textbox
         self.t = None
+        # List of pokemon buttons
         self.pbuttons = []
-        self.pcmds = []
+        # self.pcmds = []
+        # List of moves buttons
         self.move_buttons = []
-        self.movecmds = []
+        # self.movecmds = []
+        # Variable for storing player pokemon health
         self.hp1 = StringVar()
+        # Variable for storing enemy pokemon health
         self.hp2 = StringVar()
         self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
         self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
+        # Number of enemy pokemon
         self.enemypokemon = IntVar()
         self.enemypokemon.set(len(self.p2.pokemon))
+        # Checking if the game is finished loading
         self.loading = False
+        # Object for thread
         self.thread = threading.Thread(target=self.start_battle)
         self.thread.daemon = False
+        # Return code
         self.code = 1
 
     def start(self):
@@ -78,6 +91,9 @@ class LBattle:
         return sprite
 
     def paction(self, move):
+        """
+        Wrapper function for player action
+        """
         m = self.p1.turn(self.p2.played_pokemon, move)
         if m == 5:
             self.message(f"{self.p1.played_pokemon.name} has "
@@ -93,6 +109,9 @@ class LBattle:
         self.turn = 2
 
     def message(self, msg):
+        """
+        Method for piping data to the text box
+        """
         self.t.config(state="normal")
         self.t.insert(END, msg)
         self.t.config(state="disabled")
@@ -147,6 +166,8 @@ class LBattle:
                 time.sleep(1)
                 m = self.p2.turn(self.p1.played_pokemon)
                 time.sleep(1)
+                self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
+                self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
                 while m is None:
                     pass
                 if m[0] == 1:
@@ -185,12 +206,12 @@ class LBattle:
                         self.message("You lost!\n")
                         self.message("Press the quit button to return "
                                      "to main menu and restart\n")
+                        while True:
+                            pass
 
                 else:
                     for button in self.move_buttons:
                         button[1] = 0
-                self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
-                self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
                 self.update_sprite()
         return 0
 
@@ -213,6 +234,7 @@ class LBattle:
         """
         moves = self.p1.played_pokemon.moves
         if len(self.move_buttons) < len(moves):
+            self.move_buttons = []
             for i, move in enumerate(moves):
                 button = Button(self.root, text=move["Name"])
                 button["command"] = lambda arg1=button["text"]: \
@@ -227,11 +249,12 @@ class LBattle:
                     self.paction(arg1)
                 button.place(x=150 + i * 150, y=350)
                 self.move_buttons.append([button, 0])
-        for i, move in enumerate(moves):
-            self.move_buttons[i][0].config(text=move["Name"])
-            self.move_buttons[i][0]["command"] = lambda \
-                    arg1=self.move_buttons[i][0]["text"]: \
-                self.paction(arg1)
+        else:
+            for i, move in enumerate(moves):
+                self.move_buttons[i][0].config(text=move["Name"])
+                self.move_buttons[i][0]["command"] = lambda \
+                        arg1=self.move_buttons[i][0]["text"]: \
+                    self.paction(arg1)
 
     def switch_pokemon(self, index):
         """

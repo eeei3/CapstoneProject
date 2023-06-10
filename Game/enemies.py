@@ -17,7 +17,8 @@ import JSON_Poke
 import os
 
 # List of all enemy trainers
-names = ["Ebaad", "Blue", "Red", "Trace", "Lance", "Leon", "Cynthia", "Alder", "Iris", "Elio", "Ash"]
+names = ["Ebaad", "Blue", "Red", "Trace", "Lance", "Leon", "Cynthia",
+         "Alder", "Iris", "Elio", "Ash"]
 
 # Opening and reading data from types.cvs
 with open(os.path.join(os.getcwd(), "types.csv"), newline='') as c:
@@ -29,16 +30,20 @@ with open(os.path.join(os.getcwd(), "types.csv"), newline='') as c:
 
 # Trainer object used in game
 class Trainer:
-    def __init__(self, difficulty, turn):
+    def __init__(self, difficulty):
         """
         Initialize the Trainer object.
         """
+        # Object for the API
         self.api = Poke_API_OOP.PokemonAPI()
+        # Picking trainer name
         self.name = names[random.randint(0, 10)]
+        # Getting list of pokemon
         self.pokemon = self.pokeget()
+        # Difficulty of trainer
         self.difficulty = difficulty
+        # Pokemon that the trainer has played
         self.played_pokemon = self.pokemon[random.randint(0, 5)]
-        self.gturn = turn
 
     def start(self):
         """
@@ -57,7 +62,8 @@ class Trainer:
 
         pokemon_raw = self.api.get_pokemon_data()
 
-        pokemon_data = [Poke_API_OOP.Pokemon(data).to_dict() for data in pokemon_raw]
+        pokemon_data = [Poke_API_OOP.Pokemon(data).to_dict() for data in
+                        pokemon_raw]
         index = 0
         for x in pokemon_data:
             y = JSON_Poke.JSON_to_Obj(x, index, self)
@@ -78,7 +84,7 @@ class Trainer:
             trainer_choice = 90
 
         if trainer_choice <= 80:
-            # This is our logic for attackiself.hp2.set(str(self.p2.played_pokemon.stats["hp"]))ng as a trainer
+            # This is our logic for attacking as a trainer
             if random.randint(0, 12) > self.difficulty:
                 for attack in self.played_pokemon.moves:
                     attlen += 1
@@ -86,7 +92,8 @@ class Trainer:
                         pass
                     else:
                         if epokemon.stats["hp"] < attack["Power"]:
-                            att = self.played_pokemon.attack(attack, 0, epokemon, self.difficulty)
+                            att = self.played_pokemon.attack(
+                                attack, 0, epokemon, self.difficulty)
                             if att == 0:
                                 return [1, attack["Name"]]
                             else:
@@ -96,16 +103,22 @@ class Trainer:
                             for row in EBAAD:
                                 for atype in epokemon.types:
                                     if (atype.title() in row[0]) and (
-                                            (atype.title() in attack["Type"].title()) or (
-                                            attack["Type"].title()) in atype.title()):
+                                            (atype.title() in
+                                             attack["Type"].title()) or (
+                                            attack["Type"].title()) in
+                                            atype.title()):
                                         if 0.5 in row:
-                                            att = self.played_pokemon.attack(attack, 2, epokemon, self.difficulty)
+                                            att = self.played_pokemon.attack(
+                                                attack, 2, epokemon,
+                                                self.difficulty)
                                             if att == 0:
                                                 return [5, attack["Name"]]
                                             else:
                                                 return [9, attack["Name"]]
                                         else:
-                                            att = self.played_pokemon.attack(attack, 1, epokemon, self.difficulty)
+                                            att = self.played_pokemon.attack(
+                                                attack, 1, epokemon,
+                                                self.difficulty)
                                             if att == 0:
                                                 return [6, attack["Name"]]
                                             else:
@@ -113,33 +126,39 @@ class Trainer:
 
                         if len(self.played_pokemon.moves) == attlen:
                             maxim = len(self.played_pokemon.moves) - 1
-                            attchoice = self.played_pokemon.moves[random.randint(0, maxim)]
-                            att = self.played_pokemon.attack(attchoice, 0, epokemon, self.difficulty)
+                            attchoice = self.played_pokemon.moves[
+                                random.randint(0, maxim)]
+                            att = self.played_pokemon.attack(
+                                attchoice, 0, epokemon, self.difficulty)
                             if att == 0:
                                 return [1, attack["Name"]]
                             else:
                                 return [9, attack["Name"]]
             else:
                 length = len(self.played_pokemon.moves)
-                attack = self.played_pokemon.moves[random.randint(0, length - 1)]
+                attack = self.played_pokemon.moves[
+                    random.randint(0, length - 1)]
                 for row in EBAAD:
                     for atype in epokemon.types:
                         if (atype.title() in row[0]) and (
                                 (atype.title() in attack["Type"].title()) or (
                                 attack["Type"].title()) in atype.title()):
                             if 0.5 in row:
-                                att = self.played_pokemon.attack(attack, 2, epokemon, self.difficulty)
+                                att = self.played_pokemon.attack(
+                                    attack, 2, epokemon, self.difficulty)
                                 if att == 0:
                                     return [5, attack["Name"]]
                                 else:
                                     return [9, attack["Name"]]
                             else:
-                                att = self.played_pokemon.attack(attack, 1, epokemon, self.difficulty)
+                                att = self.played_pokemon.attack(
+                                    attack, 1, epokemon, self.difficulty)
                                 if att == 0:
                                     return [6, attack["Name"]]
                                 else:
                                     return [9, attack["Name"]]
-                att = self.played_pokemon.attack(attack, 0, epokemon, self.difficulty)
+                att = self.played_pokemon.attack(
+                    attack, 0, epokemon, self.difficulty)
                 if att == 0:
                     return [1, attack["Name"]]
                 else:

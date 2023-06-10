@@ -67,9 +67,13 @@ class GUI:
         self.main.quit()
 
     def checker(self):
+        """
+        Checking if the player's username is valid
+        """
         while True:
             try:
-                while self.name.get() == "Pick your username" or self.name.get() == "":
+                while self.name.get() == "Pick your username" \
+                        or self.name.get() == "":
                     self.start.config(state="disabled")
                 self.start.config(state="normal")
                 time.sleep(1)
@@ -82,15 +86,19 @@ class GUI:
         """
         self.main.geometry("600x400")
         self.main.title("Pokémon Battle - Title Screen")
-        maintitle = Label(self.main, text="Welcome to the Pokemon Battle!", font=("MS Comic Sans", "18"))
+        maintitle = Label(self.main, text="Welcome to the Pokemon Battle!",
+                          font=("MS Comic Sans", "18"))
         maintitle.pack(ipadx=20, ipady=10, expand=True)
-        choice3 = Label(self.main, text="Play a Trainer!", font=("MS Comic Sans", "14"))
+        choice3 = Label(self.main, text="Play a Trainer!",
+                        font=("MS Comic Sans", "14"))
         choice3.pack(ipadx=20, ipady=20, expand=True)
         username = Entry(self.main, textvariable=self.name)
         username.pack()
         self.start = Button(self.main, text="Play Bot!", command=self.offgame)
         self.start.pack()
-        credit = Label(self.main, text="This program was made by Calvin, Ebaad and Josh", font=("MS Comic Sans", "10"))
+        credit = Label(self.main,
+                       text="This program was made by Calvin, Ebaad and Josh",
+                       font=("MS Comic Sans", "10"))
         credit.pack(ipadx=20, ipady=20, expand=True)
         quit_button = Button(self.main, text="Quit", command=self.quit_game)
         quit_button.pack()
