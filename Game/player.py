@@ -10,11 +10,11 @@ Current Assignment: player.py
 This file is used to create a Player object using data from the API.
 We also use this file for some of our game logic
 """
-import random
 import csv
-import Poke_API_OOP, JSON_Poke
 import os
-
+import random
+import JSON_Poke
+import Poke_API_OOP
 
 # Read types.csv file for in-game mechanics
 with open(os.path.join(os.getcwd(), "types.csv"), newline='') as csv_file:
@@ -76,12 +76,8 @@ class Player:
             return 9
         for row in EBAAD:
             for atype in epokemon.types:
-                print(atype.title())
-                print(row)
-                print(type(attchoice))
                 if (atype.title() in row[0]) and (
                         ((atype.title() in attchoice["Type"].title())) or (attchoice["Type"].title()) in atype.title()):
-                    print("Effective type triggered")
                     if 0.5 in row:
                         att = self.played_pokemon(attchoice, 2, epokemon)
                         if att == 0:
@@ -94,7 +90,6 @@ class Player:
                             return 6
                         else:
                             return 9
-        print("No type effectiveness")
         att = self.played_pokemon.attack(attchoice, 0, epokemon)
         if att == 0:
             return

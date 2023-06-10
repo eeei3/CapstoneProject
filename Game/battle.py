@@ -56,8 +56,6 @@ class LBattle:
     def start(self):
         self.thread.start()
         self.game_ui()
-        print("Code")
-        print(self.code)
         return self.code
 
     def load_sprite(self, url):
@@ -101,7 +99,6 @@ class LBattle:
                 b = False
             while (len(self.p2.pokemon) != 0) and (b is True):
                 b = bool(self.t.winfo_ismapped())
-                print(b)
                 self.message(f"{self.p1.name}'s turn\n")
                 self.turn = 1
                 self.validate_buttons(3)
@@ -164,8 +161,6 @@ class LBattle:
                 self.hp1.set(str(self.p1.played_pokemon.stats["hp"]))
                 self.hp2.set(str(self.p2.played_pokemon.stats["hp"]))
                 self.update_sprite()
-            print("G")
-        print("T")
         return 0
 
 
@@ -228,7 +223,6 @@ class LBattle:
     def quit_window(self, *code):
         if len(code) > 0:
             self.code = 1
-        print("Exit")
         self.root.destroy()
         self.root.quit()
 
@@ -287,6 +281,5 @@ class LBattle:
 
         self.loading = True
         self.root.mainloop()
-        print("L")
         return 0
 

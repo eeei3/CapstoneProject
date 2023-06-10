@@ -11,7 +11,8 @@ This file contains the Trainer class and related functions.
 """
 import random
 import csv
-from CapstoneProject.Game import Poke_API_OOP, JSON_Poke
+import Poke_API_OOP
+import JSON_Poke
 import os
 
 # List of all enemy trainers
@@ -96,7 +97,6 @@ class Trainer:
                                     if (atype.title() in row[0]) and (
                                             (atype.title() in attack["Type"].title()) or (
                                     attack["Type"].title()) in atype.title()):
-                                        print("Type effectiveness triggered")
                                         if 0.5 in row:
                                             att = self.played_pokemon.attack(attack, 2, epokemon, self.difficulty)
                                             if att == 0:
@@ -111,7 +111,6 @@ class Trainer:
                                                 return [9, attack["Name"]]
 
                         if len(self.played_pokemon.moves) == attlen:
-                            print("No type effectiveness")
                             maxim = len(self.played_pokemon.moves) - 1
                             attchoice = self.played_pokemon.moves[random.randint(0, maxim)]
                             att = self.played_pokemon.attack(attchoice, 0, epokemon, self.difficulty)
@@ -126,7 +125,6 @@ class Trainer:
                     for atype in epokemon.types:
                         if (atype.title() in row[0]) and (
                         ((atype.title() in attack["Type"].title())) or (attack["Type"].title()) in atype.title()):
-                            print("Type effectiveness triggered")
                             if 0.5 in row:
                                 att = self.played_pokemon.attack(attack, 2, epokemon, self.difficulty)
                                 if att == 0:
