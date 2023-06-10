@@ -7,9 +7,11 @@
 """
 Current Assignment: battle.py
 
-
+This file is our main battling file.
+It handles our battle logic, move and spite presentations
+It contains the Battle UI, quit buttons and updating moves and sprites when changing
 """
-# Important import statements
+# Important package imports
 from tkinter import *
 import io
 from urllib import request
@@ -30,8 +32,12 @@ class BattleManager:
         self.level = 1
 
 
+# Main battle class, contains codes for various battling obejcts
 class LBattle:
     def __init__(self, lvl, username):
+        """
+        Initializing the battle class
+        """
         self.lvl = lvl
         self.root = Toplevel()
         self.current_pokemon_index = 0
@@ -56,11 +62,17 @@ class LBattle:
         self.code = 1
 
     def start(self):
+        """
+        Starting the battle thread and the game UI
+        """
         self.thread.start()
         self.game_ui()
         return self.code
 
     def load_sprite(self, url):
+        """
+        Loading and resizing the sprite image from a URL
+        """
         response = request.urlopen(url)
         image_data = response.read()
         image_stream = io.BytesIO(image_data)
@@ -87,6 +99,9 @@ class LBattle:
         self.t.config(state="disabled")
 
     def start_battle(self):
+        """
+        Main battle loop and logic
+        """
         while not self.loading:
             time.sleep(1)
         self.message(f"Start of match with Trainer {self.p2.name}\n")
@@ -164,6 +179,9 @@ class LBattle:
         return 0
 
     def update_sprite(self):
+        """
+        Updating and handling player and trainers sprites
+        """
         sprite_url = self.p1.played_pokemon.sprites
         sprite = self.load_sprite(sprite_url)
         self.psprite_label.config(image=sprite)
@@ -174,6 +192,9 @@ class LBattle:
         self.esprite_label.image = sprite
 
     def update_moves(self):
+        """
+        Updating the players move options, whenever they switch
+        """
         moves = self.p1.played_pokemon.moves
         if len(self.move_buttons) < len(moves):
             for i, move in enumerate(moves):
@@ -193,6 +214,9 @@ class LBattle:
             self.move_buttons[i][0]["command"] = lambda arg1=self.move_buttons[i][0]["text"]: self.paction(arg1)
 
     def switch_pokemon(self, index):
+        """
+        Handling the switching of a Pokémon
+        """
         self.current_pokemon_index = index
         self.p1.switch_pokemon(index)
         self.update_sprite()
@@ -201,6 +225,9 @@ class LBattle:
         self.turn = 2
 
     def invalidate_buttons(self, num):
+        """
+        Handles disabling buttons for various reasons.
+        """
         if num == 1 or num == 3:
             for button in self.pbuttons:
                 button[0].config(state="disabled")
@@ -209,6 +236,9 @@ class LBattle:
                 button[0].config(state="disabled")
 
     def validate_buttons(self, num):
+        """
+        Handles enabling buttons for various reasons
+        """
         if num == 1 or num == 3:
             for i, button in enumerate(self.pbuttons):
                 if button[1] == 0:
@@ -219,12 +249,18 @@ class LBattle:
                     button[0].config(state="normal")
 
     def quit_window(self, *code):
+        """
+        Used to allow player to quit the game in the Game UI
+        """
         if len(code) > 0:
             self.code = 1
         self.root.destroy()
         self.root.quit()
 
     def game_ui(self):
+        """
+        Sets up the game UI window
+        """
         self.root.geometry("900x500")
         self.root.title("Pokémon Battle")
 

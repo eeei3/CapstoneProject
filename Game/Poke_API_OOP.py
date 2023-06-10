@@ -15,15 +15,21 @@ DO NOT USE THIS FILE.
 USE BATTLE.PY
 """
 # Important package imports
-
 import requests
 
 
+# The class, that we use to gather and make data from the API
 class PokemonAPI:
     def __init__(self):
+        """
+        Initialize an empty list for collecting data
+        """
         self.pokemon_data = []
 
     def call_api(self, pokemon_id):
+        """
+        Calling the API, storing response and printing any error status code
+        """
         url = f'https://pokeapi.co/api/v2/pokemon/{pokemon_id}/'
         response = requests.get(url)
 
@@ -34,11 +40,19 @@ class PokemonAPI:
             print(f"Error: {response.status_code}")
 
     def get_pokemon_data(self):
+        """
+        Returning the data collected after using the API
+        """
         return self.pokemon_data
 
 
+# Class that handles the data that was collected from the API
 class Pokemon:
     def __init__(self, data):
+        """
+        Initializes certain values that API returns.
+        Only strips the information that we actually need, to avoid garbage calls
+        """
         self.name = data['name']
         self.id = data['id']
         self.stats = {stat_data['stat']['name']: stat_data['base_stat'] for stat_data in data['stats']}
@@ -56,6 +70,10 @@ class Pokemon:
                                "Power": move_power, "Type": move_type})
 
     def to_dict(self):
+        """
+
+        Returning the data that we have collected, striped and stored.
+        """
         return {
             "ID": self.id,
             "Name": self.name,

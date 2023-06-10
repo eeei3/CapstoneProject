@@ -1,19 +1,15 @@
 # Member tasks
 ## Ebaad
-- Pokemon API
-- Game "Backend"
-- Game Designer
-- Pokemon Master
+- ~~Pokemon API~~
+- ~~Game UI~~
+- ~~Game "Backend"~~
 ## Calvin
-- Player and enemies
-- Player UI
-- Dialogue
+- ~~Player and Trainers~~
+- ~~Game UI~~
 ## Josh
-- Pokemon Battle System
-- Player UI
-- PvP system
-- Git
-
+- ~~Pokémon Battle System~~
+- ~~Game UI~~
+- ~~Git~~
 
 ## List of objects we plan on using:
 - ### Pokemon object
@@ -24,21 +20,13 @@
 - ~~ID~~
 - Dialogue
 - ### Player object
-- Pokemon
-- Items
-- Trainer's beat
-- Name
-- Dialogue
-- ### Enemy objects
-- Pokemon
-- Name
-- Items
-- Dialogue
-- ### Item objects
-- Effect
+- ~~Pokemon~~
+- ~~Name~~
+- ~~Player's team~~
+- ### Trainer objects
+- ~~Pokemon~~
+- ~~Name~~
+- ~~Trainers Team~~
 - ### Game object
-- Battle system
-- Object management
-
-
-
+- ~~Battle system~~
+- ~~Object management~~

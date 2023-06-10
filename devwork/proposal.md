@@ -13,7 +13,7 @@ The game should include all Pokémon from every generation, with their typing an
 - Player v Machine
 - Critical Hit Chance
 - Type advantages/disadvantages
-- Move stats
+- Damage stat
 - Miss chance
 - Text-Based (If no graphics)
 ## Nice to have list

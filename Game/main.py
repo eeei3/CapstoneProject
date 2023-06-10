@@ -10,6 +10,7 @@ Current Assignment: main.py
 This file contains important GUI code.
 Always run the game from this file.
 """
+# Important package imports
 from tkinter import *
 import threading
 import battle
