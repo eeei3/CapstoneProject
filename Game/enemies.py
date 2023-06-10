@@ -11,14 +11,13 @@ This file contains the Trainer class and related functions.
 """
 import random
 import csv
-from API import Poke_API_OOP
-from Pokemon_Object import JSON_Poke
+from CapstoneProject.Game import Poke_API_OOP, JSON_Poke
 
 # List of all enemy trainers
 names = ["Ebaad", "Blue", "Red", "Trace", "Lance", "Leon", "Cynthia", "Alder", "Iris", "Elio", "Ash"]
 
 # Opening and reading data from types.cvs
-with open("Data/types.csv", newline='') as c:
+with open("types.csv", newline='') as c:
     EBAAD = []
     a = csv.reader(c, delimiter=' ', quotechar='|')
     for row in a:

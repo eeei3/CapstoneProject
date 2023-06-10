@@ -13,7 +13,8 @@ This file is what we use to make objects from
 # DO NOT DELETE - Comment out if this breaks your code
 # from CapstoneProject.Game.Pokemon_Object import Poke_Obj
 # from Game.Pokemon_Object import Poke_Obj
-from Pokemon_Object import Poke_Obj
+# from Pokemon_Object import Poke_Obj
+import Poke_Obj
 
 
 # This class turns the data given from the .json into objects for later usage
