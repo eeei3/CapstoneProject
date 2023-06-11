@@ -62,8 +62,10 @@ class Battle:
         self.threads = []
         self.runtime = x
         # Object for thread
-        self.threads.append(threading.Thread(target=self.battle_logic))
-        self.threads[self.runtime].daemon = False
+        # self.threads.append(threading.Thread(target=self.battle_logic))
+        # self.threads[self.runtime].daemon = False
+        self.thread = (threading.Thread(target=self.battle_logic))
+        self.thread.daemon = False
         # Return code
         self.code = 1
         # Button to quit
@@ -73,7 +75,8 @@ class Battle:
         """
         Starting the battle thread and the game UI
         """
-        self.threads[self.runtime].start()
+        # self.threads[self.runtime].start()
+        self.thread.start()
         self.game_ui()
         return self.code
 
@@ -159,7 +162,7 @@ class Battle:
                     time.sleep(1)
                     self.message("1\n")
                     time.sleep(1)
-                    self.quit_window()
+                    self.restart()
                     continue
                 self.invalidate_buttons(3)
                 time.sleep(1)
@@ -206,8 +209,8 @@ class Battle:
                         self.message("Press the quit button to return "
                                      "to main menu and restart\n")
                         self.quit_button = Button(
-                            self.root, text="Restart", command=lambda:
-                            self.restart())
+                            self.root, text="Restart", command=lambda arg=1:
+                            self.restart(arg))
                         while True:
                             pass
 
@@ -301,8 +304,9 @@ class Battle:
         self.root.destroy()
         self.root.quit()
 
-    def restart(self):
-        self.code = 1
+    def restart(self, *code):
+        if len(code) > 0:
+            self.code = 1
         self.root.destroy()
         self.root.quit()
 
@@ -314,7 +318,7 @@ class Battle:
         self.root.title("Pokémon Battle")
 
         self.quit_button = Button(
-            self.root, text="Quit", command=lambda: self.quit_window())
+            self.root, text="Quit", command=lambda : self.quit_window())
         self.quit_button.place(x=450, y=450)
 
         sprite_url = self.p1.played_pokemon.sprites
