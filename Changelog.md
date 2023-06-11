@@ -1,5 +1,9 @@
-# V.2.1.1
+# V.2.2.0
 ## Final Release
+- Fixed game
+- More pep8
+
+# V.2.1.1
 - Fixed restarting game
 
 # V.2.1.0
