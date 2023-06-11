@@ -15,6 +15,7 @@ from tkinter import *
 import threading
 import battle
 import time
+import gc
 
 
 # Represents the graphical user interface of the game.
@@ -52,6 +53,7 @@ class GUI:
         gamestatus = self.game.begin_game()
         while gamestatus == 0:
             level += 1
+            gc.collect()
             self.game = battle.Battle(level, self.name.get())
             gamestatus = self.game.begin_game()
 
