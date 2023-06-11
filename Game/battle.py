@@ -62,8 +62,6 @@ class Battle:
         self.threads = []
         self.runtime = x
         # Object for thread
-        # self.threads.append(threading.Thread(target=self.battle_logic))
-        # self.threads[self.runtime].daemon = False
         self.thread = (threading.Thread(target=self.battle_logic))
         self.thread.daemon = False
         # Return code
@@ -127,6 +125,7 @@ class Battle:
         self.message(f"Start of match with Trainer {self.p2.name}\n")
         self.message(f"Trainer has chosen {self.p2.played_pokemon.name}"
                      f"\n")
+        self.invalidate_buttons(3)
         self.p2.mark_field()
         b = bool(self.t.winfo_ismapped())
         while b is True:
@@ -306,6 +305,10 @@ class Battle:
         self.root.quit()
 
     def restart(self, *code):
+        """
+        Used to allow the player to restart the game after defeat
+        or after victory
+        """
         if len(code) > 0:
             self.code = 1
         self.root.destroy()

@@ -63,6 +63,7 @@ class GUI:
                                           runtime)
             elif gamestatus == 1:
                 runtime += 1
+                level = 1
                 gc.collect()
                 # time.sleep(3)
                 self.game = battle.Battle(level, self.name.get(),
