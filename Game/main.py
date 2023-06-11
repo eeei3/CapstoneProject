@@ -67,6 +67,7 @@ class GUI:
             else:
                 continue
         self.quit_game()
+     
     def quit_game(self):
         """
         Quits the game and closes the GUI.
