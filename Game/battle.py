@@ -64,6 +64,8 @@ class Battle:
         self.thread.daemon = False
         # Return code
         self.code = 1
+        # Button to quit
+        self.quit_button = None
 
     def begin_game(self):
         """
@@ -201,6 +203,9 @@ class Battle:
                         self.message("You lost!\n")
                         self.message("Press the quit button to return "
                                      "to main menu and restart\n")
+                        self.quit_button = Button(
+                            self.root, text="Restart", command=lambda:
+                            self.restart())
                         while True:
                             pass
 
@@ -286,12 +291,16 @@ class Battle:
                 if button[1] == 0:
                     button[0].config(state="normal")
 
-    def quit_window(self, *code):
+    def quit_window(self):
         """
         Used to allow player to quit the game in the Game UI
         """
-        if len(code) > 0:
-            self.code = 1
+        self.code = 1
+        self.root.destroy()
+        self.root.quit()
+
+    def restart(self):
+        self.code = 2
         self.root.destroy()
         self.root.quit()
 
@@ -302,10 +311,9 @@ class Battle:
         self.root.geometry("900x500")
         self.root.title("Pokémon Battle")
 
-        quit_button = Button(
-            self.root, text="Quit", command=lambda arg1=1:
-            self.quit_window(arg1))
-        quit_button.place(x=450, y=450)
+        self.quit_button = Button(
+            self.root, text="Quit", command=lambda: self.quit_window())
+        self.quit_button.place(x=450, y=450)
 
         sprite_url = self.p1.played_pokemon.sprites
         sprite = self.load_sprite(sprite_url)

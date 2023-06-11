@@ -40,10 +40,8 @@ class GUI:
         """
         Starts an offline game with a bot.
         """
-        self.process1 = threading.Thread(target=self.offline_wrapper)
+        self.process1 = threading.Thread(target=self.offline_wrapper())
         self.process1.start()
-        self.process1.join()
-        return
 
     def offline_wrapper(self):
         """
@@ -52,15 +50,17 @@ class GUI:
         level = 1
         self.main.withdraw()
         self.game = battle.Battle(level, self.name.get())
-        gamestatus = self.game.begin_game()
-        while gamestatus == 0:
-            level += 1
-            gc.collect()
-            self.game = battle.Battle(level, self.name.get())
+        while True:
             gamestatus = self.game.begin_game()
-
-        self.main.deiconify()
-        return
+            if gamestatus == 0:
+                level += 1
+                gc.collect()
+                self.game = battle.Battle(level, self.name.get())
+            elif gamestatus == 1:
+                gc.collect()
+                self.game = battle.Battle(level, self.name.get())
+            else:
+                self.quit_game()
 
     def quit_game(self):
         """
