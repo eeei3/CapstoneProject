@@ -54,7 +54,6 @@ class GUI:
         self.game = battle.Battle(level, self.name.get(), runtime)
         while gamestatus != 2:
             gamestatus = self.game.begin_game()
-            print(gamestatus)
             if gamestatus == 0:
                 runtime += 1
                 level += 1
