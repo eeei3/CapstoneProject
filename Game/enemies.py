@@ -66,7 +66,7 @@ class Trainer:
                         pokemon_raw]
         index = 0
         for x in pokemon_data:
-            y = data_to_object.data_to_obj(x, index, self)
+            y = data_to_object.DataToObj(x, index, self)
             poke = y.return_obj()
             poke.index = index
             pokemon.append(poke)
@@ -85,6 +85,7 @@ class Trainer:
 
         if trainer_choice <= 80:
             # This is our logic for attacking as a trainer
+            # Random chance trainer makes a more careful choice
             if random.randint(0, 12) > self.difficulty:
                 for attack in self.played_pokemon.moves:
                     attlen += 1
@@ -134,6 +135,7 @@ class Trainer:
                                 return [1, attack["Name"]]
                             else:
                                 return [9, attack["Name"]]
+            # Trainer makes random attack
             else:
                 length = len(self.played_pokemon.moves)
                 attack = self.played_pokemon.moves[
@@ -164,9 +166,10 @@ class Trainer:
                 else:
                     return [9, attack["Name"]]
         else:
+            # This is the logic for switching the trainers onfield
+            # Pokémon
             if len(self.pokemon) == 0:
                 return [8, None]
-            # This is the logic for switching the trainers onfield Pokémon
             pokemon_choice = random.randint(0, len(self.pokemon) - 1)
             self.played_pokemon = self.pokemon[pokemon_choice]
             return [2, self.played_pokemon.name]

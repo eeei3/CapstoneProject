@@ -14,7 +14,7 @@ import pokemon_object
 
 
 # This class turns the data we have received into objects for later usage
-class data_to_obj:
+class DataToObj:
     def __init__(self, rawdata, index, caller):
         """
         Initializes default values.

@@ -80,7 +80,7 @@ class GUI:
 
     def title_gui(self):
         """
-        Design the main title screen.
+        The main title screen.
         """
         self.main.geometry("600x400")
         self.main.title("Pokémon Battle - Title Screen")

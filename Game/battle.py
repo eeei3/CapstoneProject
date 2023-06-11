@@ -255,7 +255,6 @@ class Battle:
         """
         Handling the switching of a Pokémon
         """
-        self.current_pokemon_index = index
         self.p1.switch_pokemon(index)
         self.update_sprite()
         self.update_moves()

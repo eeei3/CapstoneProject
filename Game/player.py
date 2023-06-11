@@ -56,7 +56,7 @@ class Player:
                         in pokemon_raw]
         index = 0
         for x in pokemon_data:
-            y = data_to_object.data_to_obj(x, index, self)
+            y = data_to_object.DataToObj(x, index, self)
             poke = y.return_obj()
             poke.index = index
             pokemon_list.append(poke)
