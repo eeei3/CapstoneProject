@@ -25,7 +25,7 @@ import io
 
 # The Main battle class contains codes for various battling obejcts
 class Battle:
-    def __init__(self, lvl, username):
+    def __init__(self, lvl, username, x):
         """
         Initializing the battle class
         """
@@ -59,9 +59,11 @@ class Battle:
         self.enemypokemon.set(len(self.p2.pokemon))
         # Checking if the game is finished loading
         self.loading = False
+        self.threads = []
+        self.runtime = x
         # Object for thread
-        self.thread = threading.Thread(target=self.battle_logic)
-        self.thread.daemon = False
+        self.threads.append(threading.Thread(target=self.battle_logic))
+        self.threads[self.runtime].daemon = False
         # Return code
         self.code = 1
         # Button to quit
@@ -71,7 +73,7 @@ class Battle:
         """
         Starting the battle thread and the game UI
         """
-        self.thread.start()
+        self.threads[self.runtime].start()
         self.game_ui()
         return self.code
 
@@ -295,12 +297,12 @@ class Battle:
         """
         Used to allow player to quit the game in the Game UI
         """
-        self.code = 1
+        self.code = 2
         self.root.destroy()
         self.root.quit()
 
     def restart(self):
-        self.code = 2
+        self.code = 1
         self.root.destroy()
         self.root.quit()
 
