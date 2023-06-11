@@ -51,22 +51,19 @@ class GUI:
         level = 1
         gamestatus = 3
         self.main.withdraw()
-        self.game = battle.Battle(level, self.name.get(), runtime)
+        self.game = battle.Battle(level, self.name.get())
         while gamestatus != 2:
             gamestatus = self.game.begin_game()
             if gamestatus == 0:
                 runtime += 1
                 level += 1
                 gc.collect()
-                self.game = battle.Battle(level, self.name.get(),
-                                          runtime)
+                self.game = battle.Battle(level, self.name.get())
             elif gamestatus == 1:
                 runtime += 1
                 level = 1
                 gc.collect()
-                # time.sleep(3)
-                self.game = battle.Battle(level, self.name.get(),
-                                          runtime)
+                self.game = battle.Battle(level, self.name.get())
             else:
                 continue
         self.quit_game()

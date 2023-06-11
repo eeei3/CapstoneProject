@@ -25,7 +25,7 @@ import io
 
 # The Main battle class contains codes for various battling obejcts
 class Battle:
-    def __init__(self, lvl, username, x):
+    def __init__(self, lvl, username):
         """
         Initializing the battle class
         """
@@ -44,10 +44,8 @@ class Battle:
         self.t = None
         # List of pokemon buttons
         self.pbuttons = []
-        # self.pcmds = []
         # List of moves buttons
         self.move_buttons = []
-        # self.movecmds = []
         # Variable for storing player Pokémon health
         self.hp1 = StringVar()
         # Variable for storing enemy Pokémon health
@@ -59,8 +57,6 @@ class Battle:
         self.enemypokemon.set(len(self.p2.pokemon))
         # Checking if the game is finished loading
         self.loading = False
-        self.threads = []
-        self.runtime = x
         # Object for thread
         self.thread = (threading.Thread(target=self.battle_logic))
         self.thread.daemon = False
@@ -73,7 +69,6 @@ class Battle:
         """
         Starting the battle thread and the game UI
         """
-        # self.threads[self.runtime].start()
         self.thread.start()
         self.game_ui()
         return self.code
@@ -345,8 +340,7 @@ class Battle:
             self.root, text="Enemy's remaining pokemon:")
         enemypokemonlabel.place(x=650, y=300)
 
-        enemypokemonnum = Label(self.root, textvariable=
-                                self.enemypokemon)
+        enemypokemonnum = Label(self.root, textvariable=self.enemypokemon)
         enemypokemonnum.place(x=820, y=300)
 
         names = [pokemon.name for pokemon in self.p1.pokemon]
