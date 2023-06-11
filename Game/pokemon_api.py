@@ -27,7 +27,8 @@ class PokemonAPI:
 
     def call_api(self, pokemon_id):
         """
-        Calling the API, storing response and printing any error status code
+        Calling the API, storing response and printing any error status
+        code
         """
         url = f'https://pokeapi.co/api/v2/pokemon/{pokemon_id}/'
         response = requests.get(url)
@@ -49,8 +50,8 @@ class Pokemon(PokemonAPI):
     def __init__(self, data):
         """
         Initializes certain values that API return.
-        Only strips the information that we actually need to avoid garbage
-        calls
+        Only strips the information that we actually need to avoid
+        garbage calls
         """
         super().__init__()
         self.name = data['name']
@@ -63,13 +64,15 @@ class Pokemon(PokemonAPI):
         self.moves = []
         for move_data in data['moves'][:4]:
             move_name = move_data['move']['name']
-            move_response = requests.get(move_data['move']['url']).json()
+            move_response = requests.get(move_data['move']['url']).\
+                json()
             move_pp = move_response['pp']
             move_accuracy = move_response['accuracy'] or "N/A"
             move_power = move_response['power'] or "N/A"
             move_type = move_response['type']['name']
             self.moves.append({"Name": move_name, "PP": move_pp,
-                               "Accuracy": move_accuracy, "Power": move_power,
+                               "Accuracy": move_accuracy, "Power":
+                                   move_power,
                                "Type": move_type})
 
     def add_to_dict(self):

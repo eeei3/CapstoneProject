@@ -13,7 +13,8 @@ We use this file to create objects from the data we have received
 import pokemon_object
 
 
-# This class turns the data we have received into objects for later usage
+# This class turns the data we have received into objects for later
+# usage
 class DataToObj:
     def __init__(self, rawdata, index, caller):
         """
@@ -99,7 +100,8 @@ class DataToObj:
         self.moves = self.get_moves()
         self.stats = self.get_stats()
         self.sprites = self.get_sprite()
-        pokemon = pokemon_object.Pokemon(self.name, self.id, self.types, self.moves,
-                                         self.stats, self.index, self.caller,
+        pokemon = pokemon_object.Pokemon(self.name, self.id, self.types,
+                                         self.moves, self.stats,
+                                         self.index, self.caller,
                                          self.sprites)
         return pokemon
