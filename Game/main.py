@@ -58,6 +58,7 @@ class GUI:
             gamestatus = self.game.begin_game()
 
         self.main.deiconify()
+        return
 
     def quit_game(self):
         """
