@@ -205,12 +205,13 @@ class Battle:
                     for button in self.move_buttons:
                         button[1] = 1
                     if len(self.p1.pokemon) == 0:
-                        self.message("You lost!\n")
-                        self.message("Press the quit button to return "
-                                     "to main menu and restart\n")
                         self.quit_button = Button(
                             self.root, text="Restart", command=lambda arg=1:
                             self.restart(arg))
+                        self.quit_button.place(x=450, y=450)
+                        self.message("You lost!\n")
+                        self.message("Press the return button to return "
+                                     "to main menu and restart\n")
                         while True:
                             pass
 
@@ -318,7 +319,7 @@ class Battle:
         self.root.title("Pokémon Battle")
 
         self.quit_button = Button(
-            self.root, text="Quit", command=lambda : self.quit_window())
+            self.root, text="Quit", command=lambda: self.quit_window())
         self.quit_button.place(x=450, y=450)
 
         sprite_url = self.p1.played_pokemon.sprites
