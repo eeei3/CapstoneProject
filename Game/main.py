@@ -42,6 +42,7 @@ class GUI:
         """
         self.process1 = threading.Thread(target=self.offline_wrapper())
         self.process1.start()
+        self.process1.join()
         return
 
     def offline_wrapper(self):
