@@ -1,5 +1,8 @@
-# V.2.1.0
+# V.2.1.1
 ## Final Release
+- Fixed restarting game
+
+# V.2.1.0
 - Improved pep8 compliance
 - Completely revamped github organization
 - Removed unnecessary files
