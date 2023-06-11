@@ -327,7 +327,8 @@ class Battle:
             self.root, text="Enemy's remaining pokemon:")
         enemypokemonlabel.place(x=650, y=300)
 
-        enemypokemonnum = Label(self.root, textvariable=self.enemypokemon)
+        enemypokemonnum = Label(self.root, textvariable=
+                                self.enemypokemon)
         enemypokemonnum.place(x=820, y=300)
 
         names = [pokemon.name for pokemon in self.p1.pokemon]

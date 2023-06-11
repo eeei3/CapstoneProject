@@ -62,7 +62,8 @@ class Trainer:
 
         pokemon_raw = self.api.get_pokemon_data()
 
-        pokemon_data = [pokemon_api.Pokemon(data).add_to_dict() for data in
+        pokemon_data = [pokemon_api.Pokemon(data).add_to_dict()
+                        for data in
                         pokemon_raw]
         index = 0
         for x in pokemon_data:
@@ -143,18 +144,22 @@ class Trainer:
                 for row in type_list:
                     for atype in epokemon.types:
                         if (atype.title() in row[0]) and (
-                                (atype.title() in attack["Type"].title()) or (
-                                attack["Type"].title()) in atype.title()):
+                                (atype.title() in
+                                 attack["Type"].title()) or (
+                                attack["Type"].title()) in
+                                atype.title()):
                             if 0.5 in row:
                                 att = self.played_pokemon.attack(
-                                    attack, 2, epokemon, self.difficulty)
+                                    attack, 2, epokemon,
+                                    self.difficulty)
                                 if att == 0:
                                     return [5, attack["Name"]]
                                 else:
                                     return [9, attack["Name"]]
                             else:
                                 att = self.played_pokemon.attack(
-                                    attack, 1, epokemon, self.difficulty)
+                                    attack, 1, epokemon,
+                                    self.difficulty)
                                 if att == 0:
                                     return [6, attack["Name"]]
                                 else:
