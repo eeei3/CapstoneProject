@@ -1,5 +1,8 @@
-# V.2.2.0
+# V.2.2.1
 ## Final Release
+- More pep8
+
+# V.2.2.0
 - Fixed game
 - More pep8
 
