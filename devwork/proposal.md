@@ -1,10 +1,10 @@
 # Project Proposal
 ## Description
-- Written in Python
+- The Game is written entirely in Python
 
-For our major project, we would like to build a Pokémon type turn based fighter game 
-that is run in the terminal.
-It will be text-based with the possibility of graphics. 
+For our major project, we would like to build a Pokémon turn based fighter game.
+We envision the game to possibly run in terminal or in a GUI. 
+If it is a GUI, then Tkinter
 The game should allow for users to have Pokémon battles against the computer (hopefully other people). 
 The game should include all Pokémon from every generation, with their typing and move sets
 ## Need to have list
@@ -13,7 +13,7 @@ The game should include all Pokémon from every generation, with their typing an
 - Player v Machine
 - Critical Hit Chance
 - Type advantages/disadvantages
-- Move stats
+- Damage stat
 - Miss chance
 - Text-Based (If no graphics)
 ## Nice to have list

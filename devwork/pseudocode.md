@@ -1,25 +1,23 @@
 # Start of program
-- Get player username
+- Ask the player's name and continue button
 
-- Get a randomized list from the 151 Pokémon and the user selects which ones they want
+- Upon press: Generates a randomized list of Pokémon, that will be the Players team
 
-- Game selects a random opponent from a list of trainers
+- Upon press: Generates a randomized list of Pokémon, that will be the Trainers team
 
-- Create enemy's roster of Pokémon from the local file
+- Upon press: Game UI and battling system should begin after player has proceeded
 
 ## Until either the enemy has been defeated or the player has been defeated
-- The player will choose to either attack, switch pokemon or use items
+- The Player will be able to choose attacks or switch Pokémon
 
-- The opposing trainer will either attack, switch pokemon or use items
+- The Trainer will be able to choose attacks or switch Pokémon
 
-- The player and the opposing trainer will keep going till a conclusion is made
+- The battle will continue until a conclusion has been made
 
 ## If the player wins
-
-- The player will face trainers with increasing difficulty, and better Pokémon
-
-- If the player has beaten the last trainer, they win
+- Keeps going on, player will face new Pokémon teams from the opposing Trainer.
 
 ## If the player is defeated
+- The game will end.
 
-- The player will restart from the beginning of the game if they lose
+- The player can restart be restarting the program, nothing will save over.

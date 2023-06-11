@@ -10,17 +10,20 @@ Current Assignment: player.py
 This file is used to create a Player object using data from the API.
 We also use this file for some of our game logic
 """
-import random
+# Important package imports
 import csv
-from API import Poke_API_OOP
-from Pokemon_Object import JSON_Poke
+import os
+import random
+import data_to_object
+import pokemon_api
 
 # Read types.csv file for in-game mechanics
-with open("Data/types.csv", newline='') as csv_file:
-    EBAAD = []
+with open(os.path.join(os.getcwd(), "types.csv"), newline='') as \
+        csv_file:
+    type_list = []
     csv_reader = csv.reader(csv_file, delimiter=' ', quotechar='|')
     for row in csv_reader:
-        EBAAD.append(row)
+        type_list.append(row)
 
 
 # Represents a Player object in the game.
@@ -29,14 +32,19 @@ class Player:
         """
         Initialize the Player object.
         """
-        self.api = Poke_API_OOP.PokemonAPI()
+        # Object for the API
+        self.api = pokemon_api.PokemonAPI()
+        # Player name
         self.name = name
-        self.pokemon = self.pokeget()
+        # List of player's Pokémon
+        self.pokemon = self.get_return_pokemon()
+        # The Pokémon that the player has on the field
         self.played_pokemon = self.pokemon[random.randint(0, 5)]
 
-    def pokeget(self):
+    def get_return_pokemon(self):
         """
-        Fetches Pokémon data from the PokeAPI and returns a list of Pokémon objects.
+        Fetches Pokémon data from the PokeAPI and returns a list of
+        Pokémon objects.
         """
         pokemon_list = []
         for _ in range(6):
@@ -44,10 +52,11 @@ class Player:
             self.api.call_api(pokemon_id)
 
         pokemon_raw = self.api.get_pokemon_data()
-        pokemon_data = [Poke_API_OOP.Pokemon(data).to_dict() for data in pokemon_raw]
+        pokemon_data = [pokemon_api.Pokemon(data).add_to_dict() for data
+                        in pokemon_raw]
         index = 0
         for x in pokemon_data:
-            y = JSON_Poke.JSON_to_Obj(x, index, self)
+            y = data_to_object.DataToObj(x, index, self)
             poke = y.return_obj()
             poke.index = index
             pokemon_list.append(poke)
@@ -64,7 +73,7 @@ class Player:
 
     def turn(self, epokemon, attack):
         """
-        Performs a turn in the game.
+        Player is performing their move
         """
         attchoice = None
         for att in self.played_pokemon.moves:
@@ -73,34 +82,32 @@ class Player:
                 break
         if attchoice is None:
             return 9
-        for row in EBAAD:
+        for row in type_list:
             for atype in epokemon.types:
-                print(atype.title())
-                print(row)
-                print(type(attchoice))
                 if (atype.title() in row[0]) and (
-                        ((atype.title() in attchoice["Type"].title())) or (attchoice["Type"].title()) in atype.title()):
-                    print("Effective type triggered")
+                        (atype.title() in attchoice["Type"].title()) or
+                        (attchoice["Type"].title()) in atype.title()):
                     if 0.5 in row:
-                        att = self.played_pokemon(attchoice, 2, epokemon)
+                        att = self.played_pokemon(attchoice, 2,
+                                                  epokemon)
                         if att == 0:
                             return 5
                         else:
                             return 9
                     else:
-                        att = self.played_pokemon.attack(attchoice, 1, epokemon)
+                        att = self.played_pokemon.attack(attchoice, 1,
+                                                         epokemon)
                         if att == 0:
                             return 6
                         else:
                             return 9
-        print("No type effectiveness")
         att = self.played_pokemon.attack(attchoice, 0, epokemon)
         if att == 0:
             return
         else:
             return 9
 
-    def check(self):
+    def hp_check(self):
         """
         Checks the HP of the currently played Pokémon.
         """
