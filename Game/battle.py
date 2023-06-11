@@ -44,10 +44,8 @@ class Battle:
         self.t = None
         # List of pokemon buttons
         self.pbuttons = []
-        # self.pcmds = []
         # List of moves buttons
         self.move_buttons = []
-        # self.movecmds = []
         # Variable for storing player Pokémon health
         self.hp1 = StringVar()
         # Variable for storing enemy Pokémon health
@@ -60,10 +58,12 @@ class Battle:
         # Checking if the game is finished loading
         self.loading = False
         # Object for thread
-        self.thread = threading.Thread(target=self.battle_logic)
+        self.thread = (threading.Thread(target=self.battle_logic))
         self.thread.daemon = False
         # Return code
         self.code = 1
+        # Button to quit
+        self.quit_button = None
 
     def begin_game(self):
         """
@@ -120,6 +120,7 @@ class Battle:
         self.message(f"Start of match with Trainer {self.p2.name}\n")
         self.message(f"Trainer has chosen {self.p2.played_pokemon.name}"
                      f"\n")
+        self.invalidate_buttons(3)
         self.p2.mark_field()
         b = bool(self.t.winfo_ismapped())
         while b is True:
@@ -155,7 +156,7 @@ class Battle:
                     time.sleep(1)
                     self.message("1\n")
                     time.sleep(1)
-                    self.quit_window()
+                    self.restart()
                     continue
                 self.invalidate_buttons(3)
                 time.sleep(1)
@@ -198,8 +199,12 @@ class Battle:
                     for button in self.move_buttons:
                         button[1] = 1
                     if len(self.p1.pokemon) == 0:
+                        self.quit_button = Button(
+                            self.root, text="Restart", command=lambda arg=1:
+                            self.restart(arg))
+                        self.quit_button.place(x=450, y=450)
                         self.message("You lost!\n")
-                        self.message("Press the quit button to return "
+                        self.message("Press the return button to return "
                                      "to main menu and restart\n")
                         while True:
                             pass
@@ -286,9 +291,18 @@ class Battle:
                 if button[1] == 0:
                     button[0].config(state="normal")
 
-    def quit_window(self, *code):
+    def quit_window(self):
         """
         Used to allow player to quit the game in the Game UI
+        """
+        self.code = 2
+        self.root.destroy()
+        self.root.quit()
+
+    def restart(self, *code):
+        """
+        Used to allow the player to restart the game after defeat
+        or after victory
         """
         if len(code) > 0:
             self.code = 1
@@ -302,10 +316,9 @@ class Battle:
         self.root.geometry("900x500")
         self.root.title("Pokémon Battle")
 
-        quit_button = Button(
-            self.root, text="Quit", command=lambda arg1=1:
-            self.quit_window(arg1))
-        quit_button.place(x=450, y=450)
+        self.quit_button = Button(
+            self.root, text="Quit", command=lambda: self.quit_window())
+        self.quit_button.place(x=450, y=450)
 
         sprite_url = self.p1.played_pokemon.sprites
         sprite = self.load_sprite(sprite_url)
@@ -327,8 +340,7 @@ class Battle:
             self.root, text="Enemy's remaining pokemon:")
         enemypokemonlabel.place(x=650, y=300)
 
-        enemypokemonnum = Label(self.root, textvariable=
-                                self.enemypokemon)
+        enemypokemonnum = Label(self.root, textvariable=self.enemypokemon)
         enemypokemonnum.place(x=820, y=300)
 
         names = [pokemon.name for pokemon in self.p1.pokemon]

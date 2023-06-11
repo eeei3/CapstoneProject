@@ -47,25 +47,33 @@ class GUI:
         """
         Wraps the function for starting an offline game with a bot.
         """
+        runtime = 0
         level = 1
+        gamestatus = 3
         self.main.withdraw()
         self.game = battle.Battle(level, self.name.get())
-        gamestatus = self.game.begin_game()
-        while gamestatus == 0:
-            level += 1
-            gc.collect()
-            self.game = battle.Battle(level, self.name.get())
+        while gamestatus != 2:
             gamestatus = self.game.begin_game()
-
-        self.main.deiconify()
-        return
-
+            if gamestatus == 0:
+                runtime += 1
+                level += 1
+                gc.collect()
+                self.game = battle.Battle(level, self.name.get())
+            elif gamestatus == 1:
+                runtime += 1
+                level = 1
+                gc.collect()
+                self.game = battle.Battle(level, self.name.get())
+            else:
+                continue
+        self.quit_game()
     def quit_game(self):
         """
         Quits the game and closes the GUI.
         """
         self.main.destroy()
         self.main.quit()
+        quit()
 
     def name_checker(self):
         """
