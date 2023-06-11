@@ -40,7 +40,7 @@ class GUI:
         """
         Starts an offline game with a bot.
         """
-        self.process1 = threading.Thread(target=self.offline_wrapper())
+        self.process1 = threading.Thread(target=self.offline_wrapper)
         self.process1.start()
         self.process1.join()
         return
